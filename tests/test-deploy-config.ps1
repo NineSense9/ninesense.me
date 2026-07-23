@@ -16,6 +16,7 @@ $rateLimit = [IO.File]::ReadAllText((Join-Path $deploy 'ninesense-rate-limit.con
 $backup = [IO.File]::ReadAllText((Join-Path $deploy 'backup-guestbook.sh'))
 $environment = [IO.File]::ReadAllText((Join-Path $deploy 'guestbook.env.example'))
 $siteConfig = [IO.File]::ReadAllText((Join-Path $deploy 'ninesense-site.conf'))
+$deployScript = [IO.File]::ReadAllText((Join-Path $deploy 'deploy-guestbook.sh'))
 
 foreach ($contract in @(
   'User=ninesense', 'EnvironmentFile=/etc/ninesense/guestbook.env',
@@ -47,10 +48,16 @@ if ($backup -notmatch 'BACKUP_ROOT:-/var/backups/ninesense/guestbook') { throw '
 if ($backup -notmatch 'PYTHON_BIN:-/opt/ninesense-guestbook/current/venv/bin/python') { throw 'Backup Python override missing' }
 if ($backup -notmatch 'backup-db' -or $backup -notmatch 'integrity') { throw 'Backup command or verification missing' }
 foreach ($setting in @(
-  'NINESENSE_DATABASE_URL=', 'NINESENSE_CONTACT_KEY=', 'NINESENSE_SESSION_PEPPER=',
+  'NINESENSE_DATABASE_URL=', 'NINESENSE_CONTACT_KEY=', 'NINESENSE_SECURITY_KEY=', 'NINESENSE_SESSION_PEPPER=',
   'NINESENSE_RATE_LIMIT_KEY=', 'NINESENSE_COOKIE_SECURE=', 'NINESENSE_SMTP_HOST=',
   'NINESENSE_SMTP_PASSWORD=', 'NINESENSE_NOTIFICATION_TO=', 'NINESENSE_PUBLIC_ADMIN_URL='
 )) {
   if ($environment -notmatch [regex]::Escape($setting)) { throw "Environment setting missing: $setting" }
+}
+foreach ($contract in @(
+  'NINESENSE_SECURITY_KEY=', 'site/admin/.vite/manifest.json',
+  'CONTACT_KEY and SECURITY_KEY must differ'
+)) {
+  if ($deployScript -notmatch [regex]::Escape($contract)) { throw "Deployment security contract missing: $contract" }
 }
 Write-Host 'PASS deployment configuration contract'

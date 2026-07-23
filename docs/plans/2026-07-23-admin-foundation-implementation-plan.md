@@ -1131,7 +1131,7 @@ Expected: both suites pass with no page errors or failed assets.
 - Modify: `tests/test-deploy-config.ps1`
 - Modify: `README.md`
 
-- [ ] **Step 1: Write failing CLI and deployment contracts**
+- [x] **Step 1: Write failing CLI and deployment contracts**
 
 Require:
 
@@ -1146,7 +1146,7 @@ revoke-admin-sessions command
 
 The reset command is interactive, requires the account password twice, clears TOTP/recovery/challenges, revokes every session, and writes a notification and audit event.
 
-- [ ] **Step 2: Confirm failures**
+- [x] **Step 2: Confirm failures**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_cli.py -q
@@ -1155,11 +1155,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-deploy-config.ps1
 
 Expected: FAIL because commands and key contract are absent.
 
-- [ ] **Step 3: Implement safeguards and documentation**
+- [x] **Step 3: Implement safeguards and documentation**
 
 Generate `NINESENSE_SECURITY_KEY` separately in the same URL-safe 32-byte format as `CONTACT_KEY`. Reject equal keys. For an existing environment file that predates this setting, append a newly generated key with the existing owner and mode preserved before starting the upgraded service. Verify the Vite manifest before release, run Alembic, and retain the existing rollback trap. README documents local build, first MFA enrollment, recovery-code storage, session revocation, terminal-only MFA reset and the HTTPS requirement.
 
-- [ ] **Step 4: Run and commit**
+- [x] **Step 4: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_cli.py -q

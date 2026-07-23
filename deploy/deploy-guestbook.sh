@@ -65,6 +65,7 @@ install -d -o root -g ninesense -m 0750 /etc/ninesense
 rm -rf "$app_release" "$static_release"
 install -d -m 0755 "$app_release" "$static_release"
 tar -xzf "$archive" -C "$app_release"
+[[ -f "$app_release/site/admin/.vite/manifest.json" ]]
 cp -a "$app_release/site/." "$static_release/"
 find "$static_release" -type d -exec chmod 0755 {} +
 find "$static_release" -type f -exec chmod 0644 {} +
@@ -75,16 +76,19 @@ python3 -m venv "$app_release/venv"
 
 if [[ ! -e /etc/ninesense/guestbook.env ]]; then
   contact_key=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '\n')
+  security_key=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '\n')
   session_pepper=$(openssl rand -hex 48)
   rate_limit_key=$(openssl rand -hex 48)
   cat > /etc/ninesense/guestbook.env <<EOF
 NINESENSE_DATABASE_URL=sqlite:////var/lib/ninesense/guestbook.sqlite3
 NINESENSE_CONTACT_KEY=${contact_key}
+NINESENSE_SECURITY_KEY=${security_key}
 NINESENSE_SESSION_PEPPER=${session_pepper}
 NINESENSE_RATE_LIMIT_KEY=${rate_limit_key}
 NINESENSE_COOKIE_SECURE=false
 NINESENSE_COOKIE_NAME=ninesense_admin
 NINESENSE_SESSION_HOURS=8
+NINESENSE_LOGIN_CHALLENGE_MINUTES=5
 NINESENSE_SMTP_HOST=
 NINESENSE_SMTP_PORT=465
 NINESENSE_SMTP_USERNAME=
@@ -92,6 +96,16 @@ NINESENSE_SMTP_PASSWORD=
 NINESENSE_NOTIFICATION_TO=
 NINESENSE_PUBLIC_ADMIN_URL=https://example.com/admin/
 EOF
+fi
+if ! grep -q '^NINESENSE_SECURITY_KEY=' /etc/ninesense/guestbook.env; then
+  security_key=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '\n')
+  printf '\nNINESENSE_SECURITY_KEY=%s\n' "$security_key" >> /etc/ninesense/guestbook.env
+fi
+contact_key_value=$(sed -n 's/^NINESENSE_CONTACT_KEY=//p' /etc/ninesense/guestbook.env | tail -n 1)
+security_key_value=$(sed -n 's/^NINESENSE_SECURITY_KEY=//p' /etc/ninesense/guestbook.env | tail -n 1)
+if [[ -z "$contact_key_value" || -z "$security_key_value" || "$contact_key_value" == "$security_key_value" ]]; then
+  echo 'CONTACT_KEY and SECURITY_KEY must differ' >&2
+  exit 1
 fi
 chown root:ninesense /etc/ninesense/guestbook.env
 chmod 0640 /etc/ninesense/guestbook.env
