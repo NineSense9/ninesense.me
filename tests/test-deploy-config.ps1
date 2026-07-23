@@ -60,4 +60,12 @@ foreach ($contract in @(
 )) {
   if ($deployScript -notmatch [regex]::Escape($contract)) { throw "Deployment security contract missing: $contract" }
 }
+foreach ($contract in @(
+  'previous_app=', 'previous_revision=', 'pre-migration.sqlite3',
+  'migration_applied=1', 'alembic'' -c alembic.ini downgrade',
+  'ln -sfn "$previous_app" "${app_root}/current.rollback"',
+  'systemctl restart ninesense-guestbook.service'
+)) {
+  if ($deployScript -notmatch [regex]::Escape($contract)) { throw "Deployment rollback contract missing: $contract" }
+}
 Write-Host 'PASS deployment configuration contract'
