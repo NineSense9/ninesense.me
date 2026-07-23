@@ -1,12 +1,16 @@
 import asyncio
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 from fastapi import FastAPI
 from argon2 import PasswordHasher
+from sqlalchemy import select
 
+from .admin_models import AdminLoginChallenge
 from .config import Settings, get_settings
 from .db import build_session_factory
-from .services.crypto import ContactCipher
+from .services.crypto import ContactCipher, EncryptedContact
+from .services.mfa import totp_at
 from .services.outbox import outbox_worker
 from .services.rate_limit import SubmissionLimiter
 from .services.sessions import LoginAttemptLimiter
@@ -59,6 +63,33 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/api/health")
     def health():
         return {"status": "ok"}
+
+    if resolved_settings.testing:
+
+        @app.get("/__e2e/current-totp")
+        def current_e2e_totp():
+            with app.state.session_factory() as db:
+                challenge = db.scalar(
+                    select(AdminLoginChallenge)
+                    .where(AdminLoginChallenge.purpose == "setup")
+                    .order_by(AdminLoginChallenge.created_at.desc())
+                    .limit(1)
+                )
+                if (
+                    challenge is None
+                    or challenge.secret_nonce is None
+                    or challenge.secret_ciphertext is None
+                    or challenge.secret_key_version is None
+                ):
+                    return {"value": ""}
+                secret = app.state.security_cipher.decrypt(
+                    EncryptedContact(
+                        challenge.secret_nonce,
+                        challenge.secret_ciphertext,
+                        challenge.secret_key_version,
+                    )
+                )
+                return {"value": totp_at(secret, datetime.now(timezone.utc).timestamp())}
 
     app.include_router(public_router)
     app.include_router(auth_router)

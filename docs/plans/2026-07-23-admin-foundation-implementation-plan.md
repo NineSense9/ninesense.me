@@ -941,7 +941,7 @@ Expected: PASS.
 - Modify: `playwright.config.js`
 - Modify: `tests/e2e_server.py`
 
-- [ ] **Step 1: Write a failing browser setup test**
+- [x] **Step 1: Write a failing browser setup test**
 
 ```js
 test("owner enrolls MFA and receives recovery codes once", async ({ page }) => {
@@ -963,7 +963,7 @@ Register `/__e2e/current-totp` only when `Settings.testing` is true. Production 
 
 Add `testing: bool = False` to `Settings`, pass `testing=True` only in `tests/e2e_server.py`, and add an API test proving the route returns 404 with the normal test fixture.
 
-- [ ] **Step 2: Confirm failure**
+- [x] **Step 2: Confirm failure**
 
 ```powershell
 npm --prefix admin-app run build
@@ -972,7 +972,7 @@ npx playwright test tests/admin-foundation-e2e.spec.js
 
 Expected: FAIL because staged login is not implemented.
 
-- [ ] **Step 3: Implement the in-memory API client**
+- [x] **Step 3: Implement the in-memory API client**
 
 ```js
 let csrfToken = "";
@@ -997,11 +997,11 @@ export async function api(path, options = {}) {
 }
 ```
 
-- [ ] **Step 4: Implement the three login stages**
+- [x] **Step 4: Implement the three login stages**
 
 Keep challenge tokens and raw recovery codes in React memory only. Render QR from `setup_uri` with `qrcode.toCanvas` and show a copyable manual secret. After MFA completion, store only CSRF in module memory, clear password/code/challenge values and route to the recovery acknowledgement or dashboard. Never add registration, email reset, localStorage, sessionStorage or HTML injection.
 
-- [ ] **Step 5: Build, test and commit**
+- [x] **Step 5: Build, test and commit**
 
 ```powershell
 npm --prefix admin-app run build

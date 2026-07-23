@@ -48,6 +48,10 @@ def test_admin_data_is_unavailable_without_session(client):
     assert response.status_code == 401
 
 
+def test_e2e_totp_helper_is_absent_from_normal_application(client):
+    assert client.get("/__e2e/current-totp").status_code == 404
+
+
 def test_forged_csrf_is_rejected(client, db_session, app):
     create_admin_and_login(client, db_session, app)
 

@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     notification_to: str = ""
     public_admin_url: str = "/admin/"
+    testing: bool = False
 
     model_config = SettingsConfigDict(env_prefix="NINESENSE_", env_file=".env")
 

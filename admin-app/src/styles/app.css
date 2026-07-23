@@ -21,3 +21,157 @@
   font: 500 clamp(2.8rem, 8vw, 6rem)/0.95 Georgia, "Songti SC", serif;
   letter-spacing: -0.06em;
 }
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 520px);
+  align-items: center;
+  gap: clamp(3rem, 9vw, 10rem);
+  padding: clamp(2rem, 7vw, 7rem);
+  background:
+    radial-gradient(circle at 72% 0%, rgba(210, 118, 49, 0.14), transparent 30rem),
+    radial-gradient(rgba(240, 237, 228, 0.07) 0.7px, transparent 0.8px),
+    #141310;
+  background-size: auto, 24px 24px, auto;
+}
+
+.login-intro > p,
+.auth-card > p,
+.recovery-card > p {
+  margin: 0 0 1rem;
+  color: #d27631;
+  font: 700 0.65rem/1.4 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+}
+
+.login-intro h1 {
+  margin: 0;
+  font: 500 clamp(4rem, 8vw, 8rem)/0.88 Georgia, "Songti SC", serif;
+  letter-spacing: -0.07em;
+}
+
+.login-intro span,
+.recovery-card > span {
+  display: block;
+  max-width: 32rem;
+  margin-top: 2rem;
+  color: rgba(240, 237, 228, 0.62);
+  line-height: 1.8;
+}
+
+.auth-card,
+.recovery-card {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  color: #141310;
+  background: #f0ede4;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.28);
+}
+
+.auth-card h2,
+.recovery-card h1 {
+  margin: 0 0 2rem;
+  font: 500 clamp(2rem, 4vw, 3.2rem)/1 Georgia, "Songti SC", serif;
+  letter-spacing: -0.05em;
+}
+
+.auth-card label,
+.mfa-setup label {
+  display: block;
+  margin: 1.25rem 0 0.45rem;
+  color: #615b52;
+  font-size: 0.75rem;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 0.75rem 0.25rem;
+  border: 0;
+  border-bottom: 1px solid rgba(20, 19, 16, 0.45);
+  border-radius: 0;
+  color: #141310;
+  background: transparent;
+}
+
+.auth-card button,
+.recovery-card button {
+  width: 100%;
+  min-height: 3.25rem;
+  margin-top: 2rem;
+  border: 1px solid #141310;
+  color: #f0ede4;
+  background: #141310;
+}
+
+.auth-card output {
+  display: block;
+  min-height: 2.2rem;
+  padding-top: 0.75rem;
+  color: #a84332;
+  font-size: 0.75rem;
+}
+
+.mfa-setup canvas {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 1rem;
+}
+
+.recovery-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: #141310;
+}
+
+.recovery-card {
+  width: min(46rem, 100%);
+}
+
+.recovery-card > span {
+  margin-top: 0;
+  color: #615b52;
+}
+
+.recovery-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.recovery-grid code {
+  padding: 0.8rem;
+  border: 1px solid rgba(20, 19, 16, 0.18);
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .login-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .login-intro h1 {
+    font-size: clamp(3.6rem, 15vw, 6rem);
+  }
+}
+
+@media (max-width: 460px) {
+  .login-screen {
+    padding: 1rem;
+  }
+
+  .recovery-grid {
+    grid-template-columns: 1fr;
+  }
+}

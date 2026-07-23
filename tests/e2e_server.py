@@ -11,6 +11,7 @@ from ninesense_guestbook.models import Admin
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ADMIN_DIST = ROOT / "admin-app" / "dist"
 DATABASE = ROOT / "tests" / ".e2e.sqlite3"
 DATABASE.unlink(missing_ok=True)
 
@@ -21,6 +22,7 @@ settings = Settings(
     session_pepper="e2e-session-pepper",
     rate_limit_key="e2e-rate-limit-key",
     cookie_secure=False,
+    testing=True,
 )
 app = create_app(settings)
 Base.metadata.create_all(app.state.engine)
@@ -34,6 +36,7 @@ with app.state.session_factory() as session:
     )
     session.commit()
 
+app.mount("/admin", StaticFiles(directory=ADMIN_DIST, html=True), name="admin")
 app.mount("/", StaticFiles(directory=ROOT / "site", html=True), name="site")
 
 
