@@ -11,6 +11,7 @@ from .services.outbox import outbox_worker
 from .services.rate_limit import SubmissionLimiter
 from .services.sessions import LoginAttemptLimiter
 from .web.admin import outbox_router, router as admin_router
+from .web.admin_dashboard import router as admin_dashboard_router
 from .web.admin_security import router as admin_security_router
 from .web.auth import router as auth_router
 from .web.middleware import ApiProtectionMiddleware
@@ -64,4 +65,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(admin_router)
     app.include_router(outbox_router)
     app.include_router(admin_security_router)
+    app.include_router(admin_dashboard_router)
     return app

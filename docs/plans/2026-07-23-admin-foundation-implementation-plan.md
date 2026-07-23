@@ -878,7 +878,7 @@ Expected: all tests pass and response bodies contain no hashes, IPs, secrets or 
 - Create: `server/tests/test_admin_notifications.py`
 - Modify: `server/src/ninesense_guestbook/app.py`
 
-- [ ] **Step 1: Write failing API tests**
+- [x] **Step 1: Write failing API tests**
 
 ```python
 def test_dashboard_reports_foundation_counts(client, db_session, app):
@@ -896,7 +896,7 @@ def test_dashboard_reports_foundation_counts(client, db_session, app):
 
 Add tests for unread filtering and cursor pagination, CSRF on mark-read/read-all, and audit response field allowlisting.
 
-- [ ] **Step 2: Confirm 404 failures**
+- [x] **Step 2: Confirm 404 failures**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_notifications.py -q
@@ -904,7 +904,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_notifications.py -
 
 Expected: FAIL for `/api/admin/dashboard`.
 
-- [ ] **Step 3: Implement service and routes**
+- [x] **Step 3: Implement service and routes**
 
 ```text
 GET   /api/admin/dashboard
@@ -918,7 +918,7 @@ Use cursor ordering `(created_at, id)`. Validate severity against `info`, `warni
 
 Create security notifications for a newly authenticated device and for a progressive login lock. Deduplicate repeated lock notifications for the same short-lived limiter token and severity window; notification text contains no username, IP or raw user agent.
 
-- [ ] **Step 4: Run and commit**
+- [x] **Step 4: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_notifications.py server/tests/test_audit.py -q

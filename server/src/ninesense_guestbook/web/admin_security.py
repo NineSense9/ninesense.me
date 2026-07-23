@@ -8,6 +8,7 @@ from sqlalchemy import delete, select
 from ..admin_models import AdminLoginChallenge, AdminRecoveryCode
 from ..models import Admin, AdminSession
 from ..services.audit import record_audit
+from ..services.admin_notifications import create_notification
 from ..services.crypto import EncryptedContact
 from ..services.mfa import (
     generate_recovery_codes,
@@ -208,13 +209,22 @@ def complete_mfa(
             recovery_row.used_at = now
 
         db.delete(challenge)
+        client_label = derive_client_label(request.headers.get("user-agent", ""))
         tokens = create_session(
             db,
             admin.id,
             settings.session_pepper,
             settings.session_hours,
             now,
-            derive_client_label(request.headers.get("user-agent", "")),
+            client_label,
+        )
+        create_notification(
+            db,
+            severity="info",
+            category="security",
+            title="新的后台登录",
+            message=client_label,
+            now=now,
         )
         record_audit(
             db,

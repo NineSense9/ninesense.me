@@ -9,6 +9,7 @@ from sqlalchemy import delete, select
 from ..admin_models import AdminLoginChallenge
 from ..models import Admin
 from ..services.audit import record_audit
+from ..services.admin_notifications import create_notification_once
 from ..services.mfa import build_otpauth_uri, generate_totp_secret
 from ..services.sessions import (
     as_utc,
@@ -37,6 +38,22 @@ def login(payload: LoginRequest, request: Request) -> dict[str, str]:
     client_ip = request.client.host if request.client is not None else "unknown"
     limiter = request.app.state.login_limiter
     if limiter.is_locked(client_ip, payload.username, now):
+        with request.app.state.session_factory() as db:
+            create_notification_once(
+                db,
+                severity="warning",
+                category="security",
+                title="后台登录已临时锁定",
+                message="连续验证失败，登录入口已暂时限制。",
+                now=now,
+            )
+            record_audit(
+                db,
+                action="session.password",
+                outcome="denied",
+                details={"reason_code": "rate_limited"},
+            )
+            db.commit()
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="登录尝试过多，请稍后再试。",
