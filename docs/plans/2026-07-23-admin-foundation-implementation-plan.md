@@ -351,7 +351,7 @@ git commit -m "feat: add administration foundation schema"
 - Create: `server/src/ninesense_guestbook/services/mfa.py`
 - Create: `server/tests/test_mfa.py`
 
-- [ ] **Step 1: Write RFC and recovery-code tests**
+- [x] **Step 1: Write RFC and recovery-code tests**
 
 ```python
 from ninesense_guestbook.services.mfa import generate_recovery_codes, hash_recovery_code, totp_at, verify_totp
@@ -376,7 +376,7 @@ def test_recovery_codes_are_unique_and_only_hashes_persist():
     assert hash_recovery_code(codes[0], "pepper") != codes[0]
 ```
 
-- [ ] **Step 2: Confirm failure**
+- [x] **Step 2: Confirm failure**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_mfa.py -q
@@ -384,7 +384,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_mfa.py -q
 
 Expected: FAIL because `services.mfa` does not exist.
 
-- [ ] **Step 3: Implement the pure service**
+- [x] **Step 3: Implement the pure service**
 
 Implement the complete pure service:
 
@@ -484,7 +484,7 @@ def hash_recovery_code(code: str, pepper: str) -> str:
     ).hexdigest()
 ```
 
-- [ ] **Step 4: Run and commit**
+- [x] **Step 4: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_mfa.py -q
