@@ -13,5 +13,6 @@ server/htmlcov/
 visuals/
 .worktrees/
 node_modules/
+admin-app/dist/
 playwright-report/
 test-results/

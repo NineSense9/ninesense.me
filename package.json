@@ -2,10 +2,11 @@
   "name": "ninesense-site-tests",
   "private": true,
   "scripts": {
+    "build:admin": "npm --prefix admin-app run build",
+    "test:admin-build": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-admin-build.ps1",
     "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0"
   }
 }
-

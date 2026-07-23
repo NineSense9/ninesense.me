@@ -4,7 +4,7 @@
 
 **Goal:** Replace the single-purpose administration page with a secure administration foundation that supports mandatory TOTP, recovery codes, session control, auditing, notifications, a dashboard, and the existing guestbook moderation workflow.
 
-**Architecture:** Keep FastAPI as a modular monolith and SQLite as the database. Add security and administration tables through one reversible Alembic migration, expose narrowly scoped administration APIs, and build a React/Vite administration application into `site/admin/`. Existing public and moderation APIs remain compatible throughout the phase.
+**Architecture:** Keep FastAPI as a modular monolith and SQLite as the database. Add security and administration tables through one reversible Alembic migration, expose narrowly scoped administration APIs, and build a React/Vite administration application in isolation before Task 11 switches it into `site/admin/`. Existing public and moderation APIs remain compatible throughout the phase.
 
 **Tech Stack:** Python 3.10+, FastAPI, SQLAlchemy 2, Alembic, SQLite WAL, Argon2, Python standard-library TOTP/HMAC, existing authenticated encryption service, React, React Router, Vite, QRCode, pytest, Playwright
 
@@ -33,7 +33,7 @@
 ### Modify
 
 - `package.json`, `playwright.config.js`: administration build and browser suites
-- `site/admin/`: generated administration release
+- `site/admin/`: existing release until the Task 11 cutover
 - `server/src/ninesense_guestbook/models.py`: extend `Admin` and `AdminSession`
 - `server/src/ninesense_guestbook/config.py`, `app.py`: security key, cipher and routers
 - `server/src/ninesense_guestbook/cli.py`: bootstrap and MFA recovery commands
@@ -42,7 +42,7 @@
 - `server/alembic/env.py`: administration metadata discovery
 - `server/tests/conftest.py` and current auth/security tests
 - `tests/e2e_server.py`, `tests/guestbook-e2e.spec.js`: MFA-aware E2E flow
-- `tests/test-static-release.ps1`, `tests/test-deploy-config.ps1`: new release contracts
+- `tests/test-admin-build.ps1`, `tests/test-static-release.ps1`, `tests/test-deploy-config.ps1`: isolated build and release contracts
 - `deploy/guestbook.env.example`, `deploy/deploy-guestbook.sh`: key and build safeguards
 - `README.md`: local build, MFA bootstrap and recovery
 
@@ -57,10 +57,11 @@
 - Create: `admin-app/src/App.jsx`
 - Create: `admin-app/src/styles/tokens.css`
 - Create: `admin-app/src/styles/app.css`
+- Create: `tests/test-admin-build.ps1`
 - Modify: `package.json`
-- Modify: `tests/test-static-release.ps1`
+- Modify: `.gitignore`
 
-- [ ] **Step 1: Run the untouched baseline**
+- [x] **Step 1: Run the untouched baseline**
 
 ```powershell
 server/.venv/Scripts/python -m ruff check server/src server/tests server/alembic
@@ -73,37 +74,39 @@ npm run test:e2e
 
 Expected: all commands exit 0. Record pytest and Playwright counts before changing files.
 
-- [ ] **Step 2: Write the failing Vite release contract**
+- [x] **Step 2: Write the failing Vite release contract**
 
-Replace fixed `admin/admin.css` and `admin/admin.js` assertions in `tests/test-static-release.ps1` with:
+Create `tests/test-admin-build.ps1` so the incomplete application can be verified without replacing the working `site/admin/` release:
 
 ```powershell
-$adminIndexPath = Join-Path $site 'admin/index.html'
-$adminManifestPath = Join-Path $site 'admin/.vite/manifest.json'
+$root = Split-Path -Parent $PSScriptRoot
+$dist = Join-Path $root 'admin-app/dist'
+$adminIndexPath = Join-Path $dist 'index.html'
+$adminManifestPath = Join-Path $dist '.vite/manifest.json'
 if (-not (Test-Path $adminIndexPath)) { throw 'Admin index missing' }
 if (-not (Test-Path $adminManifestPath)) { throw 'Admin Vite manifest missing' }
 $manifest = Get-Content -Raw -Encoding UTF8 $adminManifestPath | ConvertFrom-Json
-$entry = $manifest.'src/main.jsx'
+$entry = @($manifest.PSObject.Properties.Value | Where-Object { $_.isEntry -and $_.src -eq 'index.html' }) | Select-Object -First 1
 if (-not $entry -or -not $entry.isEntry) { throw 'Admin entry missing from manifest' }
-if (-not (Test-Path (Join-Path (Join-Path $site 'admin') $entry.file))) {
+if (-not (Test-Path (Join-Path $dist $entry.file))) {
   throw 'Admin JavaScript artifact missing'
 }
 foreach ($cssFile in @($entry.css)) {
-  if (-not (Test-Path (Join-Path (Join-Path $site 'admin') $cssFile))) {
+  if (-not (Test-Path (Join-Path $dist $cssFile))) {
     throw "Admin CSS artifact missing: $cssFile"
   }
 }
 ```
 
-- [ ] **Step 3: Confirm the expected failure**
+- [x] **Step 3: Confirm the expected failure**
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-admin-build.ps1
 ```
 
-Expected: FAIL with `Admin Vite manifest missing`.
+Expected: FAIL with `Admin build index missing`.
 
-- [ ] **Step 4: Create the Vite application**
+- [x] **Step 4: Create the Vite application**
 
 ```powershell
 npm init -y --prefix admin-app
@@ -134,7 +137,7 @@ export default defineConfig({
   base: "/admin/",
   plugins: [react()],
   build: {
-    outDir: resolve(import.meta.dirname, "../site/admin"),
+    outDir: resolve(import.meta.dirname, "./dist"),
     emptyOutDir: true,
     manifest: true
   }
@@ -166,21 +169,22 @@ export default function App() {
 }
 ```
 
-- [ ] **Step 5: Build and pass the release contract**
+- [x] **Step 5: Build and pass the release contract**
 
 Add `"build:admin": "npm --prefix admin-app run build"` to root scripts, then run:
 
 ```powershell
 npm --prefix admin-app run build
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-admin-build.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
 ```
 
 Expected: both commands exit 0.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
-git add package.json admin-app site/admin tests/test-static-release.ps1
+git add .gitignore package.json admin-app tests/test-admin-build.ps1 docs/plans/2026-07-23-admin-foundation-implementation-plan.md
 git commit -m "build: add administration application pipeline"
 ```
 

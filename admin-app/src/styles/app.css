@@ -1,0 +1,23 @@
+.bootstrap-screen {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  padding: 2rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 70% 10%, rgba(210, 118, 49, 0.14), transparent 28rem),
+    #141310;
+}
+
+.bootstrap-screen p {
+  margin: 0 0 1rem;
+  color: #d27631;
+  font: 700 0.68rem/1.4 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.16em;
+}
+
+.bootstrap-screen h1 {
+  margin: 0;
+  font: 500 clamp(2.8rem, 8vw, 6rem)/0.95 Georgia, "Songti SC", serif;
+  letter-spacing: -0.06em;
+}
