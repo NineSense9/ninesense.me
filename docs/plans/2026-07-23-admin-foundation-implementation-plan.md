@@ -200,7 +200,7 @@ git commit -m "build: add administration application pipeline"
 - Modify: `server/alembic/env.py`
 - Modify: `server/tests/conftest.py`
 
-- [ ] **Step 1: Write the failing model test**
+- [x] **Step 1: Write the failing model test**
 
 ```python
 from datetime import datetime, timezone
@@ -233,7 +233,7 @@ def test_admin_foundation_rows_persist(db_session):
     assert db_session.scalar(select(AdminNotification.title)) == "新会话"
 ```
 
-- [ ] **Step 2: Confirm the import failure**
+- [x] **Step 2: Confirm the import failure**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_foundation_models.py -q
@@ -241,7 +241,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_foundation_models.
 
 Expected: FAIL because `admin_models` does not exist.
 
-- [ ] **Step 3: Add exact model fields**
+- [x] **Step 3: Add exact model fields**
 
 Extend `Admin`:
 
@@ -310,7 +310,7 @@ class AdminNotification(Base):
     read_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 ```
 
-- [ ] **Step 4: Add migration and round-trip test**
+- [x] **Step 4: Add migration and round-trip test**
 
 Revision `0002_admin_foundation` uses `down_revision = "0001_guestbook"`. Upgrade deletes existing sessions to force a fresh login, adds the fields above, creates the four tables and indexes, and adds a unique index for `admin_sessions.public_id`. Downgrade removes them with Alembic batch operations.
 
@@ -327,7 +327,7 @@ def test_admin_foundation_migration_round_trip(tmp_path, monkeypatch):
     assert "audit_events" not in tables
 ```
 
-- [ ] **Step 5: Import metadata and pass tests**
+- [x] **Step 5: Import metadata and pass tests**
 
 Import `admin_models` in `server/alembic/env.py` and `server/tests/conftest.py`, then run:
 
@@ -337,7 +337,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_foundation_models.
 
 Expected: PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add server/src/ninesense_guestbook/models.py server/src/ninesense_guestbook/admin_models.py server/alembic server/tests/test_admin_foundation_models.py server/tests/test_migrations.py server/tests/conftest.py

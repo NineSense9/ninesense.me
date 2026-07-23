@@ -6,6 +6,7 @@ import sqlite3
 from alembic import command
 from alembic.config import Config
 from alembic.runtime.migration import MigrationContext
+from alembic.script import ScriptDirectory
 from sqlalchemy import create_engine, select
 
 from ninesense_guestbook.db import build_session_factory
@@ -54,8 +55,14 @@ def test_migrated_database_can_be_backed_up_and_restored(tmp_path):
     shutil.copy2(backup, restored)
 
     restored_engine = create_engine(sqlite_url(restored))
-    with restored_engine.connect() as connection:
-        assert MigrationContext.configure(connection).get_current_revision() == "0001_guestbook"
+    try:
+        with restored_engine.connect() as connection:
+            assert (
+                MigrationContext.configure(connection).get_current_revision()
+                == ScriptDirectory.from_config(config).get_current_head()
+            )
+    finally:
+        restored_engine.dispose()
     with closing(sqlite3.connect(restored)) as connection:
         assert connection.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
         assert connection.execute("SELECT COUNT(*) FROM messages").fetchone()[0] == 1
@@ -73,4 +80,3 @@ def test_migrated_database_can_be_backed_up_and_restored(tmp_path):
         assert recovered == "restore@example.com"
         assert message.content == "确认备份恢复不会丢失私信"
     restored_session_engine.dispose()
-    restored_engine.dispose()

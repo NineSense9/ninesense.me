@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from ninesense_guestbook import admin_models as _admin_models  # noqa: F401
 from ninesense_guestbook import models as _models  # noqa: F401
 from ninesense_guestbook.app import create_app
 from ninesense_guestbook.config import Settings
@@ -33,4 +34,3 @@ def client(app):
 def db_session(app):
     with app.state.session_factory() as session:
         yield session
-

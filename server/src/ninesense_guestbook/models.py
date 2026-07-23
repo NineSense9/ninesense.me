@@ -45,16 +45,31 @@ class Admin(Base):
     username: Mapped[str] = mapped_column(String(64), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
     active: Mapped[bool] = mapped_column(Boolean, default=True)
+    totp_secret_nonce: Mapped[bytes | None] = mapped_column(LargeBinary)
+    totp_secret_ciphertext: Mapped[bytes | None] = mapped_column(LargeBinary)
+    totp_secret_key_version: Mapped[int | None] = mapped_column(Integer)
+    totp_enabled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class AdminSession(Base):
     __tablename__ = "admin_sessions"
 
     id_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    public_id: Mapped[str] = mapped_column(
+        String(32), unique=True, default=lambda: uuid4().hex
+    )
     admin_id: Mapped[int] = mapped_column(
         ForeignKey("admins.id", ondelete="CASCADE")
     )
     csrf_hash: Mapped[str] = mapped_column(String(64))
+    client_label: Mapped[str] = mapped_column(String(80), default="Unknown device")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    last_seen_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow
+    )
+    last_reauthenticated_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
 
 
@@ -71,4 +86,3 @@ class Outbox(Base):
     )
     sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_error: Mapped[str | None] = mapped_column(String(200))
-
