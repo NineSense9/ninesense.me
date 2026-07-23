@@ -501,7 +501,7 @@ Expected: 3 tests pass and the commit succeeds.
 - Create: `server/src/ninesense_guestbook/services/audit.py`
 - Create: `server/tests/test_audit.py`
 
-- [ ] **Step 1: Write the failing allowlist test**
+- [x] **Step 1: Write the failing allowlist test**
 
 ```python
 def test_audit_accepts_allowlisted_details_and_rejects_secrets(db_session):
@@ -513,7 +513,7 @@ def test_audit_accepts_allowlisted_details_and_rejects_secrets(db_session):
         record_audit(db_session, action="session.login", outcome="failure", details={"password": "secret"})
 ```
 
-- [ ] **Step 2: Confirm failure**
+- [x] **Step 2: Confirm failure**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_audit.py -q
@@ -521,7 +521,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_audit.py -q
 
 Expected: FAIL because `services.audit` does not exist.
 
-- [ ] **Step 3: Implement the audit boundary**
+- [x] **Step 3: Implement the audit boundary**
 
 Expose `record_audit(db, *, action, outcome, admin_id=None, target_type=None, target_id=None, details=None)` and permit only:
 
@@ -531,7 +531,7 @@ ALLOWED_DETAIL_KEYS = frozenset({"client_label", "reason_code", "changed_fields"
 
 Serialize compact sorted JSON. Reject unknown keys, invalid outcomes, nested objects and scalar values longer than 160 characters. `changed_fields` may be a flat list of at most 30 strings; all other values are scalar strings or integers. Add the row without committing so the business change and audit event share a transaction.
 
-- [ ] **Step 4: Run and commit**
+- [x] **Step 4: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_audit.py -q
