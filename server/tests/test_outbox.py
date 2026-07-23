@@ -2,7 +2,6 @@ from contextlib import closing
 from datetime import datetime, timedelta, timezone
 import sqlite3
 
-from argon2 import PasswordHasher
 from sqlalchemy import select
 
 from ninesense_guestbook.models import Admin, AdminSession, Message, Outbox
@@ -12,8 +11,7 @@ from ninesense_guestbook.services.outbox import (
     process_outbox_once,
 )
 
-
-PASSWORD = "A-secure-test-password-2026"
+from admin_test_helpers import create_totp_admin, login_with_totp
 
 
 def add_pending_message(db_session, app, key="a"):
@@ -37,19 +35,9 @@ def add_pending_message(db_session, app, key="a"):
     return message, outbox
 
 
-def authenticate(client, db_session):
-    db_session.add(
-        Admin(
-            username="ninesense",
-            password_hash=PasswordHasher().hash(PASSWORD),
-            active=True,
-        )
-    )
-    db_session.commit()
-    response = client.post(
-        "/api/admin/session",
-        json={"username": "ninesense", "password": PASSWORD},
-    )
+def authenticate(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    response = login_with_totp(client, secret)
     return response.json()["csrf_token"]
 
 
@@ -152,7 +140,7 @@ def test_online_backup_is_openable_and_integrity_checked(app, db_session, tmp_pa
 
 
 def test_admin_can_retry_notification_but_csrf_is_required(client, app, db_session):
-    csrf = authenticate(client, db_session)
+    csrf = authenticate(client, db_session, app)
     message, outbox = add_pending_message(db_session, app, "e")
     outbox.attempts = 4
     outbox.last_error = "RuntimeError"
@@ -177,7 +165,7 @@ def test_admin_can_retry_notification_but_csrf_is_required(client, app, db_sessi
 def test_admin_detail_exposes_notification_status_without_email_secrets(
     client, app, db_session
 ):
-    authenticate(client, db_session)
+    authenticate(client, db_session, app)
     message, outbox = add_pending_message(db_session, app, "f")
     outbox.attempts = 2
     outbox.last_error = "RuntimeError"

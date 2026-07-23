@@ -552,7 +552,7 @@ Expected: PASS.
 - Modify: `server/tests/conftest.py`
 - Modify: `server/tests/test_admin_auth.py`
 
-- [ ] **Step 1: Write challenge tests**
+- [x] **Step 1: Write challenge tests**
 
 ```python
 def test_password_login_creates_setup_challenge_without_session(client, db_session):
@@ -579,7 +579,7 @@ def test_enabled_admin_receives_challenge_without_secret(client, db_session, app
     assert "setup_uri" not in body
 ```
 
-- [ ] **Step 2: Confirm the old 200 response fails**
+- [x] **Step 2: Confirm the old 200 response fails**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_auth.py -q
@@ -587,7 +587,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_auth.py -q
 
 Expected: FAIL because password login still creates a session.
 
-- [ ] **Step 3: Add separate encryption settings**
+- [x] **Step 3: Add separate encryption settings**
 
 Add:
 
@@ -598,7 +598,7 @@ login_challenge_minutes: int = 5
 
 Initialize `app.state.security_cipher = ContactCipher.from_urlsafe_key(settings.security_key)`. Test settings use a distinct fixed key.
 
-- [ ] **Step 4: Implement challenge creation**
+- [x] **Step 4: Implement challenge creation**
 
 After password verification, generate a 32-byte URL-safe token and persist only its HMAC hash. Disabled TOTP creates purpose `setup`, generates and encrypts a pending TOTP secret, and returns `setup_uri`; enabled TOTP creates purpose `login` and returns no secret. Both responses use status 202:
 
@@ -614,7 +614,7 @@ Setup uses `mfa_setup_required`. Delete expired challenges for the same admin. A
 
 Extend `LoginAttemptLimiter` with deterministic progressive lock intervals: failures 1–4 are not locked, failure 5 locks for 30 seconds, and each later failure doubles the interval up to 15 minutes. A successful password verification clears the entry. Add direct service tests with explicit timestamps so the suite does not sleep.
 
-- [ ] **Step 5: Run tests and commit**
+- [x] **Step 5: Run tests and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_auth.py server/tests/test_security_regressions.py -q
@@ -635,7 +635,7 @@ Expected: challenge tests pass; session-dependent helpers are completed in Task 
 - Modify: `server/src/ninesense_guestbook/web/auth.py`
 - Modify: `server/src/ninesense_guestbook/services/sessions.py`
 
-- [ ] **Step 1: Write failing API tests**
+- [x] **Step 1: Write failing API tests**
 
 Create shared test helpers first:
 
@@ -757,7 +757,7 @@ def test_setup_code_enables_totp_and_returns_recovery_codes(client, db_session, 
 
 Add separate tests that assert: five wrong OTPs consume the challenge; enabled admins log in without receiving the secret; one recovery code logs in exactly once; expired and replayed challenges receive the same generic 401 response.
 
-- [ ] **Step 2: Confirm the missing route**
+- [x] **Step 2: Confirm the missing route**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_security.py -q
@@ -765,7 +765,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_security.py -q
 
 Expected: FAIL with 404 for `/api/admin/session/mfa`.
 
-- [ ] **Step 3: Implement the completion endpoint**
+- [x] **Step 3: Implement the completion endpoint**
 
 Use this request schema:
 
@@ -789,7 +789,7 @@ Return this shape, omitting `recovery_codes` on ordinary login:
 }
 ```
 
-- [ ] **Step 4: Run focused tests**
+- [x] **Step 4: Run focused tests**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_mfa.py server/tests/test_admin_auth.py server/tests/test_admin_security.py -q
@@ -797,7 +797,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_mfa.py server/tests/test
 
 Expected: all pass.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add server/src/ninesense_guestbook/web/admin_security.py server/src/ninesense_guestbook/web/auth.py server/src/ninesense_guestbook/services/sessions.py server/src/ninesense_guestbook/app.py server/tests/admin_test_helpers.py server/tests/test_admin_security.py server/tests/test_admin_auth.py

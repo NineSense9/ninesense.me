@@ -17,6 +17,7 @@ DATABASE.unlink(missing_ok=True)
 settings = Settings(
     database_url=f"sqlite:///{DATABASE}",
     contact_key="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+    security_key="AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE=",
     session_pepper="e2e-session-pepper",
     rate_limit_key="e2e-rate-limit-key",
     cookie_secure=False,
@@ -38,4 +39,3 @@ app.mount("/", StaticFiles(directory=ROOT / "site", html=True), name="site")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8123, log_level="warning", access_log=False)
-

@@ -1,18 +1,22 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+import secrets
 
 from argon2.exceptions import VerificationError, VerifyMismatchError
 from fastapi import APIRouter, HTTPException, Request, Response, status
 from pydantic import BaseModel, ConfigDict, Field
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
+from ..admin_models import AdminLoginChallenge
 from ..models import Admin
+from ..services.audit import record_audit
+from ..services.mfa import build_otpauth_uri, generate_totp_secret
 from ..services.sessions import (
     as_utc,
-    create_session,
     require_csrf,
     require_session,
     revoke_session,
     rotate_csrf,
+    token_hash,
 )
 
 
@@ -26,8 +30,8 @@ class LoginRequest(BaseModel):
     password: str = Field(min_length=1, max_length=200)
 
 
-@router.post("/session")
-def login(payload: LoginRequest, request: Request, response: Response) -> dict[str, str]:
+@router.post("/session", status_code=status.HTTP_202_ACCEPTED)
+def login(payload: LoginRequest, request: Request) -> dict[str, str]:
     now = datetime.now(timezone.utc)
     client_ip = request.client.host if request.client is not None else "unknown"
     limiter = request.app.state.login_limiter
@@ -50,6 +54,14 @@ def login(payload: LoginRequest, request: Request, response: Response) -> dict[s
 
         if admin is None or not admin.active or not password_valid:
             limiter.record_failure(client_ip, payload.username, now)
+            record_audit(
+                db,
+                action="session.password",
+                outcome="failure",
+                admin_id=admin.id if admin is not None else None,
+                details={"reason_code": "invalid_credentials"},
+            )
+            db.commit()
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="用户名或密码不正确。",
@@ -59,28 +71,44 @@ def login(payload: LoginRequest, request: Request, response: Response) -> dict[s
         if request.app.state.password_hasher.check_needs_rehash(admin.password_hash):
             admin.password_hash = request.app.state.password_hasher.hash(payload.password)
         settings = request.app.state.settings
-        tokens = create_session(
+        db.execute(
+            delete(AdminLoginChallenge).where(
+                AdminLoginChallenge.admin_id == admin.id,
+                AdminLoginChallenge.expires_at <= now,
+            )
+        )
+        raw_challenge = secrets.token_urlsafe(32)
+        challenge = AdminLoginChallenge(
+            id_hash=token_hash(raw_challenge, settings.session_pepper),
+            admin_id=admin.id,
+            purpose="login" if admin.totp_enabled_at is not None else "setup",
+            expires_at=now + timedelta(minutes=settings.login_challenge_minutes),
+        )
+        response_body = {
+            "stage": "mfa_required",
+            "challenge_token": raw_challenge,
+            "expires_at": challenge.expires_at.isoformat(),
+        }
+        if challenge.purpose == "setup":
+            secret = generate_totp_secret()
+            encrypted = request.app.state.security_cipher.encrypt(secret)
+            challenge.secret_nonce = encrypted.nonce
+            challenge.secret_ciphertext = encrypted.ciphertext
+            challenge.secret_key_version = encrypted.key_version
+            response_body["stage"] = "mfa_setup_required"
+            response_body["setup_uri"] = build_otpauth_uri(
+                secret,
+                admin.username,
+            )
+        db.add(challenge)
+        record_audit(
             db,
-            admin.id,
-            settings.session_pepper,
-            settings.session_hours,
-            now,
+            action="session.password",
+            outcome="success",
+            admin_id=admin.id,
         )
         db.commit()
-
-    response.set_cookie(
-        key=settings.cookie_name,
-        value=tokens.session_token,
-        max_age=settings.session_hours * 3600,
-        httponly=True,
-        secure=settings.cookie_secure,
-        samesite="strict",
-        path="/",
-    )
-    return {
-        "csrf_token": tokens.csrf_token,
-        "expires_at": tokens.expires_at.isoformat(),
-    }
+        return response_body
 
 
 @router.get("/session")
@@ -112,4 +140,3 @@ def logout(request: Request, response: Response) -> None:
         httponly=True,
         samesite="strict",
     )
-

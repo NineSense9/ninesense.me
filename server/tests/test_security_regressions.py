@@ -2,27 +2,17 @@ from datetime import datetime, timezone
 import logging
 import time
 
-from argon2 import PasswordHasher
+from ninesense_guestbook.models import Message
 
-from ninesense_guestbook.models import Admin, Message
+from admin_test_helpers import create_totp_admin, login_with_totp
 
 
 PASSWORD = "A-secure-test-password-2026"
 
 
-def create_admin_and_login(client, db_session):
-    db_session.add(
-        Admin(
-            username="ninesense",
-            password_hash=PasswordHasher().hash(PASSWORD),
-            active=True,
-        )
-    )
-    db_session.commit()
-    return client.post(
-        "/api/admin/session",
-        json={"username": "ninesense", "password": PASSWORD},
-    )
+def create_admin_and_login(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    return login_with_totp(client, secret)
 
 
 def test_public_feed_has_a_strict_field_allowlist(client, db_session, app):
@@ -58,8 +48,8 @@ def test_admin_data_is_unavailable_without_session(client):
     assert response.status_code == 401
 
 
-def test_forged_csrf_is_rejected(client, db_session):
-    create_admin_and_login(client, db_session)
+def test_forged_csrf_is_rejected(client, db_session, app):
+    create_admin_and_login(client, db_session, app)
 
     response = client.delete(
         "/api/admin/session",
@@ -69,8 +59,8 @@ def test_forged_csrf_is_rejected(client, db_session):
     assert response.status_code == 403
 
 
-def test_logs_do_not_capture_credentials_or_contact(client, db_session, caplog):
-    create_admin_and_login(client, db_session)
+def test_logs_do_not_capture_credentials_or_contact(client, db_session, app, caplog):
+    create_admin_and_login(client, db_session, app)
     caplog.set_level(logging.DEBUG)
 
     client.post(

@@ -6,11 +6,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     database_url: str = "sqlite:////var/lib/ninesense/guestbook.sqlite3"
     contact_key: str
+    security_key: str
     session_pepper: str
     rate_limit_key: str
     cookie_secure: bool = False
     cookie_name: str = "ninesense_admin"
     session_hours: int = 8
+    login_challenge_minutes: int = 5
     smtp_host: str = ""
     smtp_port: int = 465
     smtp_username: str = ""
@@ -24,4 +26,3 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

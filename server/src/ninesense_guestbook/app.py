@@ -11,6 +11,7 @@ from .services.outbox import outbox_worker
 from .services.rate_limit import SubmissionLimiter
 from .services.sessions import LoginAttemptLimiter
 from .web.admin import outbox_router, router as admin_router
+from .web.admin_security import router as admin_security_router
 from .web.auth import router as auth_router
 from .web.middleware import ApiProtectionMiddleware
 from .web.public import router as public_router
@@ -45,6 +46,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.engine = engine
     app.state.session_factory = session_factory
     app.state.contact_cipher = ContactCipher.from_urlsafe_key(resolved_settings.contact_key)
+    app.state.security_cipher = ContactCipher.from_urlsafe_key(
+        resolved_settings.security_key
+    )
     app.state.submission_limiter = SubmissionLimiter(resolved_settings.rate_limit_key)
     app.state.login_limiter = LoginAttemptLimiter(resolved_settings.rate_limit_key)
     app.state.password_hasher = PasswordHasher()
@@ -59,4 +63,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(auth_router)
     app.include_router(admin_router)
     app.include_router(outbox_router)
+    app.include_router(admin_security_router)
     return app

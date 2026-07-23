@@ -129,6 +129,7 @@ class LoginAttemptLimiter:
         self._window = window
         self._max_entries = max_entries
         self._failures: dict[str, deque[datetime]] = {}
+        self._locked_until: dict[str, datetime] = {}
         self._lock = Lock()
 
     def _token(self, ip: str, username: str, now: datetime) -> str:
@@ -141,20 +142,31 @@ class LoginAttemptLimiter:
         token = self._token(ip, username, now)
         with self._lock:
             self._prune(now)
-            return len(self._failures.get(token, ())) >= self._limit
+            return self._locked_until.get(token, datetime.min.replace(tzinfo=timezone.utc)) > as_utc(now)
 
     def record_failure(self, ip: str, username: str, now: datetime) -> None:
         token = self._token(ip, username, now)
         with self._lock:
             self._prune(now)
-            self._failures.setdefault(token, deque()).append(as_utc(now))
+            current_time = as_utc(now)
+            failures = self._failures.setdefault(token, deque())
+            failures.append(current_time)
+            if len(failures) >= self._limit:
+                exponent = len(failures) - self._limit
+                lock_seconds = min(30 * (2**exponent), 15 * 60)
+                self._locked_until[token] = current_time + timedelta(
+                    seconds=lock_seconds
+                )
             while len(self._failures) > self._max_entries:
-                del self._failures[next(iter(self._failures))]
+                oldest = next(iter(self._failures))
+                del self._failures[oldest]
+                self._locked_until.pop(oldest, None)
 
     def record_success(self, ip: str, username: str, now: datetime) -> None:
         token = self._token(ip, username, now)
         with self._lock:
             self._failures.pop(token, None)
+            self._locked_until.pop(token, None)
 
     def _prune(self, now: datetime) -> None:
         cutoff = as_utc(now) - self._window
@@ -162,8 +174,8 @@ class LoginAttemptLimiter:
         for token, failures in self._failures.items():
             while failures and failures[0] < cutoff:
                 failures.popleft()
-            if not failures:
+            if not failures and self._locked_until.get(token, cutoff) <= as_utc(now):
                 empty.append(token)
         for token in empty:
             del self._failures[token]
-
+            self._locked_until.pop(token, None)

@@ -15,6 +15,7 @@ def app(tmp_path: Path):
     settings = Settings(
         database_url=f"sqlite:///{tmp_path / 'test.sqlite3'}",
         contact_key="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        security_key="AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE=",
         session_pepper="test-session-pepper",
         rate_limit_key="test-rate-limit-key",
     )
