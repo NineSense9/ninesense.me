@@ -1,0 +1,165 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+release=${1:?usage: deploy-guestbook.sh RELEASE [ARCHIVE]}
+archive=${2:-/tmp/ninesense-${release}.tar.gz}
+app_root=/opt/ninesense-guestbook
+app_release=${app_root}/releases/${release}
+static_root=/var/www/ninesense
+static_release=${static_root}/releases/${release}
+backup_root=/root/ninesense-deploy-backups/${release}
+previous_static=$(readlink -f "${static_root}/current")
+nginx_changed=0
+static_switched=0
+
+restore_file() {
+  local path="$1" name="$2"
+  if [[ -e "${backup_root}/${name}" ]]; then
+    cp -a "${backup_root}/${name}" "$path"
+  else
+    rm -f "$path"
+  fi
+}
+
+rollback() {
+  local rc="$1"
+  trap - ERR
+  set +e
+  echo "ROLLBACK rc=${rc}" >&2
+  if [[ $static_switched -eq 1 ]]; then
+    ln -sfn "$previous_static" "${static_root}/current.rollback"
+    mv -Tf "${static_root}/current.rollback" "${static_root}/current"
+  fi
+  if [[ $nginx_changed -eq 1 ]]; then
+    restore_file /etc/nginx/sites-available/ninesense.conf ninesense.conf
+    restore_file /etc/nginx/conf.d/ninesense-rate-limit.conf ninesense-rate-limit.conf
+    restore_file /etc/nginx/snippets/ninesense-guestbook.conf ninesense-guestbook.conf
+    nginx -t >/dev/null 2>&1 && systemctl reload nginx
+  fi
+  systemctl stop ninesense-guestbook.service >/dev/null 2>&1 || true
+  systemctl stop ninesense-guestbook-backup.timer >/dev/null 2>&1 || true
+  exit "$rc"
+}
+trap 'rollback $?' ERR
+
+install -d -m 0700 "$backup_root"
+for pair in \
+  /etc/nginx/sites-available/ninesense.conf:ninesense.conf \
+  /etc/nginx/conf.d/ninesense-rate-limit.conf:ninesense-rate-limit.conf \
+  /etc/nginx/snippets/ninesense-guestbook.conf:ninesense-guestbook.conf; do
+  path=${pair%%:*}
+  name=${pair##*:}
+  [[ -e "$path" ]] && cp -a "$path" "${backup_root}/${name}"
+done
+
+id -u ninesense >/dev/null 2>&1 || \
+  useradd --system --home-dir /var/lib/ninesense --shell /usr/sbin/nologin ninesense
+install -d -o root -g root -m 0755 "${app_root}/releases" "${static_root}/releases"
+install -d -o ninesense -g ninesense -m 0700 /var/lib/ninesense
+install -d -o ninesense -g ninesense -m 0700 \
+  /var/backups/ninesense/guestbook \
+  /var/backups/ninesense/guestbook/daily \
+  /var/backups/ninesense/guestbook/monthly
+install -d -o root -g ninesense -m 0750 /etc/ninesense
+
+rm -rf "$app_release" "$static_release"
+install -d -m 0755 "$app_release" "$static_release"
+tar -xzf "$archive" -C "$app_release"
+cp -a "$app_release/site/." "$static_release/"
+find "$static_release" -type d -exec chmod 0755 {} +
+find "$static_release" -type f -exec chmod 0644 {} +
+
+python3 -m venv "$app_release/venv"
+"$app_release/venv/bin/python" -m pip install \
+  --disable-pip-version-check --no-cache-dir "$app_release/server"
+
+if [[ ! -e /etc/ninesense/guestbook.env ]]; then
+  contact_key=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '\n')
+  session_pepper=$(openssl rand -hex 48)
+  rate_limit_key=$(openssl rand -hex 48)
+  cat > /etc/ninesense/guestbook.env <<EOF
+NINESENSE_DATABASE_URL=sqlite:////var/lib/ninesense/guestbook.sqlite3
+NINESENSE_CONTACT_KEY=${contact_key}
+NINESENSE_SESSION_PEPPER=${session_pepper}
+NINESENSE_RATE_LIMIT_KEY=${rate_limit_key}
+NINESENSE_COOKIE_SECURE=false
+NINESENSE_COOKIE_NAME=ninesense_admin
+NINESENSE_SESSION_HOURS=8
+NINESENSE_SMTP_HOST=
+NINESENSE_SMTP_PORT=465
+NINESENSE_SMTP_USERNAME=
+NINESENSE_SMTP_PASSWORD=
+NINESENSE_NOTIFICATION_TO=
+NINESENSE_PUBLIC_ADMIN_URL=https://example.com/admin/
+EOF
+fi
+chown root:ninesense /etc/ninesense/guestbook.env
+chmod 0640 /etc/ninesense/guestbook.env
+
+ln -sfn "$app_release" "${app_root}/current.next"
+mv -Tf "${app_root}/current.next" "${app_root}/current"
+runuser -u ninesense -- bash -c \
+  "cd '${app_release}/server'; set -a; . /etc/ninesense/guestbook.env; set +a; exec '${app_release}/venv/bin/alembic' -c alembic.ini upgrade head"
+
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-guestbook.service" \
+  /etc/systemd/system/ninesense-guestbook.service
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-guestbook-backup.service" \
+  /etc/systemd/system/ninesense-guestbook-backup.service
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-guestbook-backup.timer" \
+  /etc/systemd/system/ninesense-guestbook-backup.timer
+install -o root -g ninesense -m 0750 \
+  "$app_release/deploy/backup-guestbook.sh" \
+  /usr/local/sbin/ninesense-guestbook-backup
+systemctl daemon-reload
+systemctl enable ninesense-guestbook.service >/dev/null
+systemctl restart ninesense-guestbook.service
+
+healthy=0
+for _ in $(seq 1 30); do
+  if curl -fsS http://127.0.0.1:8812/api/health >/dev/null 2>&1; then
+    healthy=1
+    break
+  fi
+  sleep 1
+done
+[[ $healthy -eq 1 ]]
+echo API_LOCAL_OK
+
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-rate-limit.conf" \
+  /etc/nginx/conf.d/ninesense-rate-limit.conf
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-nginx.conf" \
+  /etc/nginx/snippets/ninesense-guestbook.conf
+install -o root -g root -m 0644 \
+  "$app_release/deploy/ninesense-site.conf" \
+  /etc/nginx/sites-available/ninesense.conf
+nginx_changed=1
+nginx -t
+
+ln -sfn "$static_release" "${static_root}/current.next"
+mv -Tf "${static_root}/current.next" "${static_root}/current"
+static_switched=1
+systemctl reload nginx
+
+nginx_ready=0
+for _ in $(seq 1 30); do
+  if [[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/api/health) == 200 ]]; then
+    nginx_ready=1
+    break
+  fi
+  sleep 1
+done
+[[ $nginx_ready -eq 1 ]]
+[[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/guestbook/) == 200 ]]
+[[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/admin/) == 200 ]]
+echo NGINX_LOCAL_OK
+
+systemctl start ninesense-guestbook-backup.service
+systemctl enable --now ninesense-guestbook-backup.timer >/dev/null
+
+trap - ERR
+printf 'DEPLOY_OK release=%s previous_static=%s\n' "$release" "$previous_static"

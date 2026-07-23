@@ -1,0 +1,2 @@
+"""Guestbook domain rules."""
+

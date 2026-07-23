@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#141310">
+  <title>管理后台 · NineSense</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <header class="admin-topbar">
+    <a class="brand" href="../">NineSense</a>
+    <span class="admin-badge">PRIVATE CONSOLE</span>
+    <nav aria-label="后台导航"><a href="../guestbook/">查看留言板</a><a href="../">返回主页</a></nav>
+  </header>
+
+  <main>
+    <section class="login-view" id="login-view" aria-labelledby="login-title">
+      <div class="login-copy">
+        <p class="eyebrow">OWNER ACCESS / NINESENSE</p>
+        <h1 id="login-title">回来整理<br>收到的文字</h1>
+        <p>这里不是公开页面。登录后可以审核留言、处理私信和查看邮件提醒状态。</p>
+      </div>
+      <form class="login-card" id="login-form">
+        <span class="card-number">01 / AUTHENTICATION</span>
+        <label for="username">账户</label>
+        <input id="username" name="username" type="text" autocomplete="username" maxlength="64" required>
+        <label for="password">密码</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" maxlength="200" required>
+        <button type="submit">进入后台 <span aria-hidden="true">↗</span></button>
+        <p id="login-status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden aria-labelledby="dashboard-title">
+      <div class="dashboard-heading">
+        <div><p class="eyebrow">INBOX / MODERATION</p><h1 id="dashboard-title">收到的文字</h1></div>
+        <div class="session-meta"><span id="admin-identity">—</span><button id="logout-button" type="button">退出登录</button></div>
+      </div>
+
+      <div class="toolbar" aria-label="留言筛选">
+        <label>状态
+          <select id="status-filter">
+            <option value="pending">待处理</option>
+            <option value="published">已公开</option>
+            <option value="handled">已处理</option>
+            <option value="archived">已归档</option>
+            <option value="rejected">已拒绝</option>
+            <option value="">全部状态</option>
+          </select>
+        </label>
+        <label>类型
+          <select id="kind-filter"><option value="">全部类型</option><option value="public">公开留言</option><option value="private">私信</option></select>
+        </label>
+        <label class="search-field">搜索
+          <input id="message-search" type="search" maxlength="100" placeholder="昵称或正文">
+        </label>
+        <button id="refresh-button" type="button">刷新</button>
+      </div>
+
+      <div class="workspace">
+        <section class="inbox-panel" aria-labelledby="inbox-title">
+          <div class="section-label"><h2 id="inbox-title">INBOX</h2><span id="result-count">0 ITEMS</span></div>
+          <div class="message-list" id="message-list" role="list" aria-live="polite" aria-busy="true"></div>
+          <button class="load-more" id="admin-load-more" type="button" hidden>继续加载</button>
+        </section>
+
+        <section class="detail-panel" id="message-detail" aria-labelledby="detail-title">
+          <div class="detail-empty" id="detail-empty"><span>SELECT A MESSAGE</span><p>从左侧选择一条留言查看完整内容</p></div>
+          <div id="detail-content" hidden>
+            <div class="detail-head">
+              <div><p class="eyebrow" id="detail-kind">—</p><h2 id="detail-title">—</h2></div>
+              <span class="status-pill" id="detail-status">—</span>
+            </div>
+            <div class="detail-date" id="detail-date">—</div>
+            <p class="detail-message" id="detail-message"></p>
+
+            <section class="contact-card" aria-labelledby="contact-title">
+              <div><span id="contact-title">联系方式</span><small>仅后台可见</small></div>
+              <p id="contact-value">未填写</p>
+            </section>
+
+            <section class="reply-editor" id="reply-editor" hidden aria-labelledby="reply-title">
+              <div class="section-label"><h3 id="reply-title">公开回复</h3><span>2—500 字</span></div>
+              <textarea id="reply-text" maxlength="500" rows="4" placeholder="回复会显示在公开留言下方"></textarea>
+              <div class="reply-buttons"><button id="save-reply" type="button">保存回复</button><button id="remove-reply" type="button">删除回复</button></div>
+            </section>
+
+            <section class="notification-card" aria-labelledby="notification-title">
+              <div class="section-label"><h3 id="notification-title">邮件提醒</h3><span id="notification-state">—</span></div>
+              <p id="notification-detail">—</p>
+              <button id="retry-notification" type="button" hidden>重新发送提醒</button>
+            </section>
+
+            <div class="detail-actions" id="detail-actions" aria-label="审核操作"></div>
+            <p class="detail-status-message" id="detail-status-message" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="confirm-dialog">
+    <form method="dialog">
+      <span class="card-number">CONFIRM ACTION</span>
+      <h2 id="confirm-title">确认操作</h2>
+      <p id="confirm-copy"></p>
+      <div><button value="cancel">取消</button><button class="danger" id="confirm-submit" value="confirm">确认</button></div>
+    </form>
+  </dialog>
+
+  <script src="./admin.js" defer></script>
+</body>
+</html>
+

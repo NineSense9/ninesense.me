@@ -1,0 +1,12 @@
+[Unit]
+Description=Daily NineSense guestbook backup
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=15m
+Persistent=true
+Unit=ninesense-guestbook-backup.service
+
+[Install]
+WantedBy=timers.target
+

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#ebe5dc">
+  <title>页面未找到 | NineSense</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <style>
+    :root { --paper: #ebe5dc; --ink: #12110f; --muted: #716b62; --amber: #95602d; }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100svh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background-color: var(--paper);
+      background-image: linear-gradient(rgba(18,17,15,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(18,17,15,.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: var(--ink);
+      font-family: Inter, "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
+    }
+    main { width: min(820px, calc(100% - 40px)); position: relative; }
+    main::after { content: ""; position: absolute; z-index: -1; width: 360px; height: 360px; right: -70px; top: -110px; border: 1px solid rgba(149,96,45,.22); border-radius: 50%; box-shadow: inset 0 0 0 70px var(--paper), inset 0 0 0 71px rgba(149,96,45,.13); }
+    small { color: var(--amber); font: 12px Consolas, monospace; letter-spacing: .16em; }
+    h1 { margin: 18px 0 0; font-size: clamp(108px, 24vw, 220px); line-height: .76; letter-spacing: -.09em; }
+    h2 { margin: 36px 0 10px; font-size: clamp(28px, 5vw, 48px); letter-spacing: -.04em; }
+    p { max-width: 520px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    a { display: inline-flex; margin-top: 30px; padding: 13px 18px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); text-decoration: none; font-size: 13px; }
+    a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <small>NINESENSE / NOT FOUND</small>
+    <h1>404</h1>
+    <h2>这里没有这一页</h2>
+    <p>可能是链接写错了，也可能是页面后来换了位置。先回首页看看。</p>
+    <a href="./">返回首页&nbsp;&nbsp;↗</a>
+  </main>
+</body>
+</html>

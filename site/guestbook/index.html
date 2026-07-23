@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="给 NineSense 留下一句话，或发送一封仅站长可见的私信。">
+  <meta name="theme-color" content="#f1eee5">
+  <title>留言板 · NineSense</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./guestbook.css?v=20260723-blur1">
+</head>
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="NineSense 首页">NineSense</a>
+    <nav aria-label="留言板导航">
+      <a href="../">返回主页</a>
+      <span aria-hidden="true">/</span>
+      <a href="#write">写一点</a>
+      <a href="#messages">看看大家</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">NINESENSE / GUESTBOOK / PRIVATE LETTERS</p>
+        <h1 id="page-title" aria-label="LEAVE A NOTE FOR LATER">
+          <span class="blur-title" data-blur-title>
+            <span class="blur-line" data-blur-text="LEAVE A NOTE">LEAVE A NOTE</span>
+            <span class="blur-line blur-line-outline" data-blur-text="FOR LATER">FOR LATER</span>
+          </span>
+        </h1>
+      </div>
+      <div class="intro-copy">
+        <p>路过也好，认识很久也好，都可以在这里写几句话。公开留言会先经过审核，私信则只会留在我的后台。</p>
+        <dl>
+          <div><dt>PUBLIC</dt><dd>审核后公开</dd></div>
+          <div><dt>PRIVATE</dt><dd>始终不公开</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="guestbook-layout">
+      <aside class="composer" id="write" aria-labelledby="composer-title">
+        <div class="panel-heading">
+          <span class="panel-index">01</span>
+          <div><p class="eyebrow">LEAVE A NOTE</p><h2 id="composer-title">写点什么</h2></div>
+        </div>
+
+        <form id="guestbook-form" novalidate>
+          <fieldset class="kind-picker">
+            <legend>这次想发送</legend>
+            <label>
+              <input type="radio" name="kind" value="public" checked>
+              <span><strong>公开留言</strong><small>审核后会出现在右侧</small></span>
+            </label>
+            <label>
+              <input type="radio" name="kind" value="private">
+              <span><strong>私信给我</strong><small>只在管理后台可见</small></span>
+            </label>
+          </fieldset>
+
+          <p class="privacy-note" id="privacy-note" aria-live="polite">公开留言会在审核通过后展示，联系方式不会公开。</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="nickname">怎么称呼你 <span>必填</span></label>
+              <input id="nickname" name="nickname" type="text" minlength="2" maxlength="24" autocomplete="nickname" required aria-describedby="nickname-error">
+              <p class="field-error" id="nickname-error"></p>
+            </div>
+            <div class="field">
+              <label for="contact">邮箱或手机 <span>选填 · 不公开</span></label>
+              <input id="contact" name="contact" type="text" maxlength="100" autocomplete="email" aria-describedby="contact-error">
+              <p class="field-error" id="contact-error"></p>
+            </div>
+          </div>
+
+          <div class="field content-field">
+            <label for="content">想说的话 <span><b id="content-counter">0</b> / 500</span></label>
+            <textarea id="content" name="content" minlength="2" maxlength="500" rows="7" required aria-describedby="content-error" placeholder="不必正式，写你真正想说的就好。"></textarea>
+            <p class="field-error" id="content-error"></p>
+          </div>
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button class="submit-button" type="submit">
+            <span>发送这段话</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="form-status" id="form-status" aria-live="polite"></p>
+        </form>
+      </aside>
+
+      <section class="message-stream" id="messages" aria-labelledby="messages-title">
+        <div class="stream-heading">
+          <div class="panel-heading">
+            <span class="panel-index">02</span>
+            <div><p class="eyebrow">FROM VISITORS</p><h2 id="messages-title">最近的留言</h2></div>
+          </div>
+          <p>只展示已经审核通过的公开留言</p>
+        </div>
+        <div class="message-feed" id="message-feed" role="list" aria-live="polite" aria-busy="true"></div>
+        <button class="load-more" id="load-more" type="button" hidden>继续看看 <span aria-hidden="true">→</span></button>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span>NINESENSE.ME / GUESTBOOK</span>
+    <span>WORDS STAY A LITTLE LONGER HERE</span>
+  </footer>
+  <script src="./guestbook.js?v=20260723-blur1" defer></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="NineSense">
+  <rect width="128" height="128" rx="28" fill="#ebe5dc"/>
+  <circle cx="64" cy="64" r="49" fill="#12110f"/>
+  <defs>
+    <clipPath id="n">
+      <path d="M38 92V36h13l26 34V36h13v56H78L51 57v35z"/>
+    </clipPath>
+  </defs>
+  <path d="M38 92V36h13l26 34V36h13v56H78L51 57v35z" fill="#efe7db"/>
+  <g clip-path="url(#n)">
+    <rect x="29" y="69" width="72" height="5" fill="#cf4a3b"/>
+    <rect x="35" y="74" width="72" height="5" fill="#42b9bd"/>
+    <rect x="32" y="83" width="72" height="3" fill="#c9914d"/>
+  </g>
+</svg>

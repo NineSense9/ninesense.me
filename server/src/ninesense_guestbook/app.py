@@ -1,0 +1,62 @@
+import asyncio
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from argon2 import PasswordHasher
+
+from .config import Settings, get_settings
+from .db import build_session_factory
+from .services.crypto import ContactCipher
+from .services.outbox import outbox_worker
+from .services.rate_limit import SubmissionLimiter
+from .services.sessions import LoginAttemptLimiter
+from .web.admin import outbox_router, router as admin_router
+from .web.auth import router as auth_router
+from .web.middleware import ApiProtectionMiddleware
+from .web.public import router as public_router
+
+
+def create_app(settings: Settings | None = None) -> FastAPI:
+    resolved_settings = settings or get_settings()
+    engine, session_factory = build_session_factory(resolved_settings.database_url)
+
+    @asynccontextmanager
+    async def lifespan(application: FastAPI):
+        worker = None
+        if resolved_settings.smtp_host and resolved_settings.notification_to:
+            worker = asyncio.create_task(outbox_worker(application))
+        try:
+            yield
+        finally:
+            if worker is not None:
+                worker.cancel()
+                try:
+                    await worker
+                except asyncio.CancelledError:
+                    pass
+
+    app = FastAPI(
+        title="NineSense Guestbook",
+        docs_url=None,
+        redoc_url=None,
+        lifespan=lifespan,
+    )
+    app.state.settings = resolved_settings
+    app.state.engine = engine
+    app.state.session_factory = session_factory
+    app.state.contact_cipher = ContactCipher.from_urlsafe_key(resolved_settings.contact_key)
+    app.state.submission_limiter = SubmissionLimiter(resolved_settings.rate_limit_key)
+    app.state.login_limiter = LoginAttemptLimiter(resolved_settings.rate_limit_key)
+    app.state.password_hasher = PasswordHasher()
+    app.state.dummy_hash = app.state.password_hasher.hash("not-a-real-password")
+    app.add_middleware(ApiProtectionMiddleware, max_body_bytes=32 * 1024)
+
+    @app.get("/api/health")
+    def health():
+        return {"status": "ok"}
+
+    app.include_router(public_router)
+    app.include_router(auth_router)
+    app.include_router(admin_router)
+    app.include_router(outbox_router)
+    return app

@@ -1,0 +1,148 @@
+:root {
+  --ink: #141310;
+  --ink-soft: #201e1a;
+  --paper: #f0ede4;
+  --paper-deep: #e4ded2;
+  --muted: #817b70;
+  --line-dark: rgba(240, 237, 228, .16);
+  --line-light: rgba(20, 19, 16, .18);
+  --amber: #d27631;
+  --red: #a84332;
+  --green: #536339;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { color-scheme: dark; }
+body { margin: 0; min-width: 0; min-height: 100vh; overflow-x: clip; color: var(--paper); background: radial-gradient(circle at 75% -20%, rgba(210,118,49,.16), transparent 32rem), radial-gradient(rgba(240,237,228,.08) .7px, transparent .8px), var(--ink); background-size: auto, 24px 24px, auto; font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.admin-topbar { width: min(1500px, calc(100% - 56px)); min-height: 76px; margin: 0 auto; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--line-dark); }
+.brand { font: 800 1.35rem/1 ui-monospace, Consolas, monospace; letter-spacing: -.07em; }
+.admin-badge { padding: 6px 9px; border: 1px solid var(--line-dark); color: var(--amber); font: 700 .58rem/1 ui-monospace, monospace; letter-spacing: .12em; }
+.admin-topbar nav { margin-left: auto; display: flex; gap: 22px; color: rgba(240,237,228,.66); font-size: .72rem; }
+.admin-topbar nav a:hover { color: var(--paper); }
+main { width: min(1500px, calc(100% - 56px)); margin: 0 auto; }
+.eyebrow { margin: 0 0 9px; color: var(--amber); font: 700 .64rem/1.4 ui-monospace, Consolas, monospace; letter-spacing: .15em; }
+
+.login-view { min-height: calc(100vh - 77px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(340px, .55fr); align-items: center; gap: 9vw; padding: 70px 6vw; }
+.login-copy h1 { margin: 0; font: 500 clamp(4.2rem, 8.5vw, 8rem)/.88 Georgia, "Songti SC", serif; letter-spacing: -.07em; }
+.login-copy > p:last-child { max-width: 470px; margin: 34px 0 0; color: rgba(240,237,228,.62); line-height: 1.8; }
+.login-card { padding: 36px; color: var(--ink); background: var(--paper); box-shadow: 0 30px 90px rgba(0,0,0,.26); }
+.card-number { display: block; margin-bottom: 34px; color: var(--muted); font: 700 .58rem/1 ui-monospace, monospace; letter-spacing: .12em; }
+.login-card label { display: block; margin: 22px 0 8px; color: #59544b; font-size: .72rem; }
+.login-card input { width: 100%; padding: 13px 3px; border: 0; border-bottom: 1px solid rgba(20,19,16,.48); border-radius: 0; outline: 0; color: var(--ink); background: transparent; }
+.login-card input:focus { border-color: var(--amber); box-shadow: 0 1px 0 var(--amber); }
+.login-card button { width: 100%; min-height: 52px; margin-top: 34px; padding: 0 17px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--ink); color: var(--paper); background: var(--ink); }
+.login-card button:disabled { opacity: .55; cursor: wait; }
+#login-status { min-height: 36px; margin: 12px 0 0; color: var(--red); font-size: .7rem; line-height: 1.5; }
+
+.dashboard { padding: 56px 0 80px; }
+.dashboard-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; padding-bottom: 38px; }
+.dashboard-heading h1 { margin: 0; font: 500 clamp(3.2rem, 6vw, 6rem)/.9 Georgia, "Songti SC", serif; letter-spacing: -.065em; }
+.session-meta { display: flex; align-items: center; gap: 15px; color: rgba(240,237,228,.62); font-size: .7rem; }
+.session-meta button, .toolbar button { border: 1px solid var(--line-dark); padding: 9px 14px; color: var(--paper); background: transparent; }
+.session-meta button:hover, .toolbar button:hover { border-color: var(--amber); }
+
+.toolbar { display: grid; grid-template-columns: 170px 170px minmax(250px, 1fr) auto; align-items: end; gap: 12px; padding: 18px; border: 1px solid var(--line-dark); background: rgba(32,30,26,.82); }
+.toolbar label { color: var(--muted); font-size: .61rem; text-transform: uppercase; letter-spacing: .09em; }
+.toolbar select, .toolbar input { width: 100%; height: 39px; margin-top: 6px; padding: 0 11px; border: 1px solid var(--line-dark); border-radius: 0; outline: 0; color: var(--paper); background: #181713; }
+.toolbar select:focus, .toolbar input:focus { border-color: var(--amber); }
+.toolbar button { height: 39px; }
+
+.workspace { min-height: 650px; margin-top: 18px; display: grid; grid-template-columns: minmax(340px, .72fr) minmax(480px, 1.28fr); border: 1px solid var(--line-dark); background: var(--ink-soft); }
+.inbox-panel { min-width: 0; border-right: 1px solid var(--line-dark); }
+.section-label { min-height: 58px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line-dark); }
+.section-label h2, .section-label h3 { margin: 0; font: 700 .66rem/1 ui-monospace, monospace; letter-spacing: .14em; }
+.section-label span { color: var(--muted); font: 600 .57rem/1 ui-monospace, monospace; }
+.message-list { min-height: 520px; }
+.inbox-item { width: 100%; padding: 20px 18px; display: block; border: 0; border-bottom: 1px solid var(--line-dark); text-align: left; color: var(--paper); background: transparent; transition: background .18s ease; }
+.inbox-item:hover, .inbox-item.active { background: rgba(210,118,49,.1); }
+.inbox-item.active { box-shadow: inset 2px 0 var(--amber); }
+.item-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.item-name { font-size: .82rem; font-weight: 700; overflow-wrap: anywhere; }
+.item-kind { color: var(--amber); font: 700 .54rem/1 ui-monospace, monospace; letter-spacing: .1em; }
+.item-preview { margin: 11px 0 0; color: rgba(240,237,228,.58); font-size: .72rem; line-height: 1.55; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-meta { margin-top: 12px; display: flex; justify-content: space-between; color: var(--muted); font: 600 .55rem/1 ui-monospace, monospace; }
+.list-empty { padding: 70px 20px; color: var(--muted); text-align: center; font-size: .75rem; }
+.load-more { width: calc(100% - 36px); height: 42px; margin: 16px 18px; border: 1px solid var(--line-dark); color: var(--paper); background: transparent; }
+
+.detail-panel { min-width: 0; color: var(--ink); background: var(--paper); }
+.detail-empty { min-height: 100%; display: grid; place-content: center; text-align: center; color: #878074; }
+.detail-empty span { font: 700 .66rem/1 ui-monospace, monospace; letter-spacing: .14em; }
+.detail-empty p { margin: 12px 0; font-size: .75rem; }
+#detail-content { padding: 40px clamp(26px, 4vw, 64px) 52px; }
+.detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
+.detail-head h2 { margin: 0; font: 500 clamp(2.4rem, 4vw, 4.6rem)/.95 Georgia, "Songti SC", serif; letter-spacing: -.055em; overflow-wrap: anywhere; }
+.status-pill { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line-light); color: #625d54; font: 700 .57rem/1 ui-monospace, monospace; letter-spacing: .08em; }
+.detail-date { margin-top: 14px; color: var(--muted); font: 600 .6rem/1 ui-monospace, monospace; }
+.detail-message { min-height: 90px; margin: 36px 0; color: #302d27; font-size: 1rem; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.contact-card, .notification-card, .reply-editor { margin-top: 18px; padding: 20px; border: 1px solid var(--line-light); background: rgba(255,255,255,.34); }
+.contact-card > div { display: flex; justify-content: space-between; color: #615b52; font-size: .68rem; }
+.contact-card small { color: var(--amber); }
+.contact-card p { margin: 13px 0 0; font: 650 .88rem/1.4 ui-monospace, monospace; overflow-wrap: anywhere; }
+.reply-editor .section-label, .notification-card .section-label { min-height: 0; padding: 0 0 14px; border-bottom-color: var(--line-light); }
+.reply-editor textarea { width: 100%; margin-top: 15px; padding: 12px; border: 1px solid var(--line-light); border-radius: 0; resize: vertical; color: var(--ink); background: rgba(255,255,255,.32); line-height: 1.7; }
+.reply-buttons { margin-top: 10px; display: flex; gap: 8px; }
+.reply-buttons button, .notification-card button { padding: 9px 13px; border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+.reply-buttons button:first-child { color: var(--paper); background: var(--ink); }
+.notification-card p { margin: 14px 0; color: #6f685e; font-size: .7rem; line-height: 1.6; }
+.detail-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 9px; }
+.detail-actions button { min-height: 42px; padding: 0 15px; border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+.detail-actions button.primary { color: var(--paper); background: var(--ink); }
+.detail-actions button.danger { border-color: var(--red); color: var(--red); }
+.detail-status-message { min-height: 34px; margin: 12px 0 0; color: var(--red); font-size: .7rem; }
+
+dialog { width: min(440px, calc(100% - 32px)); padding: 0; border: 0; color: var(--ink); background: var(--paper); box-shadow: 0 30px 100px rgba(0,0,0,.46); }
+dialog::backdrop { background: rgba(8,7,6,.74); backdrop-filter: blur(5px); }
+dialog form { padding: 32px; }
+dialog h2 { margin: 0; font: 500 2.2rem/1 Georgia, serif; }
+dialog p { min-height: 48px; color: #655f55; line-height: 1.6; }
+dialog form > div { display: flex; justify-content: flex-end; gap: 8px; }
+dialog button { padding: 10px 16px; border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+dialog button.danger { border-color: var(--red); color: var(--paper); background: var(--red); }
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgba(210,118,49,.38); outline-offset: 2px; }
+
+@media (max-width: 980px) {
+  .login-view { grid-template-columns: 1fr 360px; padding-inline: 0; }
+  .workspace { grid-template-columns: 330px minmax(0, 1fr); }
+  .toolbar { grid-template-columns: 1fr 1fr; }
+  .search-field { grid-column: 1 / -1; }
+  .toolbar button { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  .admin-topbar, main { width: calc(100% - 28px); }
+  .admin-badge { display: none; }
+  .admin-topbar nav a:last-child { display: none; }
+  .login-view { min-height: 0; display: block; padding: 60px 0; }
+  .login-copy h1 { font-size: clamp(3.6rem, 17vw, 5.8rem); }
+  .login-copy > p:last-child { margin: 24px 0 38px; }
+  .login-card { padding: 28px 24px; }
+  .dashboard { padding-top: 38px; }
+  .dashboard-heading { align-items: flex-start; flex-direction: column; }
+  .toolbar { grid-template-columns: 1fr 1fr; }
+  .workspace { display: block; }
+  .inbox-panel { border-right: 0; border-bottom: 1px solid var(--line-dark); }
+  .message-list { min-height: 0; max-height: 480px; overflow-y: auto; }
+  .detail-panel { min-height: 520px; }
+  #detail-content { padding: 34px 22px 44px; }
+}
+
+@media (max-width: 430px) {
+  .admin-topbar nav { font-size: .65rem; }
+  .toolbar { grid-template-columns: 1fr; }
+  .search-field, .toolbar button { grid-column: auto; }
+  .dashboard-heading h1 { font-size: 3.3rem; }
+  .session-meta { width: 100%; justify-content: space-between; }
+  .detail-head { display: block; }
+  .status-pill { display: inline-block; margin-top: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
