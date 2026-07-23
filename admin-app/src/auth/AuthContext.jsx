@@ -46,14 +46,25 @@ export function AuthProvider({ children }) {
     return authenticated;
   }, []);
 
+  const logout = useCallback(async () => {
+    try {
+      await api("/api/admin/session", { method: "DELETE" });
+    } finally {
+      setCsrfToken("");
+      setRecoveryCodes(null);
+      setSession(null);
+    }
+  }, []);
+
   const value = useMemo(() => ({
     session,
     loading,
     recoveryCodes,
     startLogin,
     completeMfa,
+    logout,
     acknowledgeRecoveryCodes: () => setRecoveryCodes(null)
-  }), [session, loading, recoveryCodes, startLogin, completeMfa]);
+  }), [session, loading, recoveryCodes, startLogin, completeMfa, logout]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

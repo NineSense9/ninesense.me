@@ -9,6 +9,7 @@ from sqlalchemy import select
 from .admin_models import AdminLoginChallenge
 from .config import Settings, get_settings
 from .db import build_session_factory
+from .models import Admin
 from .services.crypto import ContactCipher, EncryptedContact
 from .services.mfa import totp_at
 from .services.outbox import outbox_worker
@@ -75,20 +76,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     .order_by(AdminLoginChallenge.created_at.desc())
                     .limit(1)
                 )
-                if (
-                    challenge is None
-                    or challenge.secret_nonce is None
-                    or challenge.secret_ciphertext is None
-                    or challenge.secret_key_version is None
-                ):
-                    return {"value": ""}
-                secret = app.state.security_cipher.decrypt(
-                    EncryptedContact(
+                if challenge is not None:
+                    encrypted = EncryptedContact(
                         challenge.secret_nonce,
                         challenge.secret_ciphertext,
                         challenge.secret_key_version,
                     )
-                )
+                else:
+                    admin = db.scalar(
+                        select(Admin).where(Admin.totp_enabled_at.is_not(None)).limit(1)
+                    )
+                    if admin is None:
+                        return {"value": ""}
+                    encrypted = EncryptedContact(
+                        admin.totp_secret_nonce,
+                        admin.totp_secret_ciphertext,
+                        admin.totp_secret_key_version,
+                    )
+                if (
+                    encrypted.nonce is None
+                    or encrypted.ciphertext is None
+                    or encrypted.key_version is None
+                ):
+                    return {"value": ""}
+                secret = app.state.security_cipher.decrypt(encrypted)
                 return {"value": totp_at(secret, datetime.now(timezone.utc).timestamp())}
 
     app.include_router(public_router)

@@ -175,3 +175,376 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+.admin-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  background: #171612;
+}
+
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-right: 1px solid rgba(240, 237, 228, 0.12);
+  background: #141310;
+}
+
+.admin-brand {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.12);
+}
+
+.admin-brand strong {
+  display: block;
+  font: 800 1.4rem/1 ui-monospace, Consolas, monospace;
+  letter-spacing: -0.07em;
+}
+
+.admin-brand span,
+.admin-account span {
+  color: #817b70;
+  font: 700 0.58rem/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.1em;
+}
+
+.admin-sidebar nav {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.admin-sidebar nav a {
+  padding: 0.75rem 0.85rem;
+  border-left: 2px solid transparent;
+  color: rgba(240, 237, 228, 0.62);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.admin-sidebar nav a:hover,
+.admin-sidebar nav a.active {
+  border-left-color: #d27631;
+  color: #f0ede4;
+  background: rgba(210, 118, 49, 0.08);
+}
+
+.admin-account {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-account button,
+.page-heading button,
+.panel button {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(240, 237, 228, 0.18);
+  color: inherit;
+  background: transparent;
+}
+
+.admin-main {
+  min-width: 0;
+}
+
+.admin-mobile-header {
+  display: none;
+}
+
+.admin-page {
+  width: min(92rem, 100%);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 4rem);
+}
+
+.page-heading {
+  min-height: 8rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.14);
+}
+
+.page-heading p {
+  margin: 0 0 0.6rem;
+  color: #d27631;
+  font: 700 0.62rem/1.4 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font: 500 clamp(3rem, 6vw, 6rem)/0.9 Georgia, "Songti SC", serif;
+  letter-spacing: -0.065em;
+}
+
+.page-heading > span {
+  color: #817b70;
+  font-size: 0.75rem;
+}
+
+.summary-grid {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.summary-grid article,
+.panel {
+  border: 1px solid rgba(240, 237, 228, 0.14);
+  background: #201e1a;
+}
+
+.summary-grid article {
+  min-height: 10rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.summary-grid span,
+.panel-heading span {
+  color: #817b70;
+  font: 700 0.6rem/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+.summary-grid strong {
+  font: 500 3.5rem/1 Georgia, serif;
+}
+
+.panel {
+  margin-top: 1rem;
+}
+
+.panel-heading {
+  min-height: 3.75rem;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.12);
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+.empty-copy,
+.future-panel {
+  padding: 3rem 1.25rem;
+  color: #817b70;
+}
+
+.future-panel strong {
+  color: #f0ede4;
+  font-size: 1.5rem;
+}
+
+.event-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-list li {
+  padding: 1rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.08);
+  font-size: 0.75rem;
+}
+
+.event-list span,
+.event-list time {
+  color: #817b70;
+}
+
+.notification-item {
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.1);
+}
+
+.notification-item.is-read {
+  opacity: 0.58;
+}
+
+.notification-item > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #817b70;
+  font-size: 0.65rem;
+}
+
+.notification-item h2 {
+  margin: 0.8rem 0 0.4rem;
+  font-size: 1rem;
+}
+
+.notification-item p {
+  color: rgba(240, 237, 228, 0.65);
+}
+
+.security-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(22rem, 0.8fr);
+  gap: 1rem;
+}
+
+.session-list article {
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.1);
+}
+
+.session-list article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.session-list article span {
+  color: #d27631;
+  font-size: 0.65rem;
+}
+
+.session-list article p {
+  color: #817b70;
+  font-size: 0.7rem;
+}
+
+.reauth-form {
+  padding: 1.25rem;
+}
+
+.reauth-form label {
+  display: block;
+  margin: 0.9rem 0 0.35rem;
+  color: #817b70;
+  font-size: 0.7rem;
+}
+
+.reauth-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(240, 237, 228, 0.16);
+  color: #f0ede4;
+  background: #171612;
+}
+
+.reauth-form button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.security-actions {
+  padding: 0 1.25rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.security-actions .danger {
+  border-color: #a84332;
+  color: #d97868;
+}
+
+.security-grid output {
+  display: block;
+  min-height: 2rem;
+  padding: 0 1.25rem 1.25rem;
+  color: #d27631;
+  font-size: 0.75rem;
+}
+
+.recovery-inline {
+  padding-bottom: 1.25rem;
+}
+
+.page-error {
+  padding: 1rem;
+  color: #d97868;
+}
+
+@media (max-width: 980px) {
+  .admin-shell {
+    grid-template-columns: 12rem minmax(0, 1fr);
+  }
+
+  .security-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .admin-shell {
+    display: block;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    z-index: 20;
+    inset: 0 auto 0 0;
+    width: min(18rem, 84vw);
+    transform: translateX(-105%);
+    transition: transform 0.2s ease;
+  }
+
+  .admin-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .admin-mobile-header {
+    min-height: 3.75rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(240, 237, 228, 0.14);
+  }
+
+  .admin-mobile-header button {
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(240, 237, 228, 0.18);
+    color: inherit;
+    background: transparent;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid article {
+    min-height: 7rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .admin-page {
+    padding: 1rem;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .event-list li {
+    grid-template-columns: 1fr;
+  }
+}

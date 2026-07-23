@@ -18,4 +18,48 @@ test("owner enrolls MFA and receives recovery codes once", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "保存恢复码" })).toBeVisible();
   await expect(page.getByTestId("recovery-code")).toHaveCount(10);
+  await page.getByRole("button", { name: "我已保存，进入后台" }).click();
+
+  await expect(page.getByRole("heading", { name: "总览" })).toBeVisible();
+  for (const label of ["总览", "互动", "内容", "页面", "媒体", "发布", "统计", "运维", "设置与安全"]) {
+    await expect(page.getByRole("link", { name: label, exact: true })).toBeVisible();
+  }
+  await expect(page.getByText("待处理互动")).toBeVisible();
+
+  await page.getByRole("link", { name: "通知", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "通知中心" })).toBeVisible();
+  await page.getByRole("link", { name: "设置与安全", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "设置与安全" })).toBeVisible();
+  await expect(page.getByText("当前会话")).toBeVisible();
+
+  const challengeResponse = await page.request.post("/api/admin/session", {
+    data: { username: "ninesense", password: "E2E-secure-password-2026" }
+  });
+  const challenge = await challengeResponse.json();
+  const secondCode = await page.request.get("/__e2e/current-totp").then(response => response.json());
+  const secondLogin = await page.request.post("/api/admin/session/mfa", {
+    data: { challenge_token: challenge.challenge_token, code: secondCode.value }
+  });
+  expect(secondLogin.status()).toBe(200);
+  await page.reload();
+  await page.getByRole("link", { name: "设置与安全", exact: true }).click();
+  await expect(page.getByRole("button", { name: "撤销" })).toHaveCount(1);
+  page.once("dialog", dialog => dialog.accept());
+  await page.getByRole("button", { name: "撤销" }).click();
+  await expect(page.getByRole("button", { name: "撤销" })).toHaveCount(0);
+
+  await page.getByRole("link", { name: "内容", exact: true }).click();
+  await expect(page.getByText("内容将在后续阶段启用")).toBeVisible();
+
+  for (const viewport of [
+    { width: 1440, height: 1000 },
+    { width: 768, height: 1024 },
+    { width: 390, height: 844 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/admin/");
+    await page.waitForLoadState("networkidle");
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow, `admin overflows at ${viewport.width}px`).toBeLessThanOrEqual(1);
+  }
 });

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from argon2 import PasswordHasher
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
@@ -36,7 +37,18 @@ with app.state.session_factory() as session:
     )
     session.commit()
 
-app.mount("/admin", StaticFiles(directory=ADMIN_DIST, html=True), name="admin")
+app.mount(
+    "/admin/assets",
+    StaticFiles(directory=ADMIN_DIST / "assets"),
+    name="admin-assets",
+)
+
+
+@app.get("/admin/{path:path}", include_in_schema=False)
+def admin_spa(path: str):
+    return FileResponse(ADMIN_DIST / "index.html")
+
+
 app.mount("/", StaticFiles(directory=ROOT / "site", html=True), name="site")
 
 

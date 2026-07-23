@@ -1025,11 +1025,11 @@ Expected: setup test passes.
 - Modify: `admin-app/src/styles/app.css`
 - Modify: `tests/admin-foundation-e2e.spec.js`
 
-- [ ] **Step 1: Extend the failing browser test**
+- [x] **Step 1: Extend the failing browser test**
 
 Assert navigation labels `总览`, `互动`, `内容`, `页面`, `媒体`, `发布`, `统计`, `运维`, `设置与安全`; dashboard counts; unread notifications; session list; session revocation; and logout. Future modules render `将在后续阶段启用` without calling nonexistent APIs.
 
-- [ ] **Step 2: Confirm route failures**
+- [x] **Step 2: Confirm route failures**
 
 ```powershell
 npm --prefix admin-app run build
@@ -1038,7 +1038,7 @@ npx playwright test tests/admin-foundation-e2e.spec.js
 
 Expected: FAIL because shell routes do not exist.
 
-- [ ] **Step 3: Implement routes**
+- [x] **Step 3: Implement routes**
 
 ```jsx
 <Route element={<RequireSession />}>
@@ -1059,7 +1059,7 @@ Expected: FAIL because shell routes do not exist.
 
 Session restoration calls `GET /api/admin/session`, keeps rotated CSRF in memory, and shows a neutral loading screen. Security actions use confirmation dialogs; recovery regeneration and MFA disable require the reauthentication form first.
 
-- [ ] **Step 4: Verify responsive shell and commit**
+- [x] **Step 4: Verify responsive shell and commit**
 
 ```powershell
 npm --prefix admin-app run build
