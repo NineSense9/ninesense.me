@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
-$dist = Join-Path $root 'admin-app/dist'
+$dist = Join-Path $root 'site/admin'
 $indexPath = Join-Path $dist 'index.html'
 $manifestPath = Join-Path $dist '.vite/manifest.json'
 

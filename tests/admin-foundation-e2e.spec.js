@@ -62,4 +62,9 @@ test("owner enrolls MFA and receives recovery codes once", async ({ page }) => {
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, `admin overflows at ${viewport.width}px`).toBeLessThanOrEqual(1);
   }
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/admin/");
+  await page.getByRole("button", { name: "退出登录" }).click();
+  await expect(page.getByRole("heading", { name: "登录管理平台" })).toBeVisible();
 });

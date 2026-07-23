@@ -12,7 +12,7 @@ from ninesense_guestbook.models import Admin
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ADMIN_DIST = ROOT / "admin-app" / "dist"
+ADMIN_DIST = ROOT / "site" / "admin"
 DATABASE = ROOT / "tests" / ".e2e.sqlite3"
 DATABASE.unlink(missing_ok=True)
 

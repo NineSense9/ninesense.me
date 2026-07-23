@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import AdminShell from "./layout/AdminShell.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import FutureModule from "./pages/FutureModule.jsx";
+import InboxPage from "./pages/InboxPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import RecoveryCodesPage from "./pages/RecoveryCodesPage.jsx";
@@ -18,7 +19,7 @@ function AppContent() {
     <Routes>
       <Route element={<AdminShell />}>
         <Route index element={<DashboardPage />} />
-        <Route path="inbox" element={<FutureModule name="互动" />} />
+        <Route path="inbox" element={<InboxPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="security" element={<SecurityPage />} />
         <Route path="content" element={<FutureModule name="内容" />} />

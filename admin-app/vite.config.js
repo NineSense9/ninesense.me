@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/admin/",
   plugins: [react()],
   build: {
-    outDir: fileURLToPath(new URL("./dist", import.meta.url)),
+    outDir: fileURLToPath(new URL("../site/admin", import.meta.url)),
     emptyOutDir: true,
     manifest: true
   }

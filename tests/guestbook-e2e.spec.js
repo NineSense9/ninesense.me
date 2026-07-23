@@ -1,5 +1,35 @@
 const { test, expect } = require("@playwright/test");
 
+
+async function currentTotp(page) {
+  await expect.poll(async () => {
+    const response = await page.request.get("/__e2e/current-totp");
+    return (await response.json()).value;
+  }).toMatch(/^\d{6}$/);
+  return page.request.get("/__e2e/current-totp").then(response => response.json()).then(body => body.value);
+}
+
+
+async function loginAdmin(page) {
+  await page.goto("/admin/");
+  if (await page.getByLabel("账户").isVisible().catch(() => false)) {
+    await page.getByLabel("账户").fill("ninesense");
+    await page.getByLabel("密码").fill("E2E-secure-password-2026");
+    await page.getByRole("button", { name: "继续" }).click();
+    await page.getByLabel("动态验证码").fill(await currentTotp(page));
+    const setupButton = page.getByRole("button", { name: "启用并登录" });
+    if (await setupButton.isVisible().catch(() => false)) {
+      await setupButton.click();
+      await page.getByRole("button", { name: "我已保存，进入后台" }).click();
+    } else {
+      await page.getByRole("button", { name: "验证并登录" }).click();
+    }
+  }
+  await expect(page.getByRole("heading", { name: "总览" })).toBeVisible();
+  await page.getByRole("link", { name: "互动", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "互动中心" })).toBeVisible();
+}
+
 test("public moderation, private handling, and responsive layouts", async ({ page }) => {
   const pageErrors = [];
   const failedAssets = [];
@@ -43,17 +73,17 @@ test("public moderation, private handling, and responsive layouts", async ({ pag
   await page.getByRole("button", { name: "发送这段话" }).click();
   await expect(page.locator("#form-status")).toContainText("审核后出现");
 
-  await page.goto("/admin/");
-  await page.locator("#username").fill("ninesense");
-  await page.locator("#password").fill("E2E-secure-password-2026");
-  await page.getByRole("button", { name: "进入后台" }).click();
-  await expect(page.locator("#dashboard")).toBeVisible();
-  await page.locator(".inbox-item").filter({ hasText: publicText }).click();
-  await expect(page.locator("#contact-value")).toHaveText("visitor@example.com");
-  await expect(page.locator("#reply-editor")).toBeVisible();
-  await page.locator("#reply-text").fill(ownerReply);
+  await loginAdmin(page);
+  await page.getByRole("button", { name: new RegExp(publicText) }).click();
+  await page.getByRole("button", { name: "查看联系方式" }).click();
+  await expect(page.getByRole("heading", { name: "重新验证后查看" })).toBeVisible();
+  await page.getByLabel("验证密码").fill("E2E-secure-password-2026");
+  await page.getByLabel("验证动态码").fill(await currentTotp(page));
+  await page.getByRole("button", { name: "验证并查看" }).click();
+  await expect(page.getByText("visitor@example.com")).toBeVisible();
+  await page.getByLabel("公开回复").fill(ownerReply);
   await page.getByRole("button", { name: "通过并回复" }).click();
-  await expect(page.locator("#detail-status")).toHaveText("PUBLISHED");
+  await expect(page.getByLabel("互动详情").getByText("已公开", { exact: true })).toBeVisible();
 
   await page.goto("/guestbook/");
   await expect(page.getByText(publicText)).toBeVisible();
@@ -67,12 +97,11 @@ test("public moderation, private handling, and responsive layouts", async ({ pag
   await expect(page.locator("#form-status")).toContainText("只会在后台显示");
   await expect(page.getByText(privateText)).toHaveCount(0);
 
-  await page.goto("/admin/");
-  await expect(page.locator("#dashboard")).toBeVisible();
-  await page.locator(".inbox-item").filter({ hasText: privateText }).click();
-  await expect(page.locator("#contact-value")).toHaveText("13800138000");
+  await page.goto("/admin/inbox");
+  await expect(page.getByRole("heading", { name: "互动中心" })).toBeVisible();
+  await page.getByRole("button", { name: new RegExp(privateText) }).click();
   await page.getByRole("button", { name: "标记已处理" }).click();
-  await expect(page.locator("#detail-status")).toHaveText("HANDLED");
+  await expect(page.getByLabel("互动详情").getByText("已处理", { exact: true })).toBeVisible();
 
   for (const viewport of [
     { width: 1440, height: 1000 },

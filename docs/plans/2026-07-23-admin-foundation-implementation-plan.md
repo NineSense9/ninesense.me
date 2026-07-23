@@ -1075,17 +1075,16 @@ Expected: pass at 1440×1000 and 768×1024; dashboard, notifications, security s
 **Files:**
 
 - Create: `admin-app/src/pages/InboxPage.jsx`
-- Create: `admin-app/src/components/ConfirmDialog.jsx`
-- Create: `admin-app/src/components/Paginator.jsx`
+- Keep confirmation and cursor-loading controls local to `InboxPage.jsx` until another page needs to reuse them
 - Modify: `admin-app/src/styles/app.css`
 - Modify: `tests/guestbook-e2e.spec.js`
 - Modify: `tests/admin-foundation-e2e.spec.js`
 
-- [ ] **Step 1: Convert E2E selectors to accessible roles**
+- [x] **Step 1: Convert E2E selectors to accessible roles**
 
 Keep every current behavior assertion: public approval, public reply, private handling, contact reveal, status updates, responsive widths, no page errors and no failed assets. Replace `#dashboard` and `.inbox-item` with role/name selectors.
 
-- [ ] **Step 2: Confirm moderation failure**
+- [x] **Step 2: Confirm moderation failure**
 
 ```powershell
 npm --prefix admin-app run build
@@ -1094,7 +1093,7 @@ npx playwright test tests/guestbook-e2e.spec.js
 
 Expected: FAIL because the new shell has no functional inbox.
 
-- [ ] **Step 3: Implement against existing APIs**
+- [x] **Step 3: Implement against existing APIs**
 
 ```text
 GET    /api/admin/messages
@@ -1110,7 +1109,7 @@ Preserve status/type/search filters, cursor pagination, contact reveal, reply ed
 
 Replace the temporary inbox route from Task 10 with `<Route path="inbox" element={<InboxPage />} />` after the functional page is implemented.
 
-- [ ] **Step 4: Run both browser suites and commit**
+- [x] **Step 4: Run both browser suites and commit**
 
 ```powershell
 npm --prefix admin-app run build

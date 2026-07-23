@@ -176,6 +176,255 @@ button {
   }
 }
 
+.inbox-toolbar {
+  margin-top: 1rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 10rem 10rem minmax(14rem, 1fr);
+  gap: 0.75rem;
+  border: 1px solid rgba(240, 237, 228, 0.14);
+  background: #201e1a;
+}
+
+.inbox-toolbar label {
+  color: #817b70;
+  font-size: 0.65rem;
+}
+
+.inbox-toolbar select,
+.inbox-toolbar input {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 0.35rem;
+  padding: 0 0.65rem;
+  border: 1px solid rgba(240, 237, 228, 0.14);
+  color: #f0ede4;
+  background: #171612;
+}
+
+.inbox-workspace {
+  min-height: 42rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.72fr) minmax(26rem, 1.28fr);
+  border: 1px solid rgba(240, 237, 228, 0.14);
+}
+
+.message-list {
+  min-width: 0;
+  border-right: 1px solid rgba(240, 237, 228, 0.14);
+  background: #201e1a;
+}
+
+.message-row {
+  width: 100%;
+  padding: 1.15rem;
+  display: block;
+  border: 0;
+  border-bottom: 1px solid rgba(240, 237, 228, 0.1);
+  color: #f0ede4;
+  text-align: left;
+  background: transparent;
+}
+
+.message-row:hover,
+.message-row.active {
+  background: rgba(210, 118, 49, 0.08);
+  box-shadow: inset 2px 0 #d27631;
+}
+
+.message-row > span,
+.detail-heading,
+.contact-panel > div,
+.delivery-panel > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.message-row small,
+.message-row time,
+.message-detail > time,
+.detail-heading > strong,
+.detail-heading span,
+.contact-panel span,
+.delivery-panel span {
+  color: #817b70;
+  font-size: 0.65rem;
+}
+
+.message-row p {
+  margin: 0.7rem 0;
+  overflow: hidden;
+  color: rgba(240, 237, 228, 0.62);
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-detail {
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  color: #141310;
+  background: #f0ede4;
+}
+
+.detail-heading h2 {
+  margin: 0.4rem 0;
+  font: 500 clamp(2.4rem, 4vw, 4rem)/0.95 Georgia, "Songti SC", serif;
+  letter-spacing: -0.055em;
+}
+
+.detail-heading > strong {
+  padding: 0.5rem;
+  border: 1px solid rgba(20, 19, 16, 0.18);
+  color: #625d54;
+}
+
+.message-content {
+  min-height: 5rem;
+  margin: 2rem 0;
+  color: #302d27;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.contact-panel,
+.contact-reauth,
+.reply-panel,
+.delivery-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(20, 19, 16, 0.18);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.contact-panel p {
+  font-family: ui-monospace, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.contact-panel button,
+.contact-reauth button,
+.reply-panel button,
+.delivery-panel button,
+.moderation-actions button,
+.load-more {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid currentColor;
+  color: #141310;
+  background: transparent;
+}
+
+.contact-reauth h2 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.contact-reauth label,
+.reply-panel label {
+  display: block;
+  margin: 0.75rem 0 0.35rem;
+  color: #615b52;
+  font-size: 0.7rem;
+}
+
+.contact-reauth input,
+.reply-panel textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(20, 19, 16, 0.2);
+  color: #141310;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.contact-reauth button {
+  width: 100%;
+  margin-top: 0.75rem;
+  color: #f0ede4;
+  background: #141310;
+}
+
+.reply-panel > div,
+.moderation-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.moderation-actions button:first-child {
+  color: #f0ede4;
+  background: #141310;
+}
+
+.moderation-actions .danger {
+  border-color: #a84332;
+  color: #a84332;
+}
+
+.detail-output {
+  display: block;
+  min-height: 2rem;
+  margin-top: 0.75rem;
+  color: #a84332;
+  font-size: 0.72rem;
+}
+
+.load-more {
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  color: #f0ede4;
+}
+
+@media (max-width: 960px) {
+  .inbox-workspace {
+    grid-template-columns: 18rem minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .inbox-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inbox-toolbar label:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .inbox-workspace {
+    display: block;
+  }
+
+  .message-list {
+    max-height: 28rem;
+    overflow-y: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(240, 237, 228, 0.14);
+  }
+}
+
+@media (max-width: 430px) {
+  .inbox-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .inbox-toolbar label:last-child {
+    grid-column: auto;
+  }
+
+  .message-detail {
+    padding: 1.25rem;
+  }
+
+  .detail-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 .admin-shell {
   min-height: 100vh;
   display: grid;

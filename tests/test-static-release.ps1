@@ -7,7 +7,7 @@ $required = @(
   'index.html', '404.html', 'robots.txt', 'site.webmanifest',
   'favicon.svg', 'apple-touch-icon.png', 'assets/og-cover.jpg',
   'guestbook/index.html', 'guestbook/guestbook.css', 'guestbook/guestbook.js',
-  'admin/index.html', 'admin/admin.css', 'admin/admin.js'
+  'admin/index.html', 'admin/.vite/manifest.json'
 )
 
 $missing = @($required | Where-Object { -not (Test-Path (Join-Path $site $_)) })
@@ -73,18 +73,23 @@ if ($guestbook -match 'data-shuffle' -or
   throw 'Legacy Shuffle title implementation must be removed'
 }
 
-$admin = [IO.File]::ReadAllText((Join-Path $site 'admin/index.html'), [Text.Encoding]::UTF8)
-$adminJs = [IO.File]::ReadAllText((Join-Path $site 'admin/admin.js'), [Text.Encoding]::UTF8)
-$adminContracts = @(
-  'id="login-form"', 'id="dashboard"', 'id="status-filter"', 'id="kind-filter"',
-  'id="message-search"', 'id="message-list"', 'id="message-detail"',
-  'id="contact-value"', 'id="reply-editor"', 'id="confirm-dialog"', 'id="logout-button"'
-)
-foreach ($contract in $adminContracts) {
-  if ($admin -notmatch [regex]::Escape($contract)) { throw "Admin contract missing: $contract" }
+$adminRoot = Join-Path $site 'admin'
+$admin = [IO.File]::ReadAllText((Join-Path $adminRoot 'index.html'), [Text.Encoding]::UTF8)
+$manifest = Get-Content -Raw -Encoding UTF8 (Join-Path $adminRoot '.vite/manifest.json') | ConvertFrom-Json
+$adminEntry = @(
+  $manifest.PSObject.Properties.Value |
+    Where-Object { $_.isEntry -and $_.src -eq 'index.html' }
+) | Select-Object -First 1
+if (-not $adminEntry) { throw 'Admin release entry missing' }
+if (-not (Test-Path (Join-Path $adminRoot $adminEntry.file))) { throw 'Admin release script missing' }
+foreach ($cssFile in @($adminEntry.css)) {
+  if (-not (Test-Path (Join-Path $adminRoot $cssFile))) { throw "Admin release CSS missing: $cssFile" }
 }
 if ($admin -match '注册|忘记密码') { throw 'Admin page must not expose registration or password reset' }
-if ($adminJs -notmatch 'X-CSRF-Token') { throw 'Admin mutations must attach CSRF token' }
-if ($adminJs -match 'localStorage|sessionStorage') { throw 'Admin must keep CSRF token in memory only' }
-if ($adminJs -match '\.innerHTML') { throw 'Admin must not render visitor content with innerHTML' }
+$adminSource = Get-ChildItem (Join-Path $root 'admin-app/src') -Recurse -File |
+  ForEach-Object { [IO.File]::ReadAllText($_.FullName, [Text.Encoding]::UTF8) }
+$sourceText = $adminSource -join "`n"
+if ($sourceText -notmatch 'X-CSRF-Token') { throw 'Admin mutations must attach CSRF token' }
+if ($sourceText -match 'localStorage|sessionStorage') { throw 'Admin must keep security tokens in memory only' }
+if ($sourceText -match 'dangerouslySetInnerHTML|\.innerHTML') { throw 'Admin must render untrusted content as text' }
 Write-Host 'PASS static guestbook release contract'
