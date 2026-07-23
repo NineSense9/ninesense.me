@@ -149,7 +149,8 @@ export default function InboxPage() {
     try {
       await api("/api/admin/session/reauthenticate", {
         method: "POST",
-        body: JSON.stringify({ password: reauthPassword, code: reauthCode })
+        body: JSON.stringify({ password: reauthPassword, code: reauthCode }),
+        preserveSessionOnUnauthorized: true
       });
       setReauthPassword("");
       setReauthCode("");

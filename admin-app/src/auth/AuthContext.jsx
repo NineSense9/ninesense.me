@@ -32,13 +32,15 @@ export function AuthProvider({ children }) {
 
   const startLogin = useCallback((username, password) => api("/api/admin/session", {
     method: "POST",
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
+    preserveSessionOnUnauthorized: true
   }), []);
 
   const completeMfa = useCallback(async (challengeToken, code) => {
     const authenticated = await api("/api/admin/session/mfa", {
       method: "POST",
-      body: JSON.stringify({ challenge_token: challengeToken, code })
+      body: JSON.stringify({ challenge_token: challengeToken, code }),
+      preserveSessionOnUnauthorized: true
     });
     setCsrfToken(authenticated.csrf_token);
     setSession(authenticated);

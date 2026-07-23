@@ -19,7 +19,8 @@ export default function SecurityPage() {
     try {
       await api("/api/admin/session/reauthenticate", {
         method: "POST",
-        body: JSON.stringify({ password, code })
+        body: JSON.stringify({ password, code }),
+        preserveSessionOnUnauthorized: true
       });
       setPassword("");
       setCode("");

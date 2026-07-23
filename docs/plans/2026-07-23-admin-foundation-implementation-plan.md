@@ -1177,7 +1177,7 @@ Expected: PASS.
 - Modify only files required to fix failures found by the complete gate
 - Update: `docs/plans/2026-07-23-admin-foundation-implementation-plan.md`
 
-- [ ] **Step 1: Run backend gates**
+- [x] **Step 1: Run backend gates**
 
 ```powershell
 server/.venv/Scripts/python -m ruff check server/src server/tests server/alembic
@@ -1186,7 +1186,7 @@ server/.venv/Scripts/python -W 'error::ResourceWarning' -m pytest server/tests
 
 Expected: exit 0, no failures and no warnings promoted to errors.
 
-- [ ] **Step 2: Rebuild from a clean administration install**
+- [x] **Step 2: Rebuild from a clean administration install**
 
 Resolve `admin-app/node_modules` and verify it is inside the repository before removal, then run:
 
@@ -1198,7 +1198,7 @@ npm --prefix admin-app run build
 
 Expected: clean install and build exit 0.
 
-- [ ] **Step 3: Run release, privacy and browser gates**
+- [x] **Step 3: Run release, privacy and browser gates**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
@@ -1210,11 +1210,11 @@ npm run test:e2e
 
 Expected: all scripts print `PASS`; Playwright reports both suites passed.
 
-- [ ] **Step 4: Test migration on an isolated production-data copy**
+- [x] **Step 4: Test migration on an isolated production-data copy**
 
 Create a protected backup with the existing backup command, copy it into an isolated directory, run `alembic upgrade head`, execute API smoke checks, run `alembic downgrade 0001_guestbook`, and upgrade to head again. Compare message, admin and outbox row counts before and after. Never downgrade the live database.
 
-- [ ] **Step 5: Review the diff**
+- [x] **Step 5: Review the diff**
 
 ```powershell
 git status --short
@@ -1224,6 +1224,6 @@ git log --oneline --decorate -15
 
 Expected: only intended phase files differ, no whitespace errors, and commits correspond to Tasks 1–12.
 
-- [ ] **Step 6: Commit gate fixes and report the checkpoint**
+- [x] **Step 6: Commit gate fixes and report the checkpoint**
 
 If the gate required fixes, stage only those files and commit `test: complete administration foundation gate`. If no files changed, do not create an empty commit. Report exact test counts, isolated migration result, current commit and rollback commit, then request explicit approval before any production deployment.

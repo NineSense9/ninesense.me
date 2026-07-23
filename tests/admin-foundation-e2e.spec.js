@@ -32,6 +32,21 @@ test("owner enrolls MFA and receives recovery codes once", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "设置与安全" })).toBeVisible();
   await expect(page.getByText("当前会话")).toBeVisible();
 
+  const reauthCode = await page.request.get("/__e2e/current-totp").then(response => response.json());
+  await page.getByLabel("密码").fill("incorrect-password");
+  await page.getByLabel("动态验证码或恢复码").fill(reauthCode.value);
+  const failedReauthentication = page.waitForResponse(response => (
+    response.url().endsWith("/api/admin/session/reauthenticate")
+    && response.request().method() === "POST"
+  ));
+  await page.getByRole("button", { name: "重新验证身份" }).click();
+  expect((await failedReauthentication).status()).toBe(401);
+  await page.evaluate(() => new Promise(resolve => (
+    requestAnimationFrame(() => requestAnimationFrame(resolve))
+  )));
+  await expect(page.getByRole("heading", { name: "设置与安全" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "登录管理平台" })).toHaveCount(0);
+
   const challengeResponse = await page.request.post("/api/admin/session", {
     data: { username: "ninesense", password: "E2E-secure-password-2026" }
   });
