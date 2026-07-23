@@ -5,7 +5,7 @@ from sqlalchemy import select
 
 from ninesense_guestbook.admin_models import AdminLoginChallenge
 from ninesense_guestbook.models import Admin, AdminSession
-from ninesense_guestbook.services.sessions import LoginAttemptLimiter
+from ninesense_guestbook.services.sessions import LoginAttemptLimiter, as_utc
 
 from admin_test_helpers import create_totp_admin, login_with_totp
 
@@ -188,3 +188,18 @@ def test_expired_session_is_rejected_and_removed(client, db_session, app):
     assert response.status_code == 401
     db_session.expire_all()
     assert db_session.scalars(select(AdminSession)).all() == []
+
+
+def test_session_refresh_updates_a_stale_last_seen_time(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    login_with_totp(client, secret)
+    stored = db_session.scalars(select(AdminSession)).one()
+    stale = datetime.now(timezone.utc) - timedelta(minutes=10)
+    stored.last_seen_at = stale
+    db_session.commit()
+
+    response = client.get("/api/admin/session")
+
+    assert response.status_code == 200
+    db_session.expire_all()
+    assert as_utc(db_session.scalars(select(AdminSession)).one().last_seen_at) > stale

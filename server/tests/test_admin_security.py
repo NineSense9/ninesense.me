@@ -177,3 +177,138 @@ def test_expired_and_replayed_challenges_are_rejected(
     assert expired.json() == replay.json() == {
         "detail": "验证信息无效或已过期。"
     }
+
+
+def test_session_list_returns_public_metadata_only(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    first = login_with_totp(client, secret)
+    assert first.status_code == 200
+    second = login_with_totp(client, secret)
+    assert second.status_code == 200
+
+    response = client.get("/api/admin/sessions")
+
+    assert response.status_code == 200
+    assert len(response.json()["items"]) == 2
+    assert sum(item["current"] for item in response.json()["items"]) == 1
+    for item in response.json()["items"]:
+        assert set(item) == {
+            "public_id",
+            "client_label",
+            "created_at",
+            "last_seen_at",
+            "expires_at",
+            "current",
+        }
+        assert "hash" not in str(item).lower()
+        assert "ip" not in str(item).lower()
+
+
+def test_owner_can_revoke_another_session_with_csrf(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    login_with_totp(client, secret)
+    current_login = login_with_totp(client, secret)
+    sessions = client.get("/api/admin/sessions").json()["items"]
+    other = next(item for item in sessions if not item["current"])
+
+    forged = client.delete(
+        f"/api/admin/sessions/{other['public_id']}",
+        headers={"X-CSRF-Token": "forged"},
+    )
+    revoked = client.delete(
+        f"/api/admin/sessions/{other['public_id']}",
+        headers={"X-CSRF-Token": current_login.json()["csrf_token"]},
+    )
+
+    assert forged.status_code == 403
+    assert revoked.status_code == 204
+    assert len(db_session.scalars(select(AdminSession)).all()) == 1
+
+
+def test_reauthentication_requires_password_and_totp(client, db_session, app):
+    _admin, secret = create_totp_admin(db_session, app)
+    login_response = login_with_totp(client, secret)
+    headers = {"X-CSRF-Token": login_response.json()["csrf_token"]}
+
+    wrong = client.post(
+        "/api/admin/session/reauthenticate",
+        headers=headers,
+        json={"password": PASSWORD, "code": "000000"},
+    )
+    correct = client.post(
+        "/api/admin/session/reauthenticate",
+        headers=headers,
+        json={"password": PASSWORD, "code": totp_at(secret, time.time())},
+    )
+
+    assert wrong.status_code == 401
+    assert correct.status_code == 204
+    db_session.expire_all()
+    assert db_session.scalars(select(AdminSession)).one().last_reauthenticated_at
+
+
+def test_recovery_code_regeneration_requires_recent_reauthentication(
+    client, db_session, app
+):
+    _admin, secret = create_totp_admin(db_session, app)
+    login_response = login_with_totp(client, secret)
+    headers = {"X-CSRF-Token": login_response.json()["csrf_token"]}
+
+    denied = client.post("/api/admin/mfa/recovery-codes", headers=headers)
+    assert denied.status_code == 403
+
+    reauthenticated = client.post(
+        "/api/admin/session/reauthenticate",
+        headers=headers,
+        json={"password": PASSWORD, "code": totp_at(secret, time.time())},
+    )
+    assert reauthenticated.status_code == 204
+    generated = client.post("/api/admin/mfa/recovery-codes", headers=headers)
+
+    assert generated.status_code == 200
+    assert len(generated.json()["recovery_codes"]) == 10
+    assert len(db_session.scalars(select(AdminRecoveryCode)).all()) == 10
+
+
+def test_recent_reauthentication_expires_after_five_minutes(
+    client, db_session, app
+):
+    _admin, secret = create_totp_admin(db_session, app)
+    login_response = login_with_totp(client, secret)
+    headers = {"X-CSRF-Token": login_response.json()["csrf_token"]}
+    client.post(
+        "/api/admin/session/reauthenticate",
+        headers=headers,
+        json={"password": PASSWORD, "code": totp_at(secret, time.time())},
+    )
+    session = db_session.scalars(select(AdminSession)).one()
+    session.last_reauthenticated_at = datetime.now(timezone.utc) - timedelta(minutes=6)
+    db_session.commit()
+
+    response = client.post("/api/admin/mfa/recovery-codes", headers=headers)
+
+    assert response.status_code == 403
+    assert response.json() == {"detail": "请重新验证身份后再继续。"}
+
+
+def test_disabling_mfa_requires_reauthentication_and_revokes_other_sessions(
+    client, db_session, app
+):
+    admin, secret = create_totp_admin(db_session, app)
+    login_with_totp(client, secret)
+    current_login = login_with_totp(client, secret)
+    headers = {"X-CSRF-Token": current_login.json()["csrf_token"]}
+    client.post(
+        "/api/admin/session/reauthenticate",
+        headers=headers,
+        json={"password": PASSWORD, "code": totp_at(secret, time.time())},
+    )
+
+    response = client.delete("/api/admin/mfa", headers=headers)
+
+    assert response.status_code == 204
+    db_session.expire_all()
+    refreshed = db_session.get(Admin, admin.id)
+    assert refreshed.totp_enabled_at is None
+    assert refreshed.totp_secret_ciphertext is None
+    assert len(db_session.scalars(select(AdminSession)).all()) == 1

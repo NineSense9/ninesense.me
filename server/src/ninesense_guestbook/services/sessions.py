@@ -45,6 +45,7 @@ def create_session(
     pepper: str,
     session_hours: int,
     now: datetime | None = None,
+    client_label: str = "Unknown device",
 ) -> SessionTokens:
     now = as_utc(now or datetime.now(timezone.utc))
     raw_session = secrets.token_urlsafe(32)
@@ -55,6 +56,9 @@ def create_session(
             id_hash=token_hash(raw_session, pepper),
             admin_id=admin_id,
             csrf_hash=token_hash(raw_csrf, pepper),
+            client_label=client_label[:80],
+            created_at=now,
+            last_seen_at=now,
             expires_at=expires_at,
         )
     )
@@ -114,6 +118,59 @@ def rotate_csrf(current: CurrentSession, pepper: str) -> str:
 
 def revoke_session(db: Session, current: CurrentSession) -> None:
     db.delete(current.row)
+
+
+def require_recent_reauthentication(
+    current: CurrentSession,
+    now: datetime | None = None,
+    max_age: timedelta = timedelta(minutes=5),
+) -> None:
+    current_time = as_utc(now or datetime.now(timezone.utc))
+    last = current.row.last_reauthenticated_at
+    if last is None or as_utc(last) < current_time - max_age:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="请重新验证身份后再继续。",
+        )
+
+
+def touch_session(
+    current: CurrentSession,
+    now: datetime | None = None,
+) -> bool:
+    current_time = as_utc(now or datetime.now(timezone.utc))
+    if as_utc(current.row.last_seen_at) > current_time - timedelta(minutes=5):
+        return False
+    current.row.last_seen_at = current_time
+    return True
+
+
+def derive_client_label(user_agent: str) -> str:
+    normalized = user_agent.casefold()
+    if "edg/" in normalized:
+        browser = "Edge"
+    elif "chrome/" in normalized or "crios/" in normalized:
+        browser = "Chrome"
+    elif "firefox/" in normalized or "fxios/" in normalized:
+        browser = "Firefox"
+    elif "safari/" in normalized:
+        browser = "Safari"
+    else:
+        browser = "Other browser"
+
+    if "windows" in normalized:
+        system = "Windows"
+    elif "android" in normalized:
+        system = "Android"
+    elif "iphone" in normalized or "ipad" in normalized:
+        system = "iOS"
+    elif "mac os" in normalized or "macintosh" in normalized:
+        system = "macOS"
+    elif "linux" in normalized:
+        system = "Linux"
+    else:
+        system = "Unknown system"
+    return f"{browser} / {system}"
 
 
 class LoginAttemptLimiter:

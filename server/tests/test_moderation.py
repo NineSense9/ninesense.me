@@ -1,14 +1,17 @@
+import time
+
 from sqlalchemy import select
 
 from ninesense_guestbook.models import Message, Outbox
+from ninesense_guestbook.services.mfa import totp_at
 
-from admin_test_helpers import create_totp_admin, login_with_totp
+from admin_test_helpers import PASSWORD, create_totp_admin, login_with_totp
 
 
 def authenticate(client, db_session, app):
     _admin, secret = create_totp_admin(db_session, app)
     response = login_with_totp(client, secret)
-    return response.json()["csrf_token"]
+    return response.json()["csrf_token"], secret
 
 
 def add_message(db_session, app, key: str, *, kind="public", contact="hello@example.com"):
@@ -35,8 +38,8 @@ def csrf_header(token):
     return {"X-CSRF-Token": token}
 
 
-def test_pending_list_hides_contact_and_detail_reveals_it(client, db_session, app):
-    authenticate(client, db_session, app)
+def test_contact_requires_recent_reauthentication(client, db_session, app):
+    csrf, secret = authenticate(client, db_session, app)
     public = add_message(db_session, app, "a")
     private = add_message(db_session, app, "b", kind="private", contact="13800138000")
 
@@ -49,11 +52,33 @@ def test_pending_list_hides_contact_and_detail_reveals_it(client, db_session, ap
     assert "13800138000" not in response.text
     detail = client.get(f"/api/admin/messages/{private.id}")
     assert detail.status_code == 200
-    assert detail.json()["contact"] == "13800138000"
+    assert "13800138000" not in detail.text
+    assert "contact" not in detail.json()
+
+    denied = client.post(
+        f"/api/admin/messages/{private.id}/contact",
+        headers=csrf_header(csrf),
+    )
+    assert denied.status_code == 403
+    reauthenticated = client.post(
+        "/api/admin/session/reauthenticate",
+        headers=csrf_header(csrf),
+        json={"password": PASSWORD, "code": totp_at(secret, time.time())},
+    )
+    assert reauthenticated.status_code == 204
+    revealed = client.post(
+        f"/api/admin/messages/{private.id}/contact",
+        headers=csrf_header(csrf),
+    )
+    assert revealed.status_code == 200
+    assert revealed.json() == {
+        "contact_type": "email",
+        "contact": "13800138000",
+    }
 
 
 def test_publish_with_reply_is_atomic_and_appears_in_public_feed(client, db_session, app):
-    csrf = authenticate(client, db_session, app)
+    csrf, _secret = authenticate(client, db_session, app)
     message = add_message(db_session, app, "c")
 
     response = client.patch(
@@ -76,7 +101,7 @@ def test_publish_with_reply_is_atomic_and_appears_in_public_feed(client, db_sess
 
 
 def test_withdraw_removes_published_message_from_feed(client, db_session, app):
-    csrf = authenticate(client, db_session, app)
+    csrf, _secret = authenticate(client, db_session, app)
     message = add_message(db_session, app, "d")
     client.patch(
         f"/api/admin/messages/{message.id}/status",
@@ -97,7 +122,7 @@ def test_withdraw_removes_published_message_from_feed(client, db_session, app):
 def test_private_message_can_be_handled_then_archived_but_never_published(
     client, db_session, app
 ):
-    csrf = authenticate(client, db_session, app)
+    csrf, _secret = authenticate(client, db_session, app)
     message = add_message(db_session, app, "e", kind="private")
 
     publish = client.patch(
@@ -129,7 +154,7 @@ def test_private_message_can_be_handled_then_archived_but_never_published(
 
 
 def test_reply_can_be_updated_and_removed(client, db_session, app):
-    csrf = authenticate(client, db_session, app)
+    csrf, _secret = authenticate(client, db_session, app)
     message = add_message(db_session, app, "f")
     client.patch(
         f"/api/admin/messages/{message.id}/status",
@@ -155,7 +180,7 @@ def test_reply_can_be_updated_and_removed(client, db_session, app):
 
 
 def test_delete_cascades_outbox_and_all_writes_require_csrf(client, db_session, app):
-    csrf = authenticate(client, db_session, app)
+    csrf, _secret = authenticate(client, db_session, app)
     message = add_message(db_session, app, "1")
     message_id = message.id
 

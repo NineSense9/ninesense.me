@@ -8,8 +8,14 @@ from sqlalchemy.orm import Session
 
 from ..domain.messages import MessageKind, MessageStatus, require_transition
 from ..models import Message, Outbox
+from ..services.audit import record_audit
 from ..services.crypto import EncryptedContact
-from ..services.sessions import as_utc, require_csrf, require_session
+from ..services.sessions import (
+    as_utc,
+    require_csrf,
+    require_recent_reauthentication,
+    require_session,
+)
 from .public import decode_cursor, encode_cursor
 from .schemas import clean_text
 
@@ -94,7 +100,6 @@ def detail(request: Request, db: Session, message: Message) -> dict[str, object]
         **summary(message),
         "content": message.content,
         "contact_type": message.contact_type,
-        "contact": reveal_contact(request, message),
         "reviewed_at": (
             as_utc(message.reviewed_at).isoformat() if message.reviewed_at else None
         ),
@@ -180,6 +185,29 @@ def get_message_detail(message_id: str, request: Request) -> dict[str, object]:
     with request.app.state.session_factory() as db:
         require_session(request, db)
         return detail(request, db, get_message(db, message_id))
+
+
+@router.post("/{message_id}/contact")
+def get_message_contact(message_id: str, request: Request) -> dict[str, str | None]:
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        require_recent_reauthentication(current)
+        message = get_message(db, message_id)
+        contact = reveal_contact(request, message)
+        record_audit(
+            db,
+            action="message.contact_viewed",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="message",
+            target_id=message.id,
+        )
+        db.commit()
+        return {
+            "contact_type": message.contact_type,
+            "contact": contact,
+        }
 
 
 @router.patch("/{message_id}/status")

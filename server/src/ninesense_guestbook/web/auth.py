@@ -17,6 +17,7 @@ from ..services.sessions import (
     revoke_session,
     rotate_csrf,
     token_hash,
+    touch_session,
 )
 
 
@@ -115,6 +116,7 @@ def login(payload: LoginRequest, request: Request) -> dict[str, str]:
 def current_session(request: Request) -> dict[str, str]:
     with request.app.state.session_factory() as db:
         current = require_session(request, db)
+        touch_session(current)
         csrf_token = rotate_csrf(current, request.app.state.settings.session_pepper)
         db.commit()
         return {

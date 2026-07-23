@@ -814,7 +814,7 @@ git commit -m "feat: add mandatory MFA and recovery login"
 - Modify: `server/tests/test_admin_security.py`
 - Modify: `server/tests/test_moderation.py`
 
-- [ ] **Step 1: Write failing session-control tests**
+- [x] **Step 1: Write failing session-control tests**
 
 Add tests that verify the session list returns only `public_id`, `client_label`, `created_at`, `last_seen_at`, `expires_at`, and `current`; another session can be revoked with valid CSRF; forged CSRF fails; reauthentication requires password plus TOTP/recovery code; recent reauthentication expires after five minutes; recovery-code regeneration revokes every old code.
 
@@ -827,7 +827,7 @@ assert "hash" not in str(item).lower()
 assert "ip" not in str(item).lower()
 ```
 
-- [ ] **Step 2: Confirm missing endpoints**
+- [x] **Step 2: Confirm missing endpoints**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_security.py -q
@@ -835,7 +835,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_admin_security.py -q
 
 Expected: FAIL with 404 for session-management routes.
 
-- [ ] **Step 3: Implement exact routes**
+- [x] **Step 3: Implement exact routes**
 
 ```text
 GET    /api/admin/sessions
@@ -859,7 +859,7 @@ Regeneration returns 10 raw codes once and replaces old rows transactionally. Di
 
 Message detail continues to return `has_contact` but no decrypted value. The dedicated contact endpoint requires CSRF and recent reauthentication, returns the contact once, and writes `message.contact_viewed` to the audit log in the same transaction. Update moderation tests to prove ordinary authenticated detail responses never contain the contact plaintext.
 
-- [ ] **Step 4: Run and commit**
+- [x] **Step 4: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_admin_security.py server/tests/test_moderation.py server/tests/test_security_regressions.py -q
