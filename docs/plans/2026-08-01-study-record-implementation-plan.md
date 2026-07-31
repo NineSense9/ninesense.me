@@ -824,7 +824,7 @@ git commit -m "feat: add persistent focus timer"
 - Create: `server/src/ninesense_guestbook/services/study_stats.py`
 - Create: `server/tests/test_study_stats.py`
 
-- [ ] **Step 1: Write failing aggregation tests**
+- [x] **Step 1: Write failing aggregation tests**
 
 ```python
 from datetime import date, datetime, timedelta, timezone
@@ -879,13 +879,13 @@ def test_admin_history_has_no_thirty_day_cap(db_session):
     assert any(row.study_date.year == 2025 for row in rows)
 ```
 
-- [ ] **Step 2: Verify the tests fail**
+- [x] **Step 2: Verify the tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_stats.py -q
 ```
 
-- [ ] **Step 3: Implement pure completion and date-range helpers**
+- [x] **Step 3: Implement pure completion and date-range helpers**
 
 ```python
 def completion_summary(tasks):
@@ -903,7 +903,7 @@ def recent_window(today, requested_days):
     return today - timedelta(days=days - 1), today
 ```
 
-- [ ] **Step 4: Implement monthly SQL aggregation**
+- [x] **Step 4: Implement monthly SQL aggregation**
 
 Use Shanghai natural-month boundaries converted to UTC before querying `FocusSession.started_at`. Return all four subjects, even when zero:
 
@@ -946,7 +946,7 @@ Extend the function with daily trend and completion data using the same local bo
     }
 ```
 
-- [ ] **Step 5: Run and commit**
+- [x] **Step 5: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_stats.py -q
