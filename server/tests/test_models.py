@@ -2,7 +2,7 @@ from ninesense_guestbook.db import Base
 
 
 def test_application_models_register_all_tables():
-    from ninesense_guestbook import admin_models, models  # noqa: F401
+    from ninesense_guestbook import admin_models, models, study_models  # noqa: F401
 
     assert set(Base.metadata.tables) == {
         "messages",
@@ -13,6 +13,12 @@ def test_application_models_register_all_tables():
         "audit_events",
         "admin_notifications",
         "outbox",
+        "study_schedule_entries",
+        "study_days",
+        "study_tasks",
+        "focus_timers",
+        "focus_sessions",
+        "exam_events",
     }
 
 

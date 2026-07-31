@@ -4,7 +4,7 @@ import os
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from ninesense_guestbook import admin_models, models  # noqa: F401
+from ninesense_guestbook import admin_models, models, study_models  # noqa: F401
 from ninesense_guestbook.db import Base
 
 

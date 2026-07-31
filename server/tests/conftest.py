@@ -5,6 +5,7 @@ from fastapi.testclient import TestClient
 
 from ninesense_guestbook import admin_models as _admin_models  # noqa: F401
 from ninesense_guestbook import models as _models  # noqa: F401
+from ninesense_guestbook import study_models as _study_models  # noqa: F401
 from ninesense_guestbook.app import create_app
 from ninesense_guestbook.config import Settings
 from ninesense_guestbook.db import Base

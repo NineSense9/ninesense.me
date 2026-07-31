@@ -223,7 +223,7 @@ git commit -m "feat: add study record route scaffolds"
 - Modify: `server/tests/test_models.py`
 - Modify: `server/tests/test_migrations.py`
 
-- [ ] **Step 1: Write failing metadata and constraint tests**
+- [x] **Step 1: Write failing metadata and constraint tests**
 
 Create `server/tests/test_study_models.py`:
 
@@ -297,7 +297,7 @@ def test_only_one_active_timer_per_admin(db_session):
 
 Update `server/tests/test_models.py` to assert the six new table names.
 
-- [ ] **Step 2: Verify the model tests fail**
+- [x] **Step 2: Verify the model tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_models.py server/tests/test_models.py -q
@@ -305,7 +305,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_study_models.py server/t
 
 Expected: FAIL because `study_models` does not exist.
 
-- [ ] **Step 3: Implement focused SQLAlchemy models**
+- [x] **Step 3: Implement focused SQLAlchemy models**
 
 Create `study_models.py` with one class per table. The critical constraints must be explicit:
 
@@ -432,7 +432,7 @@ class ExamEvent(Base):
 
 Add model check constraints for task kind, subject, task status, timer phase/state, focus-session source/completion kind and exam date status. Add the partial unique countdown-target index in the migration.
 
-- [ ] **Step 4: Add and test migration 0003**
+- [x] **Step 4: Add and test migration 0003**
 
 Import metadata in `server/alembic/env.py` and `server/tests/conftest.py`:
 
@@ -455,7 +455,7 @@ def test_study_record_migration_round_trip(tmp_path, monkeypatch):
     assert "study_days" not in table_names(database_url)
 ```
 
-- [ ] **Step 5: Run focused schema tests**
+- [x] **Step 5: Run focused schema tests**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_models.py server/tests/test_models.py server/tests/test_migrations.py -q
@@ -463,7 +463,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_study_models.py server/t
 
 Expected: PASS.
 
-- [ ] **Step 6: Commit the schema**
+- [x] **Step 6: Commit the schema**
 
 ```powershell
 git add server/src/ninesense_guestbook/study_models.py server/alembic server/tests

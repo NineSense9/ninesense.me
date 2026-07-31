@@ -56,6 +56,25 @@ def test_admin_foundation_migration_round_trip(tmp_path: Path, monkeypatch):
     assert "admins" in downgraded
 
 
+def test_study_record_migration_round_trip(tmp_path: Path, monkeypatch):
+    database_url = f"sqlite:///{tmp_path / 'study.sqlite3'}"
+    monkeypatch.setenv("NINESENSE_DATABASE_URL", database_url)
+    config = Config(str(Path(__file__).parents[1] / "alembic.ini"))
+
+    command.upgrade(config, "head")
+    assert {
+        "study_schedule_entries",
+        "study_days",
+        "study_tasks",
+        "focus_timers",
+        "focus_sessions",
+        "exam_events",
+    } <= table_names(database_url)
+
+    command.downgrade(config, "0002_admin_foundation")
+    assert "study_days" not in table_names(database_url)
+
+
 def test_legacy_business_data_survives_backup_upgrade_and_rollback(
     tmp_path: Path,
     monkeypatch,
