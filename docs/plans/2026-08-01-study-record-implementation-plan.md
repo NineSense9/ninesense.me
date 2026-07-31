@@ -1599,7 +1599,7 @@ git commit -m "feat: add study timer workspace"
 - Modify: `admin-app/src/App.jsx`
 - Modify: `admin-app/src/styles/study.css`
 
-- [ ] **Step 1: Add nested navigation and unresolved routes**
+- [x] **Step 1: Add nested navigation and unresolved routes**
 
 ```jsx
 const tabs = [
@@ -1613,7 +1613,7 @@ const tabs = [
 
 Add routes in `App.jsx`; run the build and expect unresolved page modules.
 
-- [ ] **Step 2: Implement the effective-date schedule editor**
+- [x] **Step 2: Implement the effective-date schedule editor**
 
 `StudySchedulePage` groups entries by weekday, uses native time/date inputs, supports adding study or rest rows, and validates end time after start time before API submission. Updating a template displays the explicit note `只影响尚未生成的日期`.
 
@@ -1635,21 +1635,21 @@ The save payload is exactly:
 }
 ```
 
-- [ ] **Step 3: Implement unlimited history browsing**
+- [x] **Step 3: Implement unlimited history browsing**
 
 `StudyHistoryPage` provides from/to date inputs, defaults to the current month, permits any valid historical range, and displays full tasks, reflection and focus records for each returned date. Do not impose a 30-day client limit.
 
 Use stable pagination or bounded ranges; reject a range larger than 366 days per request and let the user move the window rather than loading all history at once.
 
-- [ ] **Step 4: Implement focus corrections and exports**
+- [x] **Step 4: Implement focus corrections and exports**
 
 `StudyFocusPage` supports subject/date filters, manual record creation, correction with required reason, explicit delete confirmation, and links to JSON/CSV export endpoints. Deleting must name the subject, date and effective duration in the confirmation dialog.
 
-- [ ] **Step 5: Implement exam timeline management**
+- [x] **Step 5: Implement exam timeline management**
 
 `StudyExamPage` supports common node types plus custom events, estimated/confirmed status, optional date ranges, official source URL, active status, ordering and one countdown target. Selecting a new target clearly states that the previous target will be replaced.
 
-- [ ] **Step 6: Build, inspect and commit**
+- [x] **Step 6: Build, inspect and commit**
 
 ```powershell
 npm --prefix admin-app run build

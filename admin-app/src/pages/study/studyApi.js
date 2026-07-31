@@ -31,3 +31,16 @@ export const updateReflection = (date, reflection) => api(`/api/admin/study/days
   method: "PATCH",
   body: JSON.stringify({ reflection })
 });
+export const getSchedule = () => api("/api/admin/study/schedule");
+export const createSchedule = payload => api("/api/admin/study/schedule", { method: "POST", body: JSON.stringify(payload) });
+export const updateSchedule = (id, payload) => api(`/api/admin/study/schedule/${id}`, { method: "PATCH", body: JSON.stringify(payload) });
+export const deleteSchedule = id => api(`/api/admin/study/schedule/${id}`, { method: "DELETE" });
+export const getHistory = (from, to) => api(`/api/admin/study/history?${new URLSearchParams({ from, to })}`);
+export const getFocus = params => api(`/api/admin/study/focus?${new URLSearchParams(params)}`);
+export const createFocus = payload => api("/api/admin/study/focus", { method: "POST", body: JSON.stringify(payload) });
+export const updateFocus = (id, payload) => api(`/api/admin/study/focus/${id}`, { method: "PATCH", body: JSON.stringify(payload) });
+export const deleteFocus = id => api(`/api/admin/study/focus/${id}`, { method: "DELETE" });
+export const getExams = () => api("/api/admin/study/exams");
+export const createExam = payload => api("/api/admin/study/exams", { method: "POST", body: JSON.stringify(payload) });
+export const updateExam = (id, payload) => api(`/api/admin/study/exams/${id}`, { method: "PATCH", body: JSON.stringify(payload) });
+export const deleteExam = id => api(`/api/admin/study/exams/${id}`, { method: "DELETE" });

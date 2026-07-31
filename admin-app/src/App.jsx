@@ -9,6 +9,10 @@ import NotificationsPage from "./pages/NotificationsPage.jsx";
 import RecoveryCodesPage from "./pages/RecoveryCodesPage.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
 import StudyLayout from "./pages/study/StudyLayout.jsx";
+import StudyExamPage from "./pages/study/StudyExamPage.jsx";
+import StudyFocusPage from "./pages/study/StudyFocusPage.jsx";
+import StudyHistoryPage from "./pages/study/StudyHistoryPage.jsx";
+import StudySchedulePage from "./pages/study/StudySchedulePage.jsx";
 import StudyTodayPage from "./pages/study/StudyTodayPage.jsx";
 
 
@@ -26,6 +30,10 @@ function AppContent() {
         <Route path="security" element={<SecurityPage />} />
         <Route path="study" element={<StudyLayout />}>
           <Route index element={<StudyTodayPage />} />
+          <Route path="schedule" element={<StudySchedulePage />} />
+          <Route path="history" element={<StudyHistoryPage />} />
+          <Route path="focus" element={<StudyFocusPage />} />
+          <Route path="exams" element={<StudyExamPage />} />
         </Route>
         <Route path="content" element={<FutureModule name="内容" />} />
         <Route path="pages" element={<FutureModule name="页面" />} />
