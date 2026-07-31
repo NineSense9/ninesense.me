@@ -1766,7 +1766,7 @@ git commit -m "test: cover study record workflow"
 - Modify only files required by failures found in this task.
 - Do not change production state.
 
-- [ ] **Step 1: Run backend formatting and all tests**
+- [x] **Step 1: Run backend formatting and all tests**
 
 ```powershell
 server/.venv/Scripts/python -m ruff check server/src server/tests server/alembic
@@ -1775,7 +1775,7 @@ server/.venv/Scripts/python -W 'error::ResourceWarning' -m pytest server/tests
 
 Expected: no lint failures, no pytest failures and no warnings promoted to errors.
 
-- [ ] **Step 2: Build administration and run all release contracts**
+- [x] **Step 2: Build administration and run all release contracts**
 
 ```powershell
 npm --prefix admin-app run build
@@ -1787,7 +1787,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-public-repo.ps1
 
 Expected: every PowerShell contract prints `PASS`.
 
-- [ ] **Step 3: Run all browser tests**
+- [x] **Step 3: Run all browser tests**
 
 ```powershell
 npm run test:e2e
@@ -1795,7 +1795,7 @@ npm run test:e2e
 
 Expected: guestbook, administration foundation and study-record suites all pass.
 
-- [ ] **Step 4: Verify migration safety on an isolated copy**
+- [x] **Step 4: Verify migration safety on an isolated copy**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_migrations.py::test_legacy_business_data_survives_backup_upgrade_and_rollback server/tests/test_migrations.py::test_study_record_migration_round_trip -q
@@ -1803,7 +1803,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_migrations.py::test_lega
 
 Expected: both isolated-database tests pass; old row counts remain unchanged, study tables appear only at revision 0003, and no production database is touched.
 
-- [ ] **Step 5: Perform visual QA with screenshots**
+- [x] **Step 5: Perform visual QA with screenshots**
 
 At 1440x1000, 768x1024, 390x844 and 320x800 verify:
 
@@ -1817,7 +1817,7 @@ At 1440x1000, 768x1024, 390x844 and 320x800 verify:
 
 Also test `prefers-reduced-motion`, notification denied, API unavailable and empty-data states.
 
-- [ ] **Step 6: Review the final diff and security boundaries**
+- [x] **Step 6: Review the final diff and security boundaries**
 
 ```powershell
 git diff --check
@@ -1827,7 +1827,7 @@ git diff --stat HEAD~12..HEAD
 
 Confirm no credentials, databases, backups, personal contact data, browser tokens or server logs are present. Confirm public APIs contain only the documented whitelist and no public write route exists.
 
-- [ ] **Step 7: Commit any verification fixes and stop before deployment**
+- [x] **Step 7: Commit any verification fixes and stop before deployment**
 
 ```powershell
 git add --update
