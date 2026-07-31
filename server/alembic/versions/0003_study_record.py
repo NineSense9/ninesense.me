@@ -194,6 +194,7 @@ def upgrade() -> None:
             "accumulated_pause_seconds >= 0",
             name="ck_focus_timer_pause_seconds",
         ),
+        sqlite_autoincrement=True,
     )
 
     op.create_table(

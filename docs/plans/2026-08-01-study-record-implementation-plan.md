@@ -647,7 +647,7 @@ git commit -m "feat: generate daily study plans"
 - Create: `server/src/ninesense_guestbook/services/study_timer.py`
 - Create: `server/tests/test_study_timer.py`
 
-- [ ] **Step 1: Write failing timer-state tests**
+- [x] **Step 1: Write failing timer-state tests**
 
 ```python
 from datetime import datetime, timedelta, timezone
@@ -716,13 +716,13 @@ def test_second_active_timer_is_rejected(db_session, admin):
 
 Add an `admin` fixture to `test_study_timer.py` that inserts one active `Admin`.
 
-- [ ] **Step 2: Verify the timer tests fail**
+- [x] **Step 2: Verify the timer tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_timer.py -q
 ```
 
-- [ ] **Step 3: Implement start, pause and resume**
+- [x] **Step 3: Implement start, pause and resume**
 
 ```python
 def start_timer(db, admin_id, subject, preset_kind, focus_seconds, break_seconds, idempotency_key, now):
@@ -761,7 +761,7 @@ def resume_timer(db, timer, now):
     return timer
 ```
 
-- [ ] **Step 4: Implement exactly-once reconciliation and early finish**
+- [x] **Step 4: Implement exactly-once reconciliation and early finish**
 
 `reconcile_timer` must lock the row through the current transaction, create a `FocusSession` with `source_timer_id=timer.id`, flush it, and delete the timer. Catch a unique-session race by rolling back and returning the existing session.
 
@@ -794,7 +794,7 @@ def start_break_timer(db, admin_id, break_seconds, idempotency_key, now):
     return timer
 ```
 
-- [ ] **Step 5: Add tests for duplicate idempotency, break phase and UTC-naive SQLite reads**
+- [x] **Step 5: Add tests for duplicate idempotency, break phase and UTC-naive SQLite reads**
 
 Expected assertions:
 
@@ -808,7 +808,7 @@ assert db_session.get(FocusTimer, break_timer.id) is None
 assert as_utc(timer.started_at).tzinfo is not None
 ```
 
-- [ ] **Step 6: Run and commit**
+- [x] **Step 6: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_timer.py -q

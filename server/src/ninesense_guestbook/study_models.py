@@ -173,6 +173,7 @@ class FocusTimer(Base):
             "accumulated_pause_seconds >= 0",
             name="ck_focus_timer_pause_seconds",
         ),
+        {"sqlite_autoincrement": True},
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
