@@ -963,7 +963,7 @@ git commit -m "feat: aggregate study history"
 - Create: `server/tests/test_study_public_api.py`
 - Modify: `server/src/ninesense_guestbook/app.py`
 
-- [ ] **Step 1: Write failing public API tests**
+- [x] **Step 1: Write failing public API tests**
 
 ```python
 from datetime import date, datetime, time, timedelta, timezone
@@ -1007,13 +1007,13 @@ def test_public_month_does_not_return_reflection_or_task_body(client, db_session
     assert "tasks" not in payload
 ```
 
-- [ ] **Step 2: Verify the API tests fail**
+- [x] **Step 2: Verify the API tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_public_api.py -q
 ```
 
-- [ ] **Step 3: Define strict response schemas**
+- [x] **Step 3: Define strict response schemas**
 
 ```python
 class PublicStudyTask(BaseModel):
@@ -1041,7 +1041,7 @@ class PublicToday(BaseModel):
 
 Use `ConfigDict(extra="forbid")` on every request schema. Response schemas are the public field whitelist.
 
-- [ ] **Step 4: Implement GET-only routes**
+- [x] **Step 4: Implement GET-only routes**
 
 ```python
 router = APIRouter(prefix="/api/study", tags=["study-public"])
@@ -1089,7 +1089,7 @@ def active_admin_id(db: Session) -> int | None:
 
 When it returns `None`, public responses use `active_subject=None`.
 
-- [ ] **Step 5: Register the router and pass tests**
+- [x] **Step 5: Register the router and pass tests**
 
 ```python
 from .web.study_public import router as study_public_router
@@ -1100,7 +1100,7 @@ app.include_router(study_public_router)
 server/.venv/Scripts/python -m pytest server/tests/test_study_public_api.py -q
 ```
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add server/src/ninesense_guestbook/app.py server/src/ninesense_guestbook/web/study_public.py server/src/ninesense_guestbook/web/study_schemas.py server/tests/test_study_public_api.py

@@ -24,7 +24,13 @@ class ApiProtectionMiddleware:
                 headers = MutableHeaders(raw=message.setdefault("headers", []))
                 headers["X-Content-Type-Options"] = "nosniff"
                 headers["Referrer-Policy"] = "no-referrer"
-                headers["Cache-Control"] = "no-store"
+                public_study_get = (
+                    scope.get("method") == "GET"
+                    and scope.get("path", "").startswith("/api/study/")
+                    and "Cache-Control" in headers
+                )
+                if not public_study_get:
+                    headers["Cache-Control"] = "no-store"
             await send(message)
 
         content_length = self._content_length(scope)
