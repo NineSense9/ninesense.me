@@ -24,4 +24,10 @@ foreach ($cssFile in @($entry.css)) {
     }
 }
 
+$sourceRoot = Join-Path $root 'admin-app/src'
+$appSource = [IO.File]::ReadAllText((Join-Path $sourceRoot 'App.jsx'), [Text.Encoding]::UTF8)
+$shellSource = [IO.File]::ReadAllText((Join-Path $sourceRoot 'layout/AdminShell.jsx'), [Text.Encoding]::UTF8)
+if ($appSource -notmatch 'path="study"') { throw 'Study administration route missing' }
+if ($shellSource -notmatch '"/study"') { throw 'Study administration navigation missing' }
+
 Write-Host 'PASS administration application build contract'

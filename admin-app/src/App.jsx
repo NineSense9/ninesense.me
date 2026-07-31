@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import RecoveryCodesPage from "./pages/RecoveryCodesPage.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
+import StudyLayout from "./pages/study/StudyLayout.jsx";
+import StudyTodayPage from "./pages/study/StudyTodayPage.jsx";
 
 
 function AppContent() {
@@ -22,6 +24,9 @@ function AppContent() {
         <Route path="inbox" element={<InboxPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="security" element={<SecurityPage />} />
+        <Route path="study" element={<StudyLayout />}>
+          <Route index element={<StudyTodayPage />} />
+        </Route>
         <Route path="content" element={<FutureModule name="内容" />} />
         <Route path="pages" element={<FutureModule name="页面" />} />
         <Route path="media" element={<FutureModule name="媒体" />} />

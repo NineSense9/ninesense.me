@@ -1504,7 +1504,7 @@ git commit -m "feat: build public study record"
 - Modify: `admin-app/src/layout/AdminShell.jsx`
 - Modify: `admin-app/src/main.jsx`
 
-- [ ] **Step 1: Add the route and build the failing application contract**
+- [x] **Step 1: Add the route and build the failing application contract**
 
 Add `/study` to `AdminShell` navigation and nested routes to `App.jsx`, then run:
 
@@ -1514,7 +1514,7 @@ npm --prefix admin-app run build
 
 Expected before creating the page modules: FAIL with unresolved study imports.
 
-- [ ] **Step 2: Add study API helpers**
+- [x] **Step 2: Add study API helpers**
 
 ```js
 import { api } from "../../api/client.js";
@@ -1529,7 +1529,7 @@ export const updateTask = (id, payload) => api(`/api/admin/study/tasks/${id}`, {
 export const updateReflection = (date, reflection) => api(`/api/admin/study/days/${date}/reflection`, { method: "PATCH", body: JSON.stringify({ reflection }) });
 ```
 
-- [ ] **Step 3: Build the timer panel**
+- [x] **Step 3: Build the timer panel**
 
 `StudyTimerPanel` must:
 
@@ -1550,7 +1550,7 @@ function remainingSeconds(timer, now = Date.now()) {
 }
 ```
 
-- [ ] **Step 4: Build today task and reflection editing**
+- [x] **Step 4: Build today task and reflection editing**
 
 `StudyTaskEditor` uses native `input`, `select`, `textarea` and buttons. Status options are `planned`, `in_progress`, `completed`, `incomplete`, `cancelled`; rest rows omit subject selection. Save only changed fields and show inline errors without discarding input.
 
@@ -1567,7 +1567,7 @@ function remainingSeconds(timer, now = Date.now()) {
 </main>
 ```
 
-- [ ] **Step 5: Add routes and responsive styles**
+- [x] **Step 5: Add routes and responsive styles**
 
 ```jsx
 <Route path="study" element={<StudyLayout />}>
@@ -1577,7 +1577,7 @@ function remainingSeconds(timer, now = Date.now()) {
 
 At 720 pixels and below, timer controls stack, subject buttons remain a stable 2x2 grid, and task fields use one column. Import `./styles/study.css` from `main.jsx`.
 
-- [ ] **Step 6: Build and commit**
+- [x] **Step 6: Build and commit**
 
 ```powershell
 npm --prefix admin-app run build

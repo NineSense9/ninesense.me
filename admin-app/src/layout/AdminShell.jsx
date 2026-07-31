@@ -7,6 +7,7 @@ import { useAuth } from "../auth/AuthContext.jsx";
 const navigation = [
   ["总览", "/"],
   ["互动", "/inbox"],
+  ["学习管理", "/study"],
   ["内容", "/content"],
   ["页面", "/pages"],
   ["媒体", "/media"],
