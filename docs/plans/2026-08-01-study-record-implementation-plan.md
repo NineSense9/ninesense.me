@@ -1117,7 +1117,7 @@ git commit -m "feat: expose public study data"
 - Modify: `server/src/ninesense_guestbook/app.py`
 - Modify: `server/src/ninesense_guestbook/services/audit.py`
 
-- [ ] **Step 1: Write failing authentication and CRUD tests**
+- [x] **Step 1: Write failing authentication and CRUD tests**
 
 ```python
 from datetime import date
@@ -1166,13 +1166,13 @@ def test_admin_history_is_not_limited_to_thirty_days(authenticated_client, db_se
     assert any(item["date"].startswith("2025-") for item in response.json()["items"])
 ```
 
-- [ ] **Step 2: Verify the tests fail**
+- [x] **Step 2: Verify the tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_admin_api.py -q
 ```
 
-- [ ] **Step 3: Add strict mutation schemas**
+- [x] **Step 3: Add strict mutation schemas**
 
 ```python
 class ScheduleEntryInput(BaseModel):
@@ -1204,7 +1204,7 @@ class ScheduleEntryInput(BaseModel):
 
 Add `TaskCreate`, `TaskUpdate`, `ReflectionUpdate`, `ExamEventInput` and date-range query validators with concrete maximum text lengths from the design.
 
-- [ ] **Step 4: Implement schedule, day, task and exam routes**
+- [x] **Step 4: Implement schedule, day, task and exam routes**
 
 Every mutation begins with:
 
@@ -1248,7 +1248,7 @@ record_audit(
 )
 ```
 
-- [ ] **Step 5: Enforce one countdown target transactionally**
+- [x] **Step 5: Enforce one countdown target transactionally**
 
 When setting `countdown_target=True`, clear the flag from other events in the same transaction before flushing the target event. Add this sequential replacement test:
 
@@ -1262,7 +1262,7 @@ def test_setting_countdown_target_replaces_the_previous_target(authenticated_cli
     assert [row.id for row in targets] == [second.json()["id"]]
 ```
 
-- [ ] **Step 6: Pass tests and commit**
+- [x] **Step 6: Pass tests and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_admin_api.py server/tests/test_audit.py -q

@@ -22,6 +22,7 @@ from .web.auth import router as auth_router
 from .web.middleware import ApiProtectionMiddleware
 from .web.public import router as public_router
 from .web.study_public import router as study_public_router
+from .web.study_admin import router as study_admin_router
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -105,6 +106,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(public_router)
     app.include_router(study_public_router)
+    app.include_router(study_admin_router)
     app.include_router(auth_router)
     app.include_router(admin_router)
     app.include_router(outbox_router)
