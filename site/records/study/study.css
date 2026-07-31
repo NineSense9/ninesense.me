@@ -1,0 +1,40 @@
+:root {
+  --paper: #ebe5dc;
+  --ink: #12110f;
+  --muted: #716b62;
+  --line: rgba(24, 22, 19, .16);
+  --amber: #c9914d;
+  --dark: #12100e;
+  --cream: #efe7db;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .045; background-image: radial-gradient(circle, var(--ink) .7px, transparent .8px); background-size: 22px 22px; }
+a { color: inherit; text-decoration: none; }
+.study-topbar, main, footer { width: min(1380px, calc(100% - 72px)); margin: 0 auto; }
+.study-topbar { min-height: 74px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); font-size: .72rem; }
+.study-topbar a:first-child { font-weight: 800; font-size: 1.05rem; }
+section { min-height: 36vh; padding: 72px 0; border-bottom: 1px solid var(--line); }
+#study-today { min-height: 64vh; }
+h1, h2 { margin: 12px 0 24px; font: 500 clamp(3rem, 7vw, 7rem)/.92 Georgia, "Songti SC", serif; }
+h2 { font-size: clamp(2.4rem, 5vw, 5rem); }
+p { color: var(--muted); line-height: 1.8; }
+footer { min-height: 92px; display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .7rem; }
+
+@media (max-width: 900px) {
+  .study-topbar, main, footer { width: min(100% - 40px, 760px); }
+}
+
+@media (max-width: 560px) {
+  .study-topbar, main, footer { width: calc(100% - 28px); }
+  .study-topbar { min-height: 62px; }
+  .study-topbar a:last-child { font-size: .62rem; }
+  section { padding: 52px 0; }
+  footer { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

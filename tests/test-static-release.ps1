@@ -7,6 +7,8 @@ $required = @(
   'index.html', '404.html', 'robots.txt', 'site.webmanifest',
   'favicon.svg', 'apple-touch-icon.png', 'assets/og-cover.jpg',
   'guestbook/index.html', 'guestbook/guestbook.css', 'guestbook/guestbook.js',
+  'records/index.html', 'records/records.css',
+  'records/study/index.html', 'records/study/study.css', 'records/study/study.js',
   'admin/index.html', 'admin/.vite/manifest.json'
 )
 
@@ -14,6 +16,27 @@ $missing = @($required | Where-Object { -not (Test-Path (Join-Path $site $_)) })
 if ($missing.Count) { throw "Missing release files: $($missing -join ', ')" }
 if ($index -notmatch 'href="\./guestbook/"') { throw 'Desktop guestbook navigation link missing' }
 if ($index -notmatch 'class="mobile-menu-item" href="\./guestbook/"') { throw 'Mobile guestbook navigation link missing' }
+if ($index -notmatch 'href="\./records/"') { throw 'Homepage records entry missing' }
+
+$studyRoot = Join-Path $site 'records/study'
+$study = [IO.File]::ReadAllText((Join-Path $studyRoot 'index.html'), [Text.Encoding]::UTF8)
+$studyCss = [IO.File]::ReadAllText((Join-Path $studyRoot 'study.css'), [Text.Encoding]::UTF8)
+$studyJs = [IO.File]::ReadAllText((Join-Path $studyRoot 'study.js'), [Text.Encoding]::UTF8)
+foreach ($contract in @(
+  'name="robots" content="noindex, nofollow"',
+  'id="study-today"', 'id="study-overview"',
+  'id="study-recent"', 'id="study-exams"',
+  'aria-live="polite"'
+)) {
+  if ($study -notmatch [regex]::Escape($contract)) {
+    throw "Study page contract missing: $contract"
+  }
+}
+if ($studyCss -notmatch 'max-width:\s*900px') { throw 'Study tablet breakpoint missing' }
+if ($studyCss -notmatch 'max-width:\s*560px') { throw 'Study mobile breakpoint missing' }
+if ($studyCss -notmatch 'prefers-reduced-motion') { throw 'Study reduced-motion rules missing' }
+if ($studyJs -match '\.innerHTML|insertAdjacentHTML') { throw 'Study page must use safe DOM rendering' }
+if ($studyJs -notmatch '\.textContent') { throw 'Study page textContent rendering missing' }
 
 $guestbook = [IO.File]::ReadAllText((Join-Path $site 'guestbook/index.html'), [Text.Encoding]::UTF8)
 $guestbookCss = [IO.File]::ReadAllText((Join-Path $site 'guestbook/guestbook.css'), [Text.Encoding]::UTF8)

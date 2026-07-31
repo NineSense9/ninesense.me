@@ -81,7 +81,7 @@
 - Modify: `site/index.html`
 - Modify: `tests/test-static-release.ps1`
 
-- [ ] **Step 1: Run and record the untouched baseline**
+- [x] **Step 1: Run and record the untouched baseline**
 
 ```powershell
 server/.venv/Scripts/python -m ruff check server/src server/tests server/alembic
@@ -96,7 +96,7 @@ npm run test:e2e
 
 Expected: every command exits with code 0. Record pytest and Playwright counts in the goal progress notes.
 
-- [ ] **Step 2: Add the failing static release contract**
+- [x] **Step 2: Add the failing static release contract**
 
 Extend `$required` in `tests/test-static-release.ps1`:
 
@@ -133,7 +133,7 @@ if ($studyJs -match '\.innerHTML|insertAdjacentHTML') { throw 'Study page must u
 if ($studyJs -notmatch '\.textContent') { throw 'Study page textContent rendering missing' }
 ```
 
-- [ ] **Step 3: Verify the contract fails for the intended reason**
+- [x] **Step 3: Verify the contract fails for the intended reason**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
@@ -141,7 +141,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps
 
 Expected: FAIL with `Missing release files` or `Homepage records entry missing`.
 
-- [ ] **Step 4: Add minimal accessible route scaffolds**
+- [x] **Step 4: Add minimal accessible route scaffolds**
 
 Use this structure in `site/records/index.html`:
 
@@ -196,7 +196,7 @@ Add a footer link in `site/index.html`:
 <a href="./records/">更多记录&nbsp;&nbsp;↗</a>
 ```
 
-- [ ] **Step 5: Pass the static contract and inspect 1440/390 widths**
+- [x] **Step 5: Pass the static contract and inspect 1440/390 widths**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
@@ -204,7 +204,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps
 
 Expected: PASS. Open `/records/` and `/records/study/`; confirm no horizontal overflow at 1440 and 390 pixels.
 
-- [ ] **Step 6: Commit the route scaffold**
+- [x] **Step 6: Commit the route scaffold**
 
 ```powershell
 git add site/index.html site/records tests/test-static-release.ps1
