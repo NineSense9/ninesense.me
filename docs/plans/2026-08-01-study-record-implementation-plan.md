@@ -478,7 +478,7 @@ git commit -m "feat: add study record schema"
 - Create: `server/src/ninesense_guestbook/services/study_days.py`
 - Create: `server/tests/test_study_days.py`
 
-- [ ] **Step 1: Write failing schedule-generation tests**
+- [x] **Step 1: Write failing schedule-generation tests**
 
 ```python
 from datetime import date, time
@@ -521,7 +521,7 @@ def test_missing_template_creates_an_empty_day_without_rollover(db_session):
     assert list(db_session.scalars(select(StudyTask))) == []
 ```
 
-- [ ] **Step 2: Verify the tests fail**
+- [x] **Step 2: Verify the tests fail**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_days.py -q
@@ -529,7 +529,7 @@ server/.venv/Scripts/python -m pytest server/tests/test_study_days.py -q
 
 Expected: FAIL because the service is missing.
 
-- [ ] **Step 3: Add domain enums and pure validation**
+- [x] **Step 3: Add domain enums and pure validation**
 
 ```python
 # domain/study.py
@@ -558,7 +558,7 @@ def counts_toward_completion(task_kind: str, status: str) -> bool:
     return task_kind == "study" and status in {TaskStatus.COMPLETED, TaskStatus.INCOMPLETE}
 ```
 
-- [ ] **Step 4: Implement snapshot generation**
+- [x] **Step 4: Implement snapshot generation**
 
 ```python
 # services/study_days.py
@@ -602,7 +602,7 @@ def ensure_today(db: Session, today: date) -> StudyDay:
     return get_or_create_day(db, today, generate_from_template=True)
 ```
 
-- [ ] **Step 5: Add boundary tests for rest and no rollover**
+- [x] **Step 5: Add boundary tests for rest and no rollover**
 
 ```python
 def test_rest_template_generates_a_subjectless_rest_task(db_session):
@@ -631,7 +631,7 @@ def test_admin_can_create_a_past_blank_day_without_current_template(db_session):
     assert list(db_session.scalars(select(StudyTask).where(StudyTask.day_id == day.id))) == []
 ```
 
-- [ ] **Step 6: Run and commit**
+- [x] **Step 6: Run and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_days.py -q
