@@ -1374,7 +1374,7 @@ git commit -m "feat: manage focus timing and exports"
 - Modify: `site/records/study/study.js`
 - Modify: `tests/test-static-release.ps1`
 
-- [ ] **Step 1: Extend the static contract for the approved visual structure**
+- [x] **Step 1: Extend the static contract for the approved visual structure**
 
 Require these markers in `test-static-release.ps1`:
 
@@ -1393,7 +1393,7 @@ foreach ($contract in @(
 
 Run the contract and expect failure.
 
-- [ ] **Step 2: Implement the editorial HTML bands**
+- [x] **Step 2: Implement the editorial HTML bands**
 
 Use this top-level order:
 
@@ -1413,7 +1413,7 @@ Use this top-level order:
 
 Do not create nested card containers. Use full-width dark/light bands, a vertical task rail, one trend chart, one subject distribution and one exam timeline.
 
-- [ ] **Step 3: Implement safe API rendering**
+- [x] **Step 3: Implement safe API rendering**
 
 ```js
 const SUBJECT_LABELS = { math: "高数", "408": "408", english: "英语", politics: "政治" };
@@ -1455,7 +1455,7 @@ async function loadStudyPage() {
 
 Use only `textContent`, `createElement`, `append` and safe attribute assignment. Show a per-section retry button on failure; never substitute fabricated data.
 
-- [ ] **Step 4: Implement the approved responsive styling**
+- [x] **Step 4: Implement the approved responsive styling**
 
 Use the existing site variables and exact palette:
 
@@ -1475,7 +1475,7 @@ Use the existing site variables and exact palette:
 
 At `max-width: 900px`, stack hero, status rail, daily plan and overview. At `max-width: 560px`, keep a minimum 320-pixel layout, use horizontal scrolling only inside the view navigation, and prevent document-level overflow. Add reduced-motion rules for chart reveal and status transitions.
 
-- [ ] **Step 5: Pass contracts and visually inspect four widths**
+- [x] **Step 5: Pass contracts and visually inspect four widths**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps1
@@ -1483,7 +1483,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps
 
 Inspect 1440x1000, 768x1024, 390x844 and 320x800. Confirm the title, countdown, task rail, charts and exam timeline do not clip or overlap.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add site/records/study tests/test-static-release.ps1

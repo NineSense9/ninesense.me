@@ -32,6 +32,17 @@ foreach ($contract in @(
     throw "Study page contract missing: $contract"
   }
 }
+foreach ($contract in @(
+  'STUDY RECORD / 2026', 'id="today-title"', 'id="countdown-value"',
+  'id="current-study-status"', 'id="today-task-list"',
+  'id="focus-trend"', 'id="subject-breakdown"',
+  'id="recent-heatmap"', 'id="recent-day-list"',
+  'id="exam-timeline"', 'id="study-updated-at"'
+)) {
+  if ($study -notmatch [regex]::Escape($contract)) {
+    throw "Study visual contract missing: $contract"
+  }
+}
 if ($studyCss -notmatch 'max-width:\s*900px') { throw 'Study tablet breakpoint missing' }
 if ($studyCss -notmatch 'max-width:\s*560px') { throw 'Study mobile breakpoint missing' }
 if ($studyCss -notmatch 'prefers-reduced-motion') { throw 'Study reduced-motion rules missing' }

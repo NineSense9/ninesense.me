@@ -10,28 +10,108 @@
   <script src="./study.js" defer></script>
 </head>
 <body>
-  <header class="study-topbar"><a href="../../">NineSense</a><a href="../">MORE RECORDS / 备考记录</a></header>
+  <header class="study-topbar">
+    <a class="study-brand" href="../../">NineSense</a>
+    <span>MORE RECORDS / 备考记录</span>
+  </header>
+
+  <section class="study-hero" aria-labelledby="today-title">
+    <div class="study-hero-copy">
+      <p class="eyebrow">STUDY RECORD / 2026</p>
+      <h1 id="today-title">备考这件事<br>一天一天记录</h1>
+      <p class="hero-note">不写目标宣言，只留下今天做了什么。</p>
+    </div>
+    <div class="countdown-panel" aria-label="初试倒计时">
+      <span>距离初试</span>
+      <strong id="countdown-value">—</strong>
+      <p id="countdown-label">等待时间节点</p>
+    </div>
+  </section>
+
+  <div class="study-status-rail">
+    <div>
+      <small>NOW</small>
+      <span id="current-study-status" aria-live="polite">正在读取当前状态</span>
+    </div>
+    <div>
+      <small>NEXT</small>
+      <span id="next-exam-event">最近节点待更新</span>
+    </div>
+    <div>
+      <small>UPDATED</small>
+      <time id="study-updated-at">—</time>
+    </div>
+  </div>
+
+  <nav class="study-nav" aria-label="备考记录视图">
+    <a href="#study-today">今日计划</a>
+    <a href="#study-overview">专注总览</a>
+    <a href="#study-recent">最近 30 天</a>
+    <a href="#study-exams">考研时间表</a>
+  </nav>
+
+  <p id="study-status" class="sr-only" aria-live="polite">正在读取备考记录</p>
+
   <main>
-    <section id="study-today" aria-labelledby="today-title">
-      <p>STUDY RECORD / 2026</p>
-      <h1 id="today-title">备考记录</h1>
-      <p id="study-status" aria-live="polite">正在读取今天的记录</p>
-      <div id="today-task-list"></div>
+    <section id="study-today" class="study-band today-band" aria-labelledby="today-section-title">
+      <div class="section-inner today-layout">
+        <header class="section-heading">
+          <p class="eyebrow">TODAY / 今日</p>
+          <h2 id="today-section-title">今天学什么</h2>
+          <p id="today-summary" class="section-summary">当天计划正在读取</p>
+          <blockquote id="today-reflection">今天还没有留下复盘。</blockquote>
+        </header>
+        <div id="today-task-list" class="today-task-list" aria-live="polite"></div>
+      </div>
     </section>
-    <section id="study-overview" aria-labelledby="overview-title">
-      <h2 id="overview-title">专注总览</h2>
-      <div id="focus-trend"></div>
-      <div id="subject-breakdown"></div>
+
+    <section id="study-overview" class="study-band overview-band" aria-labelledby="overview-title">
+      <div class="section-inner">
+        <header class="section-heading overview-heading">
+          <p class="eyebrow">MONTHLY FOCUS / 月度</p>
+          <h2 id="overview-title">这个月真正学了多久</h2>
+          <p id="month-total" class="section-summary">月度数据正在读取</p>
+        </header>
+        <div class="overview-layout">
+          <div>
+            <h3>每日专注</h3>
+            <div id="focus-trend" class="focus-trend" aria-label="本月每日专注趋势"></div>
+          </div>
+          <div>
+            <h3>科目分布</h3>
+            <div id="subject-breakdown" class="subject-breakdown"></div>
+          </div>
+        </div>
+      </div>
     </section>
-    <section id="study-recent" aria-labelledby="recent-title">
-      <h2 id="recent-title">最近 30 天</h2>
-      <div id="recent-heatmap"></div>
+
+    <section id="study-recent" class="study-band recent-band" aria-labelledby="recent-title">
+      <div class="section-inner">
+        <header class="section-heading recent-heading">
+          <p class="eyebrow">LAST 30 DAYS / 近况</p>
+          <h2 id="recent-title">最近不只是看今天</h2>
+          <p class="section-summary">有记录的日子都会留在这里。</p>
+        </header>
+        <div id="recent-heatmap" class="recent-heatmap" aria-label="最近 30 天专注热力"></div>
+        <ol id="recent-day-list" class="recent-day-list"></ol>
+      </div>
     </section>
-    <section id="study-exams" aria-labelledby="exam-title">
-      <h2 id="exam-title">考研时间表</h2>
-      <ol id="exam-timeline"></ol>
+
+    <section id="study-exams" class="study-band exam-band" aria-labelledby="exam-title">
+      <div class="section-inner exam-layout">
+        <header class="section-heading">
+          <p class="eyebrow">EXAM CALENDAR / 时间</p>
+          <h2 id="exam-title">今年还有哪些时间点</h2>
+          <p class="section-summary">确认日期和预计日期会分别标注。</p>
+        </header>
+        <ol id="exam-timeline" class="exam-timeline"></ol>
+      </div>
     </section>
   </main>
-  <footer><a href="../">返回更多记录</a><span>PUBLIC VIEW · READ ONLY</span></footer>
+
+  <footer>
+    <a href="../">返回更多记录</a>
+    <span>PUBLIC VIEW · READ ONLY</span>
+  </footer>
 </body>
 </html>
