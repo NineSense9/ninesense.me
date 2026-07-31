@@ -1278,7 +1278,7 @@ git commit -m "feat: manage study plans and exams"
 - Modify: `server/src/ninesense_guestbook/web/study_schemas.py`
 - Modify: `server/tests/test_study_admin_api.py`
 
-- [ ] **Step 1: Write failing timer and correction API tests**
+- [x] **Step 1: Write failing timer and correction API tests**
 
 ```python
 def test_timer_lifecycle_and_public_state(authenticated_client):
@@ -1308,7 +1308,7 @@ def test_json_and_csv_exports_include_complete_history(authenticated_client, db_
     assert csv_response.headers["content-type"].startswith("text/csv")
 ```
 
-- [ ] **Step 2: Add timer and manual-record schemas**
+- [x] **Step 2: Add timer and manual-record schemas**
 
 ```python
 class TimerStart(BaseModel):
@@ -1329,7 +1329,7 @@ class FocusRecordInput(BaseModel):
     reason: str = Field(min_length=2, max_length=160)
 ```
 
-- [ ] **Step 3: Add timer routes**
+- [x] **Step 3: Add timer routes**
 
 ```text
 GET  /api/admin/study/timer
@@ -1343,7 +1343,7 @@ POST /api/admin/study/timer/break
 
 Each route calls `reconcile_timer` before returning. `finish` requires `{"save": true|false}`; `discard` removes the active row and records only a bounded audit event.
 
-- [ ] **Step 4: Add focus history, correction and export routes**
+- [x] **Step 4: Add focus history, correction and export routes**
 
 ```text
 GET    /api/admin/study/focus?from=&to=&subject=&cursor=
@@ -1357,7 +1357,7 @@ GET    /api/admin/study/tasks.csv
 
 Use `StreamingResponse` with `io.StringIO` and Python `csv.DictWriter`. JSON export includes schedule entries, days, tasks, focus sessions and exam events; it excludes admins, sessions and audit rows.
 
-- [ ] **Step 5: Run focused tests and commit**
+- [x] **Step 5: Run focused tests and commit**
 
 ```powershell
 server/.venv/Scripts/python -m pytest server/tests/test_study_timer.py server/tests/test_study_admin_api.py -q

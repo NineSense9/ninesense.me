@@ -1,19 +1,34 @@
+import base64
+import binascii
+import csv
 from datetime import date, datetime, time, timedelta, timezone
+import io
 from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from pydantic import ValidationError
-from sqlalchemy import select, update
+from sqlalchemy import and_, or_, select, update
 from sqlalchemy.orm import Session
+from starlette.responses import StreamingResponse
 
 from ..services.audit import record_audit
 from ..services.sessions import require_csrf, require_session
 from ..services.study_days import get_or_create_day
 from ..services.study_stats import admin_history, completion_summary
-from ..services.study_timer import as_utc
+from ..services.study_timer import (
+    as_utc,
+    discard_timer,
+    finish_timer,
+    pause_timer,
+    reconcile_timer,
+    resume_timer,
+    start_break_timer,
+    start_timer,
+)
 from ..study_models import (
     ExamEvent,
     FocusSession,
+    FocusTimer,
     StudyDay,
     StudyScheduleEntry,
     StudyTask,
@@ -22,11 +37,16 @@ from .study_schemas import (
     DayCreate,
     ExamEventInput,
     ExamEventUpdate,
+    FocusRecordInput,
+    FocusRecordUpdate,
     ReflectionUpdate,
     ScheduleEntryInput,
     ScheduleEntryUpdate,
     TaskCreate,
     TaskUpdate,
+    TimerBreak,
+    TimerFinish,
+    TimerStart,
 )
 
 
@@ -617,3 +637,580 @@ def delete_exam(event_id: int, request: Request) -> None:
         )
         db.delete(row)
         db.commit()
+
+
+def _timer_payload(row: FocusTimer, now: datetime) -> dict[str, object]:
+    reference = as_utc(row.paused_at) if row.paused_at else as_utc(now)
+    remaining_seconds = max(
+        0,
+        int((as_utc(row.planned_end_at) - reference).total_seconds()),
+    )
+    return {
+        "id": row.id,
+        "subject": row.subject,
+        "phase": row.phase,
+        "preset": row.preset_kind,
+        "focus_seconds": row.focus_seconds,
+        "break_seconds": row.break_seconds,
+        "state": row.state,
+        "started_at": as_utc(row.started_at).isoformat(),
+        "planned_end_at": as_utc(row.planned_end_at).isoformat(),
+        "paused_at": as_utc(row.paused_at).isoformat() if row.paused_at else None,
+        "remaining_seconds": remaining_seconds,
+    }
+
+
+def _timer_response(
+    db: Session,
+    admin_id: int,
+    now: datetime,
+    *,
+    completed: FocusSession | None = None,
+) -> dict[str, object]:
+    timer = db.scalar(
+        select(FocusTimer).where(FocusTimer.admin_id == admin_id)
+    )
+    return {
+        "timer": _timer_payload(timer, now) if timer is not None else None,
+        "completed_session": (
+            _focus_payload(completed) if completed is not None else None
+        ),
+    }
+
+
+def _current_timer(db: Session, admin_id: int) -> FocusTimer:
+    timer = db.scalar(
+        select(FocusTimer).where(FocusTimer.admin_id == admin_id)
+    )
+    if timer is None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="当前没有活动计时器。",
+        )
+    return timer
+
+
+@router.get("/timer")
+def get_timer(request: Request) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        reconciled = reconcile_timer(db, current.admin.id, now)
+        completed = reconciled if isinstance(reconciled, FocusSession) else None
+        db.commit()
+        return _timer_response(
+            db,
+            current.admin.id,
+            now,
+            completed=completed,
+        )
+
+
+@router.post("/timer/start", status_code=status.HTTP_201_CREATED)
+def start_focus_timer(
+    payload: TimerStart,
+    request: Request,
+) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        reconcile_timer(db, current.admin.id, now)
+        timer = start_timer(
+            db,
+            current.admin.id,
+            payload.subject,
+            payload.preset,
+            payload.focus_seconds,
+            payload.break_seconds,
+            payload.idempotency_key,
+            now,
+        )
+        record_audit(
+            db,
+            action="study.timer.started",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer.id),
+        )
+        db.commit()
+        return _timer_response(db, current.admin.id, now)
+
+
+@router.post("/timer/pause")
+def pause_focus_timer(request: Request) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        reconcile_timer(db, current.admin.id, now)
+        timer = _current_timer(db, current.admin.id)
+        pause_timer(db, timer, now)
+        record_audit(
+            db,
+            action="study.timer.paused",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer.id),
+        )
+        db.commit()
+        return _timer_response(db, current.admin.id, now)
+
+
+@router.post("/timer/resume")
+def resume_focus_timer(request: Request) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        _current_timer(db, current.admin.id)
+        reconciled = reconcile_timer(db, current.admin.id, now)
+        if not isinstance(reconciled, FocusTimer):
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="计时器已经结束。",
+            )
+        timer = reconciled
+        resume_timer(db, timer, now)
+        record_audit(
+            db,
+            action="study.timer.resumed",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer.id),
+        )
+        db.commit()
+        return _timer_response(db, current.admin.id, now)
+
+
+@router.post("/timer/finish")
+def finish_focus_timer(
+    payload: TimerFinish,
+    request: Request,
+) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        timer = _current_timer(db, current.admin.id)
+        timer_id = timer.id
+        reconciled = reconcile_timer(db, current.admin.id, now)
+        if isinstance(reconciled, FocusSession):
+            record_audit(
+                db,
+                action="study.timer.finished",
+                outcome="success",
+                admin_id=current.admin.id,
+                target_type="focus_timer",
+                target_id=str(timer_id),
+                details={"changed_fields": ["auto_completed"]},
+            )
+            db.commit()
+            return {"timer": None, "session": _focus_payload(reconciled)}
+        if reconciled is None:
+            db.commit()
+            return {"timer": None, "session": None}
+        timer = reconciled
+        session = finish_timer(db, timer, save=payload.save, now=now)
+        record_audit(
+            db,
+            action="study.timer.finished",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer_id),
+            details={"changed_fields": ["saved" if payload.save else "discarded"]},
+        )
+        db.commit()
+        return {
+            "timer": None,
+            "session": _focus_payload(session) if session is not None else None,
+        }
+
+
+@router.post("/timer/discard")
+def discard_focus_timer(request: Request) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        timer = _current_timer(db, current.admin.id)
+        timer_id = timer.id
+        reconciled = reconcile_timer(db, current.admin.id, now)
+        if isinstance(reconciled, FocusSession):
+            db.commit()
+            return {
+                "timer": None,
+                "completed_session": _focus_payload(reconciled),
+            }
+        if isinstance(reconciled, FocusTimer):
+            discard_timer(db, reconciled)
+        record_audit(
+            db,
+            action="study.timer.discarded",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer_id),
+        )
+        db.commit()
+        return {"timer": None}
+
+
+@router.post("/timer/break", status_code=status.HTTP_201_CREATED)
+def start_break(
+    payload: TimerBreak,
+    request: Request,
+) -> dict[str, object]:
+    now = datetime.now(timezone.utc)
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        reconcile_timer(db, current.admin.id, now)
+        timer = start_break_timer(
+            db,
+            current.admin.id,
+            payload.break_seconds,
+            payload.idempotency_key,
+            now,
+        )
+        record_audit(
+            db,
+            action="study.timer.break_started",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_timer",
+            target_id=str(timer.id),
+        )
+        db.commit()
+        return _timer_response(db, current.admin.id, now)
+
+
+def _encode_focus_cursor(row: FocusSession) -> str:
+    raw = f"{as_utc(row.started_at).isoformat()}|{row.id}".encode("utf-8")
+    return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+
+
+def _decode_focus_cursor(cursor: str) -> tuple[datetime, int]:
+    try:
+        padding = "=" * (-len(cursor) % 4)
+        raw = base64.b64decode(
+            (cursor + padding).encode("ascii"),
+            altchars=b"-_",
+            validate=True,
+        ).decode("utf-8")
+        timestamp_text, row_id_text = raw.rsplit("|", 1)
+        timestamp = datetime.fromisoformat(timestamp_text)
+        row_id = int(row_id_text)
+        if timestamp.tzinfo is None or row_id < 1:
+            raise ValueError
+        return as_utc(timestamp), row_id
+    except (ValueError, UnicodeError, binascii.Error) as error:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="无效的分页位置。",
+        ) from error
+
+
+def _focus_range(
+    from_date: date | None,
+    to_date: date | None,
+) -> tuple[date, date]:
+    today = datetime.now(SHANGHAI).date()
+    start = from_date or today.replace(day=1)
+    end = to_date or today
+    if end < start or (end - start).days > 365:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail="单次专注查询范围必须在 366 天以内。",
+        )
+    return start, end
+
+
+@router.get("/focus")
+def list_focus(
+    request: Request,
+    from_date: date | None = Query(default=None, alias="from"),
+    to_date: date | None = Query(default=None, alias="to"),
+    subject: str | None = Query(default=None, pattern=r"^(math|408|english|politics)$"),
+    cursor: str | None = None,
+    limit: int = Query(default=50, ge=1, le=100),
+) -> dict[str, object]:
+    start, end = _focus_range(from_date, to_date)
+    start_utc = datetime.combine(start, time.min, tzinfo=SHANGHAI).astimezone(
+        timezone.utc
+    )
+    end_utc = (
+        datetime.combine(end, time.min, tzinfo=SHANGHAI) + timedelta(days=1)
+    ).astimezone(timezone.utc)
+    criteria = [
+        FocusSession.started_at >= start_utc,
+        FocusSession.started_at < end_utc,
+    ]
+    if subject is not None:
+        criteria.append(FocusSession.subject == subject)
+    if cursor is not None:
+        cursor_time, cursor_id = _decode_focus_cursor(cursor)
+        criteria.append(
+            or_(
+                FocusSession.started_at < cursor_time,
+                and_(
+                    FocusSession.started_at == cursor_time,
+                    FocusSession.id < cursor_id,
+                ),
+            )
+        )
+    with request.app.state.session_factory() as db:
+        require_session(request, db)
+        rows = list(
+            db.scalars(
+                select(FocusSession)
+                .where(*criteria)
+                .order_by(FocusSession.started_at.desc(), FocusSession.id.desc())
+                .limit(limit + 1)
+            )
+        )
+        visible = rows[:limit]
+        next_cursor = (
+            _encode_focus_cursor(visible[-1])
+            if len(rows) > limit and visible
+            else None
+        )
+        return {
+            "items": [_focus_payload(row) for row in visible],
+            "next_cursor": next_cursor,
+        }
+
+
+@router.post("/focus", status_code=status.HTTP_201_CREATED)
+def create_focus(
+    payload: FocusRecordInput,
+    request: Request,
+) -> dict[str, object]:
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        planned_seconds = int(
+            (as_utc(payload.ended_at) - as_utc(payload.started_at)).total_seconds()
+        )
+        row = FocusSession(
+            admin_id=current.admin.id,
+            subject=payload.subject,
+            planned_seconds=planned_seconds,
+            started_at=as_utc(payload.started_at),
+            ended_at=as_utc(payload.ended_at),
+            effective_seconds=payload.effective_seconds,
+            completion_kind="manual",
+            source="manual",
+            correction_reason=payload.reason,
+        )
+        db.add(row)
+        db.flush()
+        record_audit(
+            db,
+            action="study.focus.created",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_session",
+            target_id=str(row.id),
+            details={"changed_fields": ["manual_record"]},
+        )
+        db.commit()
+        db.refresh(row)
+        return _focus_payload(row)
+
+
+@router.patch("/focus/{session_id}")
+def update_focus(
+    session_id: int,
+    payload: FocusRecordUpdate,
+    request: Request,
+) -> dict[str, object]:
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        row = db.get(FocusSession, session_id)
+        if row is None:
+            raise _not_found("专注记录不存在。")
+        merged = {
+            "subject": row.subject,
+            "started_at": as_utc(row.started_at),
+            "ended_at": as_utc(row.ended_at),
+            "effective_seconds": row.effective_seconds,
+            "reason": payload.reason,
+        }
+        merged.update(
+            {
+                key: value
+                for key, value in payload.model_dump(exclude_unset=True).items()
+                if key != "reason"
+            }
+        )
+        try:
+            validated = FocusRecordInput.model_validate(merged)
+        except ValidationError as error:
+            raise _validation_error(error) from error
+        changed_fields = sorted(payload.model_fields_set)
+        row.subject = validated.subject
+        row.started_at = as_utc(validated.started_at)
+        row.ended_at = as_utc(validated.ended_at)
+        row.effective_seconds = validated.effective_seconds
+        if {"started_at", "ended_at"} & payload.model_fields_set:
+            row.planned_seconds = int(
+                (row.ended_at - row.started_at).total_seconds()
+            )
+        row.completion_kind = "corrected"
+        row.correction_reason = validated.reason
+        record_audit(
+            db,
+            action="study.focus.updated",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_session",
+            target_id=str(row.id),
+            details={"changed_fields": changed_fields},
+        )
+        db.commit()
+        db.refresh(row)
+        return _focus_payload(row)
+
+
+@router.delete("/focus/{session_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_focus(session_id: int, request: Request) -> None:
+    with request.app.state.session_factory() as db:
+        current = require_session(request, db)
+        require_csrf(request, current)
+        row = db.get(FocusSession, session_id)
+        if row is None:
+            raise _not_found("专注记录不存在。")
+        record_audit(
+            db,
+            action="study.focus.deleted",
+            outcome="success",
+            admin_id=current.admin.id,
+            target_type="focus_session",
+            target_id=str(row.id),
+        )
+        db.delete(row)
+        db.commit()
+
+
+@router.get("/export.json")
+def export_study_json(request: Request) -> dict[str, object]:
+    with request.app.state.session_factory() as db:
+        require_session(request, db)
+        schedule = list(
+            db.scalars(
+                select(StudyScheduleEntry).order_by(StudyScheduleEntry.id)
+            )
+        )
+        days = list(db.scalars(select(StudyDay).order_by(StudyDay.study_date)))
+        tasks = list(db.scalars(select(StudyTask).order_by(StudyTask.id)))
+        focus = list(db.scalars(select(FocusSession).order_by(FocusSession.id)))
+        exams = list(db.scalars(select(ExamEvent).order_by(ExamEvent.id)))
+        return {
+            "exported_at": datetime.now(timezone.utc).isoformat(),
+            "schedule": [_schedule_payload(row) for row in schedule],
+            "days": [
+                {
+                    "id": row.id,
+                    "date": row.study_date.isoformat(),
+                    "reflection": row.reflection,
+                    "generated_from": row.generated_from,
+                    "created_at": as_utc(row.created_at).isoformat(),
+                    "updated_at": as_utc(row.updated_at).isoformat(),
+                }
+                for row in days
+            ],
+            "tasks": [
+                {**_task_payload(row), "day_id": row.day_id}
+                for row in tasks
+            ],
+            "focus_sessions": [_focus_payload(row) for row in focus],
+            "exam_events": [_exam_payload(row) for row in exams],
+        }
+
+
+def _csv_response(
+    filename: str,
+    fieldnames: list[str],
+    rows: list[dict[str, object]],
+) -> StreamingResponse:
+    output = io.StringIO(newline="")
+    output.write("\ufeff")
+    writer = csv.DictWriter(output, fieldnames=fieldnames, extrasaction="ignore")
+    writer.writeheader()
+    writer.writerows(rows)
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@router.get("/focus.csv")
+def export_focus_csv(request: Request) -> StreamingResponse:
+    with request.app.state.session_factory() as db:
+        require_session(request, db)
+        rows = list(
+            db.scalars(
+                select(FocusSession).order_by(
+                    FocusSession.started_at,
+                    FocusSession.id,
+                )
+            )
+        )
+        payload = [_focus_payload(row) for row in rows]
+    return _csv_response(
+        "ninesense-focus.csv",
+        [
+            "id",
+            "subject",
+            "planned_seconds",
+            "started_at",
+            "ended_at",
+            "effective_seconds",
+            "completion_kind",
+            "source",
+            "correction_reason",
+        ],
+        payload,
+    )
+
+
+@router.get("/tasks.csv")
+def export_tasks_csv(request: Request) -> StreamingResponse:
+    with request.app.state.session_factory() as db:
+        require_session(request, db)
+        rows = db.execute(
+            select(StudyTask, StudyDay.study_date)
+            .join(StudyDay, StudyTask.day_id == StudyDay.id)
+            .order_by(StudyDay.study_date, StudyTask.position, StudyTask.id)
+        ).all()
+        payload = [
+            {
+                **_task_payload(task),
+                "date": study_date.isoformat(),
+            }
+            for task, study_date in rows
+        ]
+    return _csv_response(
+        "ninesense-study-tasks.csv",
+        [
+            "id",
+            "date",
+            "kind",
+            "subject",
+            "start_time",
+            "end_time",
+            "title",
+            "description",
+            "status",
+            "position",
+            "updated_at",
+        ],
+        payload,
+    )

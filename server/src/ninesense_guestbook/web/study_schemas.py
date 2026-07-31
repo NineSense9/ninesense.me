@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import date, datetime, time
 from typing import Literal
 from urllib.parse import urlparse
 
@@ -355,3 +355,94 @@ class ExamEventUpdate(BaseModel):
     @classmethod
     def validate_source_url(cls, value: str | None) -> str | None:
         return _validate_source_url(value)
+
+
+class TimerStart(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    subject: SubjectValue
+    preset: Literal["25_5", "50_10", "custom"]
+    focus_seconds: int = Field(ge=60, le=14400)
+    break_seconds: int = Field(ge=0, le=3600)
+    idempotency_key: str = Field(pattern=r"^[A-Za-z0-9_-]{32,64}$")
+
+    @model_validator(mode="after")
+    def validate_preset(self):
+        expected = {
+            "25_5": (1500, 300),
+            "50_10": (3000, 600),
+        }.get(self.preset)
+        if expected is not None and (
+            self.focus_seconds,
+            self.break_seconds,
+        ) != expected:
+            raise ValueError("preset durations do not match")
+        return self
+
+
+class TimerBreak(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    break_seconds: int = Field(ge=60, le=3600)
+    idempotency_key: str = Field(pattern=r"^[A-Za-z0-9_-]{32,64}$")
+
+
+class TimerFinish(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    save: bool
+
+
+def _validate_focus_times(
+    started_at: datetime,
+    ended_at: datetime,
+    effective_seconds: int,
+) -> None:
+    if started_at.tzinfo is None or ended_at.tzinfo is None:
+        raise ValueError("focus timestamps must include a timezone")
+    elapsed = int((ended_at - started_at).total_seconds())
+    if elapsed <= 0:
+        raise ValueError("ended_at must be after started_at")
+    if elapsed > 43200:
+        raise ValueError("focus record cannot exceed twelve hours")
+    if effective_seconds > elapsed:
+        raise ValueError("effective_seconds cannot exceed elapsed time")
+
+
+class FocusRecordInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    subject: SubjectValue
+    started_at: datetime
+    ended_at: datetime
+    effective_seconds: int = Field(ge=60, le=43200)
+    reason: str
+
+    @field_validator("reason")
+    @classmethod
+    def validate_reason(cls, value: str) -> str:
+        return clean_text(value, 2, 160, False)
+
+    @model_validator(mode="after")
+    def validate_times(self):
+        _validate_focus_times(
+            self.started_at,
+            self.ended_at,
+            self.effective_seconds,
+        )
+        return self
+
+
+class FocusRecordUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    subject: SubjectValue | None = None
+    started_at: datetime | None = None
+    ended_at: datetime | None = None
+    effective_seconds: int | None = Field(default=None, ge=60, le=43200)
+    reason: str
+
+    @field_validator("reason")
+    @classmethod
+    def validate_reason(cls, value: str) -> str:
+        return clean_text(value, 2, 160, False)

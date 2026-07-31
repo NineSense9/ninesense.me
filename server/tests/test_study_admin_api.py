@@ -1,11 +1,11 @@
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 import json
 
 import pytest
 from sqlalchemy import select
 
 from ninesense_guestbook.admin_models import AuditEvent
-from ninesense_guestbook.study_models import ExamEvent, StudyDay
+from ninesense_guestbook.study_models import ExamEvent, FocusTimer, StudyDay
 
 from admin_test_helpers import create_totp_admin, login_with_totp
 
@@ -216,3 +216,175 @@ def test_admin_can_create_and_edit_a_past_blank_day(authenticated_client):
     assert created.status_code == 201
     assert task.status_code == 201
     assert task.json()["subject"] == "math"
+
+
+def test_timer_lifecycle_and_public_state(authenticated_client):
+    started = authenticated_client.post(
+        "/api/admin/study/timer/start",
+        json={
+            "subject": "408",
+            "preset": "25_5",
+            "focus_seconds": 1500,
+            "break_seconds": 300,
+            "idempotency_key": "a" * 32,
+        },
+    )
+
+    assert started.status_code == 201
+    assert started.json()["timer"]["subject"] == "408"
+    assert authenticated_client.get("/api/study/today").json()[
+        "active_subject"
+    ] == "408"
+    assert authenticated_client.post(
+        "/api/admin/study/timer/pause"
+    ).json()["timer"]["state"] == "paused"
+    assert authenticated_client.post(
+        "/api/admin/study/timer/resume"
+    ).json()["timer"]["state"] == "running"
+    finished = authenticated_client.post(
+        "/api/admin/study/timer/finish",
+        json={"save": True},
+    )
+
+    assert finished.status_code == 200
+    assert finished.json()["session"]["effective_seconds"] >= 0
+    assert authenticated_client.get("/api/admin/study/timer").json()[
+        "timer"
+    ] is None
+
+
+def test_finish_returns_session_if_server_already_reconciled_timer(
+    authenticated_client,
+    db_session,
+):
+    authenticated_client.post(
+        "/api/admin/study/timer/start",
+        json={
+            "subject": "english",
+            "preset": "25_5",
+            "focus_seconds": 1500,
+            "break_seconds": 300,
+            "idempotency_key": "d" * 32,
+        },
+    )
+    timer = db_session.scalar(select(FocusTimer))
+    timer.started_at = datetime.now(timezone.utc) - timedelta(minutes=26)
+    timer.planned_end_at = datetime.now(timezone.utc) - timedelta(minutes=1)
+    db_session.commit()
+
+    response = authenticated_client.post(
+        "/api/admin/study/timer/finish",
+        json={"save": True},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["session"]["completion_kind"] == "completed"
+
+
+def test_break_timer_does_not_create_focus_history(authenticated_client):
+    started = authenticated_client.post(
+        "/api/admin/study/timer/break",
+        json={
+            "break_seconds": 300,
+            "idempotency_key": "break" * 8,
+        },
+    )
+    discarded = authenticated_client.post(
+        "/api/admin/study/timer/discard"
+    )
+    history = authenticated_client.get(
+        "/api/admin/study/focus?from=2026-01-01&to=2026-12-31"
+    )
+
+    assert started.status_code == 201
+    assert started.json()["timer"]["phase"] == "break"
+    assert discarded.status_code == 200
+    assert history.json()["items"] == []
+
+
+def test_manual_focus_correction_is_audited(
+    authenticated_client,
+    db_session,
+):
+    created = authenticated_client.post(
+        "/api/admin/study/focus",
+        json={
+            "subject": "math",
+            "started_at": "2026-08-01T06:00:00Z",
+            "ended_at": "2026-08-01T07:00:00Z",
+            "effective_seconds": 3600,
+            "reason": "补录线下学习",
+        },
+    )
+    session_id = created.json()["id"]
+    updated = authenticated_client.patch(
+        f"/api/admin/study/focus/{session_id}",
+        json={
+            "effective_seconds": 3300,
+            "reason": "扣除中断时间",
+        },
+    )
+
+    assert created.status_code == 201
+    assert updated.status_code == 200
+    assert updated.json()["effective_seconds"] == 3300
+    db_session.expire_all()
+    actions = [row.action for row in db_session.scalars(select(AuditEvent))]
+    assert "study.focus.created" in actions
+    assert "study.focus.updated" in actions
+    audit_text = "\n".join(
+        row.details_json for row in db_session.scalars(select(AuditEvent))
+    )
+    assert "补录线下学习" not in audit_text
+    assert "扣除中断时间" not in audit_text
+
+
+def test_focus_input_rejects_effective_time_longer_than_elapsed(
+    authenticated_client,
+):
+    response = authenticated_client.post(
+        "/api/admin/study/focus",
+        json={
+            "subject": "english",
+            "started_at": "2026-08-01T06:00:00Z",
+            "ended_at": "2026-08-01T06:30:00Z",
+            "effective_seconds": 3600,
+            "reason": "无效补录",
+        },
+    )
+
+    assert response.status_code == 422
+
+
+def test_json_and_csv_exports_include_complete_history(
+    authenticated_client,
+    db_session,
+):
+    db_session.add(StudyDay(study_date=date(2025, 1, 1), reflection="长期保留"))
+    db_session.commit()
+    authenticated_client.post(
+        "/api/admin/study/focus",
+        json={
+            "subject": "politics",
+            "started_at": "2025-01-01T06:00:00Z",
+            "ended_at": "2025-01-01T06:30:00Z",
+            "effective_seconds": 1800,
+            "reason": "历史补录",
+        },
+    )
+
+    json_response = authenticated_client.get("/api/admin/study/export.json")
+    focus_csv = authenticated_client.get("/api/admin/study/focus.csv")
+    task_csv = authenticated_client.get("/api/admin/study/tasks.csv")
+
+    assert json_response.status_code == 200
+    assert any(
+        row["reflection"] == "长期保留"
+        for row in json_response.json()["days"]
+    )
+    assert "admins" not in json_response.json()
+    assert "sessions" not in json_response.json()
+    assert "audit" not in json_response.json()
+    assert focus_csv.headers["content-type"].startswith("text/csv")
+    assert "politics" in focus_csv.text
+    assert task_csv.headers["content-type"].startswith("text/csv")
