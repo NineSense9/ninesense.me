@@ -229,6 +229,9 @@ for _ in $(seq 1 30); do
 done
 [[ $nginx_ready -eq 1 ]]
 [[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/guestbook/) == 200 ]]
+[[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/records/) == 200 ]]
+[[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/records/study/) == 200 ]]
+[[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/api/study/today) == 200 ]]
 [[ $(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8811/admin/) == 200 ]]
 echo NGINX_LOCAL_OK
 

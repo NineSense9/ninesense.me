@@ -41,6 +41,19 @@ if (-not $guestbookLocation.Success) { throw 'Guestbook Nginx location missing' 
 if ($guestbookLocation.Groups['body'].Value -notmatch 'Cache-Control "no-cache" always') {
   throw 'Guestbook resources must revalidate after each release'
 }
+$recordsLocation = [regex]::Match(
+  $nginx,
+  'location \^~ /records/ \{(?<body>[\s\S]*?)\n\}'
+)
+if (-not $recordsLocation.Success) { throw 'Records Nginx location missing' }
+foreach ($contract in @(
+  'try_files $uri $uri/ =404', 'X-Robots-Tag "noindex, nofollow" always',
+  'form-action ''none''', 'Cache-Control "no-cache" always'
+)) {
+  if ($recordsLocation.Groups['body'].Value -notmatch [regex]::Escape($contract)) {
+    throw "Records Nginx contract missing: $contract"
+  }
+}
 if ($nginx -match 'listen\s+(80|443)') { throw 'Guestbook config must not add listeners on 80/443' }
 if ($siteConfig -notmatch 'listen 8811' -or $siteConfig -notmatch 'include /etc/nginx/snippets/ninesense-guestbook.conf') { throw 'Existing 8811 site integration missing' }
 if ($rateLimit -notmatch 'limit_req_zone') { throw 'Nginx submission rate-limit zone missing' }
@@ -56,7 +69,10 @@ foreach ($setting in @(
 }
 foreach ($contract in @(
   'NINESENSE_SECURITY_KEY=', 'site/admin/.vite/manifest.json',
-  'CONTACT_KEY and SECURITY_KEY must differ'
+  'CONTACT_KEY and SECURITY_KEY must differ',
+  'http://127.0.0.1:8811/records/',
+  'http://127.0.0.1:8811/records/study/',
+  'http://127.0.0.1:8811/api/study/today'
 )) {
   if ($deployScript -notmatch [regex]::Escape($contract)) { throw "Deployment security contract missing: $contract" }
 }

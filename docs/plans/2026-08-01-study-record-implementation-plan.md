@@ -1670,7 +1670,7 @@ git commit -m "feat: complete study administration"
 - Modify: `tests/test-deploy-config.ps1`
 - Modify: `README.md`
 
-- [ ] **Step 1: Write the failing browser flow**
+- [x] **Step 1: Write the failing browser flow**
 
 Add `study-record-e2e.spec.js` covering:
 
@@ -1692,7 +1692,7 @@ test("owner records study progress and public page stays read only", async ({ pa
 
 Add a second test for 1440, 768, 390 and 320 widths, checking document overflow on both `/records/study/` and `/admin/study`.
 
-- [ ] **Step 2: Include study metadata and suite configuration**
+- [x] **Step 2: Include study metadata and suite configuration**
 
 In `tests/e2e_server.py`, import `study_models` before `Base.metadata.create_all`. Add `study-record-e2e.spec.js` to `playwright.config.js` `testMatch`.
 
@@ -1704,7 +1704,7 @@ npx playwright test tests/study-record-e2e.spec.js
 
 Expected before final selectors and routes are complete: focused failure that identifies the missing contract.
 
-- [ ] **Step 3: Add records Nginx policy**
+- [x] **Step 3: Add records Nginx policy**
 
 Add before the generic `/api/` location:
 
@@ -1721,7 +1721,7 @@ location ^~ /records/ {
 
 The public API remains under the current `/api/` reverse proxy and does not open a new listener or port.
 
-- [ ] **Step 4: Extend deployment and configuration contracts**
+- [x] **Step 4: Extend deployment and configuration contracts**
 
 Require `location ^~ /records/`, `X-Robots-Tag`, and `form-action 'none'` in `test-deploy-config.ps1`. Add release smoke checks:
 
@@ -1733,7 +1733,7 @@ Require `location ^~ /records/`, `X-Robots-Tag`, and `form-action 'none'` in `te
 
 Do not deploy during this task.
 
-- [ ] **Step 5: Document local and retention behavior**
+- [x] **Step 5: Document local and retention behavior**
 
 Add to `README.md`:
 
@@ -1743,7 +1743,7 @@ Add to `README.md`:
 - migration and backup include the study tables;
 - production deployment waits for explicit authorization.
 
-- [ ] **Step 6: Pass integrated browser and release tests**
+- [x] **Step 6: Pass integrated browser and release tests**
 
 ```powershell
 npm --prefix admin-app run build
@@ -1752,7 +1752,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-static-release.ps
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-deploy-config.ps1
 ```
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```powershell
 git add tests playwright.config.js deploy README.md

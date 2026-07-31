@@ -361,6 +361,16 @@
   .focus-add-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 900px) {
+  .study-filter-bar,
+  .schedule-form-grid,
+  .exam-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .schedule-form-grid .wide-field,
+  .exam-form-grid .wide-field,
+  .schedule-form-grid .full-field,
+  .exam-form-grid .full-field { grid-column: 1 / -1; }
+}
+
 @media (max-width: 760px) {
   .study-filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .study-filter-bar button { min-height: 2.5rem; }

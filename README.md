@@ -2,6 +2,8 @@
 
 NineSense 个人网站及其自建留言板的正式代码仓库。公开页面仍是纯静态站点，留言 API 使用 FastAPI 与 SQLite，并由同源 Nginx 入口代理。
 
+备考记录位于 `/records/study/`，公开页只读且不参与搜索引擎索引；管理端位于 `/admin/study`，沿用现有管理员会话、两步验证和 CSRF 防护。
+
 ## 目录
 
 - `site/`：可直接发布的静态网站、留言板和管理后台
@@ -30,6 +32,21 @@ npm run test:e2e
 ```
 
 浏览器测试会在 `127.0.0.1:8123` 启动一次性服务，使用独立测试数据库和测试管理员，不读取生产凭据。
+
+## 备考记录
+
+- 公开接口：`/api/study/today`、`/api/study/recent`、`/api/study/months/{YYYY-MM}`、`/api/study/exams`
+- 管理接口：`/api/admin/study/` 下的周计划、每日任务、计时、历史、专注修正、时间表和导出端点
+- 公开详细记录最多返回最近 30 天，旧月份只返回专注与完成率汇总
+- 每天的任务、状态、复盘和专注明细长期保存在 SQLite，除非管理员主动删除
+- JSON/CSV 导出不包含管理员、会话、两步验证密钥或审计表
+- `0003_study_record` 迁移和现有数据库备份会一并覆盖全部学习记录表
+
+本地可单独运行学习流程浏览器测试：
+
+```powershell
+npx playwright test tests/study-record-e2e.spec.js
+```
 
 ## 生产路径
 

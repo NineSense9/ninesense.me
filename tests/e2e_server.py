@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import date
 
 from argon2 import PasswordHasher
 from fastapi.responses import FileResponse
@@ -9,6 +10,7 @@ from ninesense_guestbook.app import create_app
 from ninesense_guestbook.config import Settings
 from ninesense_guestbook.db import Base
 from ninesense_guestbook.models import Admin
+from ninesense_guestbook.study_models import ExamEvent
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +34,18 @@ with app.state.session_factory() as session:
         Admin(
             username="ninesense",
             password_hash=PasswordHasher().hash("E2E-secure-password-2026"),
+            active=True,
+        )
+    )
+    session.add(
+        ExamEvent(
+            kind="exam",
+            title="2026 考研初试",
+            date_status="estimated",
+            start_date=date(2026, 12, 20),
+            description="测试环境预计日期",
+            countdown_target=True,
+            position=10,
             active=True,
         )
     )
