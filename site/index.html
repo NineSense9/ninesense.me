@@ -614,8 +614,16 @@
     }
     .timeline-section .section-label, .timeline-section .section-head p { color: rgba(239,231,219,.5); }
     .timeline-section .section-title em { -webkit-text-stroke-color: var(--cream); }
+    .timeline-carousel { position: relative; }
     .timeline-shell { overflow-x: auto; padding: 22px 0 30px; touch-action: pan-x; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .timeline-shell::-webkit-scrollbar { display: none; }
+    .timeline-control { position: absolute; z-index: 3; top: 0; bottom: 0; width: clamp(72px, 8vw, 122px); display: flex; align-items: center; justify-content: center; border: 0; color: rgba(239,231,219,.9); font: 400 clamp(42px, 4vw, 66px)/1 Inter, sans-serif; opacity: .62; cursor: pointer; transition: opacity .2s ease, color .2s ease, background .2s ease; }
+    .timeline-control:hover { opacity: 1; color: var(--amber); }
+    .timeline-control:focus-visible { outline: 1px solid var(--amber); outline-offset: -9px; opacity: 1; }
+    .timeline-control:disabled { color: rgba(239,231,219,.32); opacity: .22; cursor: default; }
+    .timeline-control.previous { left: 0; background: linear-gradient(90deg, rgba(18,16,14,.88), rgba(18,16,14,.28) 55%, transparent); }
+    .timeline-control.next { right: 0; background: linear-gradient(270deg, rgba(18,16,14,.88), rgba(18,16,14,.28) 55%, transparent); }
+    .timeline-control span { transform: translateY(-2px); }
     .timeline-rail { position: relative; width: 1850px; height: 385px; }
     .timeline-axis { position: absolute; left: 25px; right: 25px; top: 50%; height: 1px; background: rgba(239,231,219,.2); }
     .event { position: absolute; width: 215px; height: 142px; padding: 16px; border: 1px solid rgba(239,231,219,.14); background: var(--dark-soft); }
@@ -661,6 +669,7 @@
       .nav { display: none; }
       .mobile-menu-shell { display: block; }
       .hero, .section { scroll-margin-top: 72px; }
+      .timeline-control { display: none; }
     }
 
     @media (min-width: 541px) and (max-width: 820px) {
@@ -868,15 +877,19 @@
       <div class="shell">
         <div class="section-label mono">TIMELINE</div>
         <div class="section-head"><h2 class="section-title">SOME<em>MILESTONES</em></h2><p>比赛、项目，还有后来逐渐固定下来的开发方式。先记这些，以后有新的再往右加。</p></div>
-        <div class="timeline-shell"><div class="timeline-rail">
-          <div class="timeline-axis"></div>
-          <article class="event top e1"><div class="event-meta"><small class="mono">大学 / ALGORITHM</small><time datetime="2023-11">2023.11</time></div><h3>开始打算法竞赛</h3><p>训练、组队、比赛，补基础也练速度。</p></article>
-          <article class="event bottom e2"><div class="event-meta"><small class="mono">CONTEST</small><time datetime="2024-11">2024.11</time></div><h3>拿到第一块奖牌</h3><p>CCPC、百度之星和蓝桥杯。</p></article>
-          <article class="event top e3"><div class="event-meta"><small class="mono">PROJECT</small><time datetime="2025-02">2025.02</time></div><h3>独立完成完整项目</h3><p>不只写代码，也管文档、演示和交付。</p></article>
-          <article class="event bottom e4"><div class="event-meta"><small class="mono">ADAPTATION</small><time datetime="2026-05">2026.05</time></div><h3>接触国产化环境</h3><p>麒麟 V11、LoongArch 和离线部署。</p></article>
-          <article class="event top e5"><div class="event-meta"><small class="mono">AGENT</small><time datetime="2026-06">2026.06</time></div><h3>Agent 成为主力工具</h3><p>开发更快了，测试和验收反而做得更多。</p></article>
-          <article class="event bottom e6"><div class="event-meta"><small class="mono">NOW</small><time datetime="2026-07">2026.07</time></div><h3>开始做个人网站</h3><p>项目和经历慢慢补，不急着一次写完。</p></article>
-        </div></div>
+        <div class="timeline-carousel">
+          <button class="timeline-control previous" type="button" aria-label="向左查看时间线" aria-controls="timeline-shell" data-timeline-direction="-1" title="向左查看时间线"><span aria-hidden="true">←</span></button>
+          <div class="timeline-shell" id="timeline-shell"><div class="timeline-rail">
+            <div class="timeline-axis"></div>
+            <article class="event top e1"><div class="event-meta"><small class="mono">大学 / ALGORITHM</small><time datetime="2023-11">2023.11</time></div><h3>开始打算法竞赛</h3><p>训练、组队、比赛，补基础也练速度。</p></article>
+            <article class="event bottom e2"><div class="event-meta"><small class="mono">CONTEST</small><time datetime="2024-11">2024.11</time></div><h3>拿到第一块奖牌</h3><p>CCPC、百度之星和蓝桥杯。</p></article>
+            <article class="event top e3"><div class="event-meta"><small class="mono">PROJECT</small><time datetime="2025-02">2025.02</time></div><h3>独立完成完整项目</h3><p>不只写代码，也管文档、演示和交付。</p></article>
+            <article class="event bottom e4"><div class="event-meta"><small class="mono">ADAPTATION</small><time datetime="2026-05">2026.05</time></div><h3>接触国产化环境</h3><p>麒麟 V11、LoongArch 和离线部署。</p></article>
+            <article class="event top e5"><div class="event-meta"><small class="mono">AGENT</small><time datetime="2026-06">2026.06</time></div><h3>Agent 成为主力工具</h3><p>开发更快了，测试和验收反而做得更多。</p></article>
+            <article class="event bottom e6"><div class="event-meta"><small class="mono">NOW</small><time datetime="2026-07">2026.07</time></div><h3>开始做个人网站</h3><p>项目和经历慢慢补，不急着一次写完。</p></article>
+          </div></div>
+          <button class="timeline-control next" type="button" aria-label="向右查看时间线" aria-controls="timeline-shell" data-timeline-direction="1" title="向右查看时间线"><span aria-hidden="true">→</span></button>
+        </div>
       </div>
     </section>
   </main>
@@ -1177,12 +1190,90 @@
     (() => {
       const timelineShell = document.querySelector('.timeline-shell');
       if (!timelineShell) return;
+      const timelineControls = [...document.querySelectorAll('[data-timeline-direction]')];
       const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const timelineEdgeSize = 130;
       const maxTimelineVelocity = .105;
+      const holdTimelineVelocity = .24;
       let timelineVelocity = 0;
       let timelineFrame = 0;
       let lastTimelineTime = 0;
+      let holdDelay = 0;
+      let holdFrame = 0;
+      let holdDirection = 0;
+      let lastHoldTime = 0;
+      let suppressControlClick = false;
+
+      const maxTimelineScroll = () => Math.max(0, timelineShell.scrollWidth - timelineShell.clientWidth);
+
+      const syncTimelineControls = () => {
+        const maximum = maxTimelineScroll();
+        timelineControls.forEach(control => {
+          const direction = Number(control.dataset.timelineDirection);
+          control.disabled = direction < 0 ? timelineShell.scrollLeft <= 1 : timelineShell.scrollLeft >= maximum - 1;
+        });
+      };
+
+      const pageTimeline = direction => {
+        const distance = Math.max(320, Math.min(720, timelineShell.clientWidth * .72));
+        timelineShell.scrollBy({
+          left: direction * distance,
+          behavior: reducedMotion.matches ? 'auto' : 'smooth',
+        });
+      };
+
+      const stopControlHold = () => {
+        if (holdDelay) window.clearTimeout(holdDelay);
+        if (holdFrame) cancelAnimationFrame(holdFrame);
+        holdDelay = 0;
+        holdFrame = 0;
+        holdDirection = 0;
+        lastHoldTime = 0;
+      };
+
+      const moveHeldTimeline = timestamp => {
+        if (!holdDirection) {
+          holdFrame = 0;
+          return;
+        }
+        const delta = lastHoldTime ? Math.min(timestamp - lastHoldTime, 32) : 16;
+        lastHoldTime = timestamp;
+        const next = Math.max(0, Math.min(
+          maxTimelineScroll(),
+          timelineShell.scrollLeft + holdDirection * holdTimelineVelocity * delta,
+        ));
+        if (next === timelineShell.scrollLeft) {
+          stopControlHold();
+          return;
+        }
+        timelineShell.scrollLeft = next;
+        holdFrame = requestAnimationFrame(moveHeldTimeline);
+      };
+
+      timelineControls.forEach(control => {
+        const direction = Number(control.dataset.timelineDirection);
+        control.addEventListener('click', event => {
+          if (suppressControlClick) {
+            event.preventDefault();
+            suppressControlClick = false;
+            return;
+          }
+          pageTimeline(direction);
+        });
+        control.addEventListener('pointerdown', event => {
+          if (event.button !== 0 || control.disabled) return;
+          control.setPointerCapture(event.pointerId);
+          holdDelay = window.setTimeout(() => {
+            suppressControlClick = true;
+            holdDirection = direction;
+            holdFrame = requestAnimationFrame(moveHeldTimeline);
+          }, 420);
+        });
+        ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => {
+          control.addEventListener(type, stopControlHold);
+        });
+      });
 
       const stopTimelineMotion = () => {
         timelineVelocity = 0;
@@ -1218,10 +1309,13 @@
       });
 
       timelineShell.addEventListener('pointerleave', stopTimelineMotion);
+      timelineShell.addEventListener('scroll', syncTimelineControls, { passive: true });
       window.addEventListener('blur', stopTimelineMotion);
+      window.addEventListener('resize', syncTimelineControls);
       const stopOnTouchMode = event => { if (!event.matches) stopTimelineMotion(); };
       if (desktopPointer.addEventListener) desktopPointer.addEventListener('change', stopOnTouchMode);
       else desktopPointer.addListener(stopOnTouchMode);
+      syncTimelineControls();
     })();
 
     (() => {
