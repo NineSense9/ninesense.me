@@ -25,5 +25,5 @@
 ### Task 3: Release and production verification
 
 - [x] Run the complete backend, frontend, static, deployment and browser test gate.
-- [ ] Commit, push and deploy with a database/environment backup.
-- [ ] Set production `NINESENSE_MFA_ENABLED=false`, verify direct login behavior, and confirm MFA secrets remain absent.
+- [x] Commit, push and deploy with a database/environment backup.
+- [x] Set production `NINESENSE_MFA_ENABLED=false`, verify direct login behavior, and confirm MFA secrets remain absent.
