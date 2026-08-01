@@ -36,8 +36,8 @@
 - No additional source files unless verification finds a defect.
 
 - [x] Run Ruff, all backend tests, the admin build, release contracts, and browser tests.
-- [ ] Commit and push `main`.
-- [ ] Deploy through the existing backup-and-rollback script.
-- [ ] Update production `NINESENSE_SESSION_HOURS` to `720` before restart.
-- [ ] Reset the exposed TOTP secret and revoke old sessions/challenges/recovery codes.
-- [ ] Verify the next login creates a 30-day session and the old secret no longer authenticates.
+- [x] Commit and push `main`.
+- [x] Deploy through the existing backup-and-rollback script.
+- [x] Update production `NINESENSE_SESSION_HOURS` to `720` before restart.
+- [x] Reset the exposed TOTP secret and revoke old sessions/challenges/recovery codes.
+- [x] Verify the deployed service loads the 30-day session lifetime and the old secret is absent from the administrator record.
