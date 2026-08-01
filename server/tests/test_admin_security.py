@@ -83,6 +83,26 @@ def test_setup_code_enables_totp_and_returns_recovery_codes(
     assert len(db_session.scalars(select(AdminSession)).all()) == 1
 
 
+def test_verified_browser_session_last_thirty_days(
+    client, db_session, setup_challenge
+):
+    response = complete_mfa(
+        client,
+        setup_challenge.token,
+        setup_challenge.current_code,
+    )
+
+    assert response.status_code == 200
+    cookie = response.headers["set-cookie"].lower()
+    assert "max-age=2592000" in cookie
+    assert "httponly" in cookie
+    assert "samesite=strict" in cookie
+
+    stored = db_session.scalars(select(AdminSession)).one()
+    lifetime = stored.expires_at - stored.created_at
+    assert lifetime == timedelta(days=30)
+
+
 def test_fifth_wrong_totp_consumes_the_challenge(
     client, db_session, setup_challenge
 ):
