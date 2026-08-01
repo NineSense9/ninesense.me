@@ -2,7 +2,7 @@ const { defineConfig } = require("@playwright/test");
 
 module.exports = defineConfig({
   testDir: "./tests",
-  testMatch: ["guestbook-e2e.spec.js", "admin-foundation-e2e.spec.js", "study-record-e2e.spec.js", "home-timeline-e2e.spec.js"],
+  testMatch: ["guestbook-e2e.spec.js", "admin-foundation-e2e.spec.js", "study-record-e2e.spec.js", "home-timeline-e2e.spec.js", "favicon-e2e.spec.js"],
   timeout: 60_000,
   expect: { timeout: 8_000 },
   fullyParallel: false,
