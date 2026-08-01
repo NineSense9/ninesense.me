@@ -74,3 +74,21 @@ test("study pages fit desktop tablet and phone widths", async ({ page }) => {
     }
   }
 });
+
+
+test("focus reminder falls back when system notifications are unavailable", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "Notification", {
+      configurable: true,
+      value: undefined
+    });
+  });
+
+  await loginOwner(page);
+  await page.goto("/admin/study");
+  const timerPanel = page.locator(".study-timer-panel");
+  await timerPanel.locator(".study-panel-heading .quiet-button").click();
+
+  await expect(timerPanel.locator(".study-panel-heading .quiet-button")).toHaveText("提醒已开启");
+  await expect(timerPanel.locator(".study-inline-output")).toHaveText("系统提醒不可用，已启用网页内声音和振动提醒。");
+});

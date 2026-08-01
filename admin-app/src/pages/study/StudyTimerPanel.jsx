@@ -24,6 +24,14 @@ const presets = {
 };
 
 
+function initialReminderState() {
+  return {
+    enabled: window.localStorage.getItem("studyReminderEnabled") === "true",
+    notificationPermission: globalThis.Notification?.permission || "unsupported"
+  };
+}
+
+
 export function remainingSeconds(timer, now = Date.now()) {
   if (!timer || timer.state === "paused") return timer?.remaining_seconds ?? 0;
   return Math.max(0, Math.ceil((Date.parse(timer.planned_end_at) - now) / 1000));
@@ -53,7 +61,7 @@ export default function StudyTimerPanel({ timer, onChange }) {
   const [remaining, setRemaining] = useState(() => remainingSeconds(timer));
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
-  const [notifications, setNotifications] = useState(() => globalThis.Notification?.permission || "unsupported");
+  const [reminders, setReminders] = useState(initialReminderState);
   const notifiedTimer = useRef(null);
 
   const selectedPreset = useMemo(() => preset === "custom"
@@ -80,12 +88,34 @@ export default function StudyTimerPanel({ timer, onChange }) {
   }, [onChange, timer]);
 
   useEffect(() => {
-    if (!timer || remaining > 0 || notifications !== "granted" || notifiedTimer.current === timer.id) return;
+    if (!timer || remaining > 0 || !reminders.enabled || notifiedTimer.current === timer.id) return;
     notifiedTimer.current = timer.id;
-    new Notification(timer.phase === "focus" ? "本次专注结束" : "休息时间结束", {
-      body: timer.phase === "focus" ? "记录已由服务器保存。" : "可以开始下一轮学习。"
-    });
-  }, [notifications, remaining, timer]);
+    const title = timer.phase === "focus" ? "本次专注结束" : "休息时间结束";
+    const body = timer.phase === "focus" ? "记录已由服务器保存。" : "可以开始下一轮学习。";
+    if (reminders.notificationPermission === "granted") {
+      new Notification(title, { body });
+    }
+    if (globalThis.navigator?.vibrate) {
+      navigator.vibrate([180, 80, 180]);
+    }
+    try {
+      const audioContext = new (globalThis.AudioContext || globalThis.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.value = timer.phase === "focus" ? 740 : 520;
+      gain.gain.setValueAtTime(0.001, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.06, audioContext.currentTime + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.55);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.6);
+      oscillator.addEventListener("ended", () => audioContext.close());
+    } catch {
+      // Audio is best-effort; browser policies may block it until the user interacts again.
+    }
+  }, [remaining, reminders.enabled, reminders.notificationPermission, timer]);
 
   async function run(action, successMessage = "") {
     setBusy(true);
@@ -122,14 +152,22 @@ export default function StudyTimerPanel({ timer, onChange }) {
   }
 
   async function enableNotifications() {
+    window.localStorage.setItem("studyReminderEnabled", "true");
     if (!globalThis.Notification) {
-      setNotifications("unsupported");
-      setMessage("当前浏览器不支持系统提醒。");
+      setReminders({ enabled: true, notificationPermission: "unsupported" });
+      setMessage("系统提醒不可用，已启用网页内声音和振动提醒。");
       return;
     }
-    const permission = await Notification.requestPermission();
-    setNotifications(permission);
-    setMessage(permission === "granted" ? "系统提醒已开启。" : "系统提醒未开启。");
+    try {
+      const permission = await Notification.requestPermission();
+      setReminders({ enabled: true, notificationPermission: permission });
+      setMessage(permission === "granted"
+        ? "系统提醒已开启，同时保留网页内声音和振动提醒。"
+        : "系统提醒未授权，已启用网页内声音和振动提醒。");
+    } catch {
+      setReminders({ enabled: true, notificationPermission: "unsupported" });
+      setMessage("系统提醒不可用，已启用网页内声音和振动提醒。");
+    }
   }
 
   const activeLabel = timer?.phase === "break"
@@ -140,8 +178,8 @@ export default function StudyTimerPanel({ timer, onChange }) {
     <section className="study-timer-panel" aria-labelledby="timer-title">
       <div className="study-panel-heading">
         <div><p>FOCUS TIMER</p><h2 id="timer-title">专注计时</h2></div>
-        <button type="button" className="quiet-button" onClick={enableNotifications} disabled={notifications === "granted"}>
-          {notifications === "granted" ? "提醒已开启" : "开启提醒"}
+        <button type="button" className="quiet-button" onClick={enableNotifications} disabled={reminders.enabled}>
+          {reminders.enabled ? "提醒已开启" : "开启提醒"}
         </button>
       </div>
 
