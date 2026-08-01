@@ -1,5 +1,7 @@
 # NineSense
 
+Current production administrator authentication uses the `NINESENSE_MFA_ENABLED` feature flag. It is temporarily set to `false` while the public service is HTTP-only, so the owner signs in with the account password and keeps the existing 30-day session. The MFA challenge and recovery-code implementation remains available for the HTTPS deployment.
+
 NineSense 个人网站及其自建留言板的正式代码仓库。公开页面仍是纯静态站点，留言 API 使用 FastAPI 与 SQLite，并由同源 Nginx 入口代理。
 
 备考记录位于 `/records/study/`，公开页只读且不参与搜索引擎索引；管理端位于 `/admin/study`，沿用现有管理员会话、两步验证和 CSRF 防护。

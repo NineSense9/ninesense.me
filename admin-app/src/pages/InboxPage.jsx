@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { api } from "../api/client.js";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 
 const statusLabels = {
@@ -21,6 +22,7 @@ function formatDate(value) {
 
 
 export default function InboxPage() {
+  const { session } = useAuth();
   const [items, setItems] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -33,6 +35,7 @@ export default function InboxPage() {
   const [reauthPassword, setReauthPassword] = useState("");
   const [reauthCode, setReauthCode] = useState("");
   const [message, setMessage] = useState("");
+  const mfaEnabled = session?.mfa_enabled !== false;
 
   const loadMessages = useCallback(async (append = false, cursor = null) => {
     const params = new URLSearchParams({ limit: "20" });
@@ -149,7 +152,7 @@ export default function InboxPage() {
     try {
       await api("/api/admin/session/reauthenticate", {
         method: "POST",
-        body: JSON.stringify({ password: reauthPassword, code: reauthCode }),
+        body: JSON.stringify(mfaEnabled ? { password: reauthPassword, code: reauthCode } : { password: reauthPassword }),
         preserveSessionOnUnauthorized: true
       });
       setReauthPassword("");
@@ -219,8 +222,7 @@ export default function InboxPage() {
                   <h2>重新验证后查看</h2>
                   <label htmlFor="contact-password">验证密码</label>
                   <input id="contact-password" type="password" value={reauthPassword} onChange={event => setReauthPassword(event.target.value)} required />
-                  <label htmlFor="contact-code">验证动态码</label>
-                  <input id="contact-code" value={reauthCode} onChange={event => setReauthCode(event.target.value)} minLength="6" maxLength="32" required />
+                  {mfaEnabled && <><label htmlFor="contact-code">验证动态码</label><input id="contact-code" value={reauthCode} onChange={event => setReauthCode(event.target.value)} minLength="6" maxLength="32" required /></>}
                   <button type="submit">验证并查看</button>
                 </form>
               )}

@@ -72,6 +72,7 @@ def test_setup_code_enables_totp_and_returns_recovery_codes(
     assert len(body["recovery_codes"]) == 10
     assert len(set(body["recovery_codes"])) == 10
     assert body["csrf_token"]
+    assert body["mfa_enabled"] is True
     assert "httponly" in response.headers["set-cookie"].lower()
     db_session.expire_all()
     admin = db_session.get(Admin, setup_challenge.admin_id)
@@ -263,6 +264,35 @@ def test_reauthentication_requires_password_and_totp(client, db_session, app):
 
     assert wrong.status_code == 401
     assert correct.status_code == 204
+    db_session.expire_all()
+    assert db_session.scalars(select(AdminSession)).one().last_reauthenticated_at
+
+
+def test_reauthentication_requires_only_password_when_mfa_is_disabled(
+    client, db_session, app
+):
+    admin = Admin(
+        username="ninesense",
+        password_hash=PasswordHasher().hash(PASSWORD),
+        active=True,
+    )
+    db_session.add(admin)
+    db_session.commit()
+    app.state.settings.mfa_enabled = False
+
+    login_response = client.post(
+        "/api/admin/session",
+        json={"username": "ninesense", "password": PASSWORD},
+    )
+    assert login_response.status_code == 200
+
+    response = client.post(
+        "/api/admin/session/reauthenticate",
+        headers={"X-CSRF-Token": login_response.json()["csrf_token"]},
+        json={"password": PASSWORD},
+    )
+
+    assert response.status_code == 204
     db_session.expire_all()
     assert db_session.scalars(select(AdminSession)).one().last_reauthenticated_at
 

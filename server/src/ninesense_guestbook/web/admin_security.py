@@ -41,7 +41,7 @@ class ReauthenticationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     password: str = Field(min_length=1, max_length=200)
-    code: str = Field(min_length=6, max_length=32)
+    code: str | None = Field(default=None, min_length=6, max_length=32)
 
 
 def invalid_challenge() -> HTTPException:
@@ -239,6 +239,7 @@ def complete_mfa(
         "username": admin.username,
         "csrf_token": tokens.csrf_token,
         "expires_at": tokens.expires_at.isoformat(),
+        "mfa_enabled": settings.mfa_enabled,
     }
     if raw_recovery_codes is not None:
         result["recovery_codes"] = raw_recovery_codes
@@ -270,7 +271,8 @@ def list_sessions(request: Request) -> dict[str, object]:
                     "current": row.id_hash == current.row.id_hash,
                 }
                 for row in rows
-            ]
+            ],
+            "mfa_enabled": request.app.state.settings.mfa_enabled,
         }
 
 
@@ -328,13 +330,16 @@ def reauthenticate(
             )
         except (VerificationError, VerifyMismatchError):
             password_valid = False
-        factor_valid, recovery_row = valid_admin_factor(
-            db,
-            request,
-            current.admin,
-            payload.code,
-            now,
-        )
+        if request.app.state.settings.mfa_enabled:
+            factor_valid, recovery_row = valid_admin_factor(
+                db,
+                request,
+                current.admin,
+                payload.code or "",
+                now,
+            )
+        else:
+            factor_valid, recovery_row = True, None
         if not password_valid or not factor_valid:
             record_audit(
                 db,

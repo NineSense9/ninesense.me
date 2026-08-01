@@ -13,6 +13,8 @@ from ..services.admin_notifications import create_notification_once
 from ..services.mfa import build_otpauth_uri, generate_totp_secret
 from ..services.sessions import (
     as_utc,
+    create_session,
+    derive_client_label,
     require_csrf,
     require_session,
     revoke_session,
@@ -20,6 +22,7 @@ from ..services.sessions import (
     token_hash,
     touch_session,
 )
+from .admin_security import set_session_cookie
 
 
 router = APIRouter(prefix="/api/admin", tags=["admin-auth"])
@@ -32,8 +35,12 @@ class LoginRequest(BaseModel):
     password: str = Field(min_length=1, max_length=200)
 
 
-@router.post("/session", status_code=status.HTTP_202_ACCEPTED)
-def login(payload: LoginRequest, request: Request) -> dict[str, str]:
+@router.post("/session")
+def login(
+    payload: LoginRequest,
+    request: Request,
+    response: Response,
+) -> dict[str, str | bool]:
     now = datetime.now(timezone.utc)
     client_ip = request.client.host if request.client is not None else "unknown"
     limiter = request.app.state.login_limiter
@@ -89,12 +96,36 @@ def login(payload: LoginRequest, request: Request) -> dict[str, str]:
         if request.app.state.password_hasher.check_needs_rehash(admin.password_hash):
             admin.password_hash = request.app.state.password_hasher.hash(payload.password)
         settings = request.app.state.settings
+        if not settings.mfa_enabled:
+            tokens = create_session(
+                db,
+                admin.id,
+                settings.session_pepper,
+                settings.session_hours,
+                now,
+                derive_client_label(request.headers.get("user-agent", "")),
+            )
+            record_audit(
+                db,
+                action="session.password",
+                outcome="success",
+                admin_id=admin.id,
+            )
+            db.commit()
+            set_session_cookie(response, request, tokens.session_token)
+            return {
+                "username": admin.username,
+                "csrf_token": tokens.csrf_token,
+                "expires_at": tokens.expires_at.isoformat(),
+                "mfa_enabled": False,
+            }
         db.execute(
             delete(AdminLoginChallenge).where(
                 AdminLoginChallenge.admin_id == admin.id,
                 AdminLoginChallenge.expires_at <= now,
             )
         )
+        response.status_code = status.HTTP_202_ACCEPTED
         raw_challenge = secrets.token_urlsafe(32)
         challenge = AdminLoginChallenge(
             id_hash=token_hash(raw_challenge, settings.session_pepper),
@@ -130,7 +161,7 @@ def login(payload: LoginRequest, request: Request) -> dict[str, str]:
 
 
 @router.get("/session")
-def current_session(request: Request) -> dict[str, str]:
+def current_session(request: Request) -> dict[str, str | bool]:
     with request.app.state.session_factory() as db:
         current = require_session(request, db)
         touch_session(current)
@@ -140,6 +171,7 @@ def current_session(request: Request) -> dict[str, str]:
             "username": current.admin.username,
             "csrf_token": csrf_token,
             "expires_at": as_utc(current.row.expires_at).isoformat(),
+            "mfa_enabled": request.app.state.settings.mfa_enabled,
         }
 
 

@@ -5,12 +5,13 @@ import { api } from "../api/client.js";
 
 export default function SecurityPage() {
   const [sessions, setSessions] = useState([]);
+  const [mfaEnabled, setMfaEnabled] = useState(true);
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
   const [status, setStatus] = useState("");
   const [recoveryCodes, setRecoveryCodes] = useState(null);
 
-  const loadSessions = useCallback(() => api("/api/admin/sessions").then(result => setSessions(result.items)), []);
+  const loadSessions = useCallback(() => api("/api/admin/sessions").then(result => { setSessions(result.items); setMfaEnabled(result.mfa_enabled); }), []);
   useEffect(() => { loadSessions().catch(error => setStatus(error.message)); }, [loadSessions]);
 
   async function reauthenticate(event) {
@@ -19,7 +20,7 @@ export default function SecurityPage() {
     try {
       await api("/api/admin/session/reauthenticate", {
         method: "POST",
-        body: JSON.stringify({ password, code }),
+        body: JSON.stringify(mfaEnabled ? { password, code } : { password }),
         preserveSessionOnUnauthorized: true
       });
       setPassword("");
@@ -78,13 +79,11 @@ export default function SecurityPage() {
           <form className="reauth-form" onSubmit={reauthenticate}>
             <label htmlFor="reauth-password">密码</label>
             <input id="reauth-password" type="password" autoComplete="current-password" value={password} onChange={event => setPassword(event.target.value)} required />
-            <label htmlFor="reauth-code">动态验证码或恢复码</label>
-            <input id="reauth-code" value={code} onChange={event => setCode(event.target.value)} minLength="6" maxLength="32" required />
+            {mfaEnabled && <><label htmlFor="reauth-code">动态验证码或恢复码</label><input id="reauth-code" value={code} onChange={event => setCode(event.target.value)} minLength="6" maxLength="32" required /></>}
             <button type="submit">重新验证身份</button>
           </form>
           <div className="security-actions">
-            <button type="button" onClick={regenerate}>生成新的恢复码</button>
-            <button className="danger" type="button" onClick={disableMfa}>关闭两步验证</button>
+            {mfaEnabled && <><button type="button" onClick={regenerate}>生成新的恢复码</button><button className="danger" type="button" onClick={disableMfa}>关闭两步验证</button></>}
           </div>
           <output aria-live="polite">{status}</output>
         </section>

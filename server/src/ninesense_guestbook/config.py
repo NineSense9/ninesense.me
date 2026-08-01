@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     cookie_secure: bool = False
     cookie_name: str = "ninesense_admin"
     session_hours: int = 24 * 30
+    mfa_enabled: bool = True
     login_challenge_minutes: int = 5
     smtp_host: str = ""
     smtp_port: int = 465

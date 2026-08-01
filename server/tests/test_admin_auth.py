@@ -47,6 +47,38 @@ def test_password_login_creates_setup_challenge_without_session(
     assert db_session.scalars(select(AdminLoginChallenge)).one().purpose == "setup"
 
 
+def test_password_login_directly_creates_thirty_day_session_when_mfa_is_disabled(
+    client, db_session, app
+):
+    create_admin(db_session)
+    app.state.settings.mfa_enabled = False
+
+    response = login(client)
+
+    assert response.status_code == 200
+    assert response.json()["username"] == "ninesense"
+    assert response.json()["mfa_enabled"] is False
+    assert "challenge_token" not in response.json()
+    assert "max-age=2592000" in response.headers["set-cookie"].lower()
+    assert db_session.scalars(select(AdminLoginChallenge)).all() == []
+    stored = db_session.scalars(select(AdminSession)).one()
+    assert stored.expires_at - stored.created_at == timedelta(days=30)
+
+
+def test_current_session_reports_disabled_mfa_after_password_only_login(
+    client, db_session, app
+):
+    create_admin(db_session)
+    app.state.settings.mfa_enabled = False
+
+    login_response = login(client)
+    current = client.get("/api/admin/session")
+
+    assert login_response.status_code == 200
+    assert current.status_code == 200
+    assert current.json()["mfa_enabled"] is False
+
+
 def test_enabled_admin_receives_mfa_challenge_without_secret(
     client, db_session, app
 ):

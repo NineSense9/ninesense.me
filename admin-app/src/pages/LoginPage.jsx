@@ -38,6 +38,7 @@ export default function LoginPage() {
     try {
       const next = await startLogin(username.trim(), password);
       setPassword("");
+      if (next.csrf_token) return;
       setChallenge(next);
       setStage(next.stage === "mfa_setup_required" ? "setup" : "mfa");
     } catch (error) {

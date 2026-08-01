@@ -34,6 +34,12 @@ export function AuthProvider({ children }) {
     method: "POST",
     body: JSON.stringify({ username, password }),
     preserveSessionOnUnauthorized: true
+  }).then(authenticated => {
+    if (authenticated.csrf_token) {
+      setCsrfToken(authenticated.csrf_token);
+      setSession(authenticated);
+    }
+    return authenticated;
   }), []);
 
   const completeMfa = useCallback(async (challengeToken, code) => {
