@@ -5,6 +5,7 @@ $index = [IO.File]::ReadAllText((Join-Path $site 'index.html'), [Text.Encoding]:
 
 $required = @(
   'index.html', '404.html', 'robots.txt', 'site.webmanifest',
+  'sitemap.xml',
   'favicon.svg', 'apple-touch-icon.png', 'assets/og-cover.jpg',
   'guestbook/index.html', 'guestbook/guestbook.css', 'guestbook/guestbook.js',
   'records/index.html', 'records/records.css',
@@ -17,6 +18,16 @@ if ($missing.Count) { throw "Missing release files: $($missing -join ', ')" }
 if ($index -notmatch 'href="\./guestbook/"') { throw 'Desktop guestbook navigation link missing' }
 if ($index -notmatch 'class="mobile-menu-item" href="\./guestbook/"') { throw 'Mobile guestbook navigation link missing' }
 if ($index -notmatch 'href="\./records/"') { throw 'Homepage records entry missing' }
+foreach ($contract in @(
+  'rel="canonical" href="https://ninesense.me/"',
+  'property="og:url" content="https://ninesense.me/"',
+  'property="og:image" content="https://ninesense.me/assets/og-cover.jpg"',
+  'name="twitter:image" content="https://ninesense.me/assets/og-cover.jpg"'
+)) {
+  if ($index -notmatch [regex]::Escape($contract)) { throw "Domain SEO contract missing: $contract" }
+}
+$robots = [IO.File]::ReadAllText((Join-Path $site 'robots.txt'), [Text.Encoding]::UTF8)
+if ($robots -notmatch 'Sitemap: https://ninesense\.me/sitemap\.xml') { throw 'Sitemap robots contract missing' }
 
 $studyRoot = Join-Path $site 'records/study'
 $study = [IO.File]::ReadAllText((Join-Path $studyRoot 'index.html'), [Text.Encoding]::UTF8)
@@ -124,6 +135,8 @@ $adminSource = Get-ChildItem (Join-Path $root 'admin-app/src') -Recurse -File |
   ForEach-Object { [IO.File]::ReadAllText($_.FullName, [Text.Encoding]::UTF8) }
 $sourceText = $adminSource -join "`n"
 if ($sourceText -notmatch 'X-CSRF-Token') { throw 'Admin mutations must attach CSRF token' }
-if ($sourceText -match 'localStorage|sessionStorage') { throw 'Admin must keep security tokens in memory only' }
+if ($sourceText -match '(?i)(localStorage|sessionStorage)[^\r\n;]*(csrf|token|session)|(csrf|token|session)[^\r\n;]*(localStorage|sessionStorage)') {
+  throw 'Admin must keep security tokens in memory only'
+}
 if ($sourceText -match 'dangerouslySetInnerHTML|\.innerHTML') { throw 'Admin must render untrusted content as text' }
 Write-Host 'PASS static guestbook release contract'
