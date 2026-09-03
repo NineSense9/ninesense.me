@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NineSense | 项目、算法竞赛与 Agent 开发</title>
+  <title>NineSense | 个人成长记录 项目、算法竞赛与 Agent 开发</title>
   <meta name="description" content="NineSense 的个人网站。这里放我做过的项目、算法竞赛经历，还有我和 Agent 一起开发、测试、部署时留下的记录。">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#ebe5dc">
@@ -15,7 +15,7 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="NineSense">
   <meta property="og:url" content="https://ninesense.me/">
-  <meta property="og:title" content="NineSense | 项目、算法竞赛与 Agent 开发">
+  <meta property="og:title" content="NineSense | 个人成长记录 项目、算法竞赛与 Agent 开发">
   <meta property="og:description" content="项目、算法竞赛，还有我和 Agent 一起开发、测试、部署时留下的记录。">
   <meta property="og:image" content="https://ninesense.me/assets/og-cover.jpg">
   <meta property="og:image:width" content="1200">
@@ -23,7 +23,7 @@
   <meta property="og:image:alt" content="NineSense 个人网站分享封面">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="NineSense | 项目、算法竞赛与 Agent 开发">
+  <meta name="twitter:title" content="NineSense | 个人成长记录 项目、算法竞赛与 Agent 开发">
   <meta name="twitter:description" content="项目、算法竞赛，还有我和 Agent 一起开发时留下的记录。">
   <meta name="twitter:image" content="https://ninesense.me/assets/og-cover.jpg">
   <meta name="twitter:image:alt" content="NineSense 个人网站分享封面">
@@ -648,6 +648,9 @@
     .footer { padding: 55px 0; background: var(--dark); color: rgba(239,231,219,.5); border-top: 1px solid rgba(239,231,219,.12); }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; font-size: 8px; letter-spacing: .11em; }
     .footer b { color: var(--cream); font-weight: 600; }
+    .footer-beian { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(239,231,219,.08); text-align: center; }
+    .footer-beian a { color: rgba(239,231,219,.5); font-size: 11px; letter-spacing: .06em; text-decoration: none; transition: color .2s ease; }
+    .footer-beian a:hover { color: var(--cream); text-decoration: underline; }
 
     @media (max-width: 1100px) {
       .hero-archive { display: none; }
@@ -709,6 +712,7 @@
       .about-avatar { width: 90px; height: 90px; }
       .about-panel { grid-column: 1 / -1; min-height: auto; }
       .footer-inner { align-items: flex-start; gap: 22px; flex-direction: column; }
+      .footer-beian { width: 100%; text-align: center; margin-top: 22px; padding-top: 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -896,7 +900,10 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="shell footer-inner"><b>PERSONAL ARCHIVE</b><span>PROJECTS · ALGORITHM · AGENT · NOTES</span><a href="./records/">更多记录&nbsp;&nbsp;↗</a></div></footer>
+  <footer class="footer">
+    <div class="shell footer-inner"><b>PERSONAL ARCHIVE</b><span>PROJECTS · ALGORITHM · AGENT · NOTES</span><a href="./records/">更多记录&nbsp;&nbsp;↗</a></div>
+    <div class="shell footer-beian"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">陕ICP备2026000266号-2</a></div>
+  </footer>
 
   <script>
     (() => {
