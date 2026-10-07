@@ -77,6 +77,7 @@ class PublicMonth(BaseModel):
     month: str
     total_seconds: int
     all_time_seconds: int
+    all_time_subjects: dict[str, int]
     subjects: dict[str, int]
     daily: list[dict[str, int | str]]
     completion: PublicCompletion

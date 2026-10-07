@@ -20,7 +20,6 @@ const nodes = {
   focusTrend: document.getElementById("focus-trend"),
   subjectBreakdown: document.getElementById("subject-breakdown"),
   recentHeatmap: document.getElementById("recent-heatmap"),
-  recentList: document.getElementById("recent-day-list"),
   examTimeline: document.getElementById("exam-timeline"),
 };
 
@@ -151,10 +150,10 @@ function renderOverview(month) {
     nodes.focusTrend.append(bar);
   });
 
-  renderSubjects(nodes.subjectBreakdown, month.subjects);
+  renderSubjects(nodes.subjectBreakdown, month.subjects, month.all_time_subjects);
 }
 
-function renderSubjects(container, subjects = {}) {
+function renderSubjects(container, subjects = {}, allTimeSubjects) {
   container.replaceChildren();
   const subjectMaximum = Math.max(...Object.values(subjects), 1);
   Object.entries(SUBJECT_LABELS).forEach(([key, label]) => {
@@ -167,7 +166,18 @@ function renderSubjects(container, subjects = {}) {
     name.textContent = label;
     const value = document.createElement("span");
     value.textContent = formatDuration(seconds);
-    header.append(name, value);
+    if (allTimeSubjects) {
+      const values = document.createElement("div");
+      values.className = "subject-values";
+      value.textContent = `本月 ${formatDuration(seconds)}`;
+      const total = document.createElement("span");
+      total.className = "subject-total";
+      total.textContent = `累计 ${formatDuration(allTimeSubjects[key] || 0)}`;
+      values.append(value, total);
+      header.append(name, values);
+    } else {
+      header.append(name, value);
+    }
     const track = document.createElement("div");
     track.className = "subject-track";
     const fill = document.createElement("div");
@@ -210,27 +220,6 @@ function renderRecent(payload) {
     nodes.recentHeatmap.append(cell);
   });
 
-  nodes.recentList.replaceChildren();
-  if (!items.length) {
-    emptyState(nodes.recentList, "最近 30 天还没有公开记录。");
-    return;
-  }
-  items.forEach((item) => {
-    const row = document.createElement("li");
-    row.className = "recent-day";
-    const date = document.createElement("time");
-    date.dateTime = item.date;
-    date.textContent = formatDate(item.date);
-    const metric = document.createElement("span");
-    metric.className = "recent-day-metric";
-    metric.textContent = formatDuration(item.total_focus_seconds);
-    const detail = document.createElement("div");
-    const reflection = document.createElement("p");
-    reflection.textContent = item.reflection || "没有留下复盘。";
-    detail.append(reflection);
-    row.append(date, metric, detail);
-    nodes.recentList.append(row);
-  });
 }
 
 function renderExams(payload) {
@@ -304,8 +293,7 @@ async function loadRecent() {
   try {
     renderRecent(await fetchJson("/api/study/recent?days=30"));
   } catch (error) {
-    retryState(nodes.recentList, error.message, loadRecent);
-    nodes.recentHeatmap.replaceChildren();
+    retryState(nodes.recentHeatmap, error.message, loadRecent);
   }
 }
 

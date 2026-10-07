@@ -137,12 +137,23 @@ def month_summary(db: Session, month_text: str) -> dict[str, object]:
         )
     )
 
+    all_time_subjects = {subject: 0 for subject in SUBJECTS}
+    all_time_subjects.update(
+        {
+            subject: int(total or 0)
+            for subject, total in db.execute(
+                select(FocusSession.subject, func.sum(FocusSession.effective_seconds))
+                .group_by(FocusSession.subject)
+            ).all()
+            if subject in all_time_subjects
+        }
+    )
+
     return {
         "month": month_text,
         "total_seconds": sum(subjects.values()),
-        "all_time_seconds": int(
-            db.scalar(select(func.sum(FocusSession.effective_seconds))) or 0
-        ),
+        "all_time_seconds": sum(all_time_subjects.values()),
+        "all_time_subjects": all_time_subjects,
         "subjects": subjects,
         "daily": [
             {"date": key, "seconds": daily[key]}
