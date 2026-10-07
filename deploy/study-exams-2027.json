@@ -1,0 +1,53 @@
+{
+  "checked_on": "2026-10-08",
+  "events": [
+    {
+      "kind": "consultation",
+      "title": "研招在线咨询",
+      "date_status": "confirmed",
+      "start_date": "2026-09-26",
+      "end_date": "2026-09-29",
+      "description": "2027 年全国硕士研究生招生宣传咨询活动；各招生单位的具体咨询时段以研招网公布为准。",
+      "source_url": "https://yz.chsi.com.cn/wap/zxdy/",
+      "position": 10
+    },
+    {
+      "kind": "registration_info",
+      "title": "填写考生信息与采集报名照片",
+      "date_status": "confirmed",
+      "start_date": "2026-09-28",
+      "end_date": "2026-10-24",
+      "description": "提前完成基本信息、学历（学籍）校验和报名照片采集。报名开始后继续填写报考信息，并按报考点要求上传核验材料。",
+      "source_url": "https://yz.chsi.com.cn/yzwb/",
+      "position": 20
+    },
+    {
+      "kind": "registration",
+      "title": "预报名",
+      "date_status": "confirmed",
+      "start_date": "2026-10-09",
+      "end_date": "2026-10-12",
+      "description": "每日 9:00—22:00。具体安排以省级考试机构公告为准；预报名信息有效，无需在正式报名时重复报名。按报考点要求上传核验材料并完成缴费。",
+      "source_url": "https://yz.chsi.com.cn/kyzx/other/202609/20260927/2293973606.html",
+      "position": 30
+    },
+    {
+      "kind": "registration",
+      "title": "正式报名与材料提交",
+      "date_status": "confirmed",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-24",
+      "description": "每日 9:00—22:00；截止前完成报名、缴费及核验材料上传。报名结束后报考点集中审核，及时查看结论并在规定时间补交材料。审核及补交截止时间以所选省份、报考点公告为准，不套用往年网上确认日期。",
+      "source_url": "https://yz.chsi.com.cn/kyzx/other/202609/20260927/2293973606.html",
+      "position": 40
+    }
+  ],
+  "admission_ticket": {
+    "kind": "admission_ticket",
+    "title": "下载打印准考证",
+    "date_status": "estimated",
+    "description": "研招网说明为考前 10 天左右开放。此处日期按现有初试日期推算，具体开放时间以研招网通知为准；使用 A4 白纸打印，正反两面不得涂改或书写。",
+    "source_url": "https://yz.chsi.com.cn/yzwb/",
+    "position": 60
+  }
+}

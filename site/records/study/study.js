@@ -5,14 +5,6 @@ const SUBJECT_LABELS = {
   politics: "政治",
 };
 
-const STATUS_LABELS = {
-  planned: "待开始",
-  in_progress: "进行中",
-  completed: "已完成",
-  incomplete: "未完成",
-  cancelled: "已取消",
-};
-
 const nodes = {
   status: document.getElementById("study-status"),
   countdownValue: document.getElementById("countdown-value"),
@@ -22,7 +14,8 @@ const nodes = {
   updatedAt: document.getElementById("study-updated-at"),
   todaySummary: document.getElementById("today-summary"),
   todayReflection: document.getElementById("today-reflection"),
-  taskList: document.getElementById("today-task-list"),
+  todaySubjects: document.getElementById("today-subjects"),
+  allTimeTotal: document.getElementById("all-time-total"),
   monthTotal: document.getElementById("month-total"),
   focusTrend: document.getElementById("focus-trend"),
   subjectBreakdown: document.getElementById("subject-breakdown"),
@@ -95,34 +88,7 @@ function emptyState(container, message) {
   container.append(empty);
 }
 
-function createTask(task) {
-  const article = document.createElement("article");
-  article.className = `study-task is-${task.status}`;
-
-  const time = document.createElement("time");
-  setText(time, task.start_time);
-
-  const subject = document.createElement("span");
-  subject.className = "study-task-subject";
-  setText(subject, task.kind === "rest" ? "REST" : SUBJECT_LABELS[task.subject]);
-
-  const content = document.createElement("div");
-  const title = document.createElement("h3");
-  setText(title, task.title);
-  const description = document.createElement("p");
-  setText(description, task.description, "");
-  content.append(title, description);
-
-  const status = document.createElement("span");
-  status.className = "study-task-status";
-  setText(status, STATUS_LABELS[task.status], task.status);
-
-  article.append(time, subject, content, status);
-  return article;
-}
-
 function renderToday(today) {
-  const completion = today.completion || { completed: 0, closed: 0, rate: null };
   setText(nodes.countdownValue, today.countdown_days === null ? "—" : String(today.countdown_days));
   setText(
     nodes.countdownLabel,
@@ -139,21 +105,13 @@ function renderToday(today) {
       : "最近节点待更新",
   );
   setText(nodes.updatedAt, formatUpdatedAt(today.updated_at));
-  const completionText = completion.closed
-    ? `${completion.completed}/${completion.closed} 项已完成`
-    : "暂无已结项任务";
   setText(
     nodes.todaySummary,
-    `${today.tasks.length} 项安排 · ${completionText} · ${formatDuration(today.total_focus_seconds)}`,
+    `今日学习 · ${formatDuration(today.total_focus_seconds)}`,
   );
   setText(nodes.todayReflection, today.reflection || "今天还没有留下复盘。");
 
-  nodes.taskList.replaceChildren();
-  if (!today.tasks.length) {
-    emptyState(nodes.taskList, "今天还没有安排具体任务。");
-  } else {
-    today.tasks.forEach((task) => nodes.taskList.append(createTask(task)));
-  }
+  renderSubjects(nodes.todaySubjects, today.subjects);
   setText(nodes.status, "今日记录已更新");
 }
 
@@ -169,8 +127,14 @@ function buildMonthDays(month, daily) {
 
 function renderOverview(month) {
   setText(
+    nodes.allTimeTotal,
+    Number.isFinite(month.all_time_seconds)
+      ? `累计学习 · ${formatDuration(month.all_time_seconds)}`
+      : "累计学习时长暂不可用",
+  );
+  setText(
     nodes.monthTotal,
-    `${month.month.replace("-", " 年 ")} 月 · ${formatDuration(month.total_seconds)} · 完成率 ${month.completion.rate === null ? "—" : `${Math.round(month.completion.rate * 100)}%`}`,
+    `${month.month.replace("-", " 年 ")} 月 · ${formatDuration(month.total_seconds)}`,
   );
 
   const days = buildMonthDays(month.month, month.daily || []);
@@ -187,10 +151,14 @@ function renderOverview(month) {
     nodes.focusTrend.append(bar);
   });
 
-  nodes.subjectBreakdown.replaceChildren();
-  const subjectMaximum = Math.max(...Object.values(month.subjects || {}), 1);
+  renderSubjects(nodes.subjectBreakdown, month.subjects);
+}
+
+function renderSubjects(container, subjects = {}) {
+  container.replaceChildren();
+  const subjectMaximum = Math.max(...Object.values(subjects), 1);
   Object.entries(SUBJECT_LABELS).forEach(([key, label]) => {
-    const seconds = month.subjects?.[key] || 0;
+    const seconds = subjects[key] || 0;
     const row = document.createElement("div");
     row.className = "subject-row";
     const header = document.createElement("div");
@@ -207,7 +175,7 @@ function renderOverview(month) {
     fill.style.setProperty("--width", `${(seconds / subjectMaximum) * 100}%`);
     track.append(fill);
     row.append(header, track);
-    nodes.subjectBreakdown.append(row);
+    container.append(row);
   });
 }
 
@@ -257,12 +225,9 @@ function renderRecent(payload) {
     metric.className = "recent-day-metric";
     metric.textContent = formatDuration(item.total_focus_seconds);
     const detail = document.createElement("div");
-    const title = document.createElement("h3");
-    const taskNames = item.tasks.map((task) => task.title).filter(Boolean);
-    title.textContent = taskNames.length ? taskNames.join(" · ") : "当天没有具体任务";
     const reflection = document.createElement("p");
     reflection.textContent = item.reflection || "没有留下复盘。";
-    detail.append(title, reflection);
+    detail.append(reflection);
     row.append(date, metric, detail);
     nodes.recentList.append(row);
   });
@@ -289,6 +254,22 @@ function renderExams(payload) {
     const description = document.createElement("p");
     description.textContent = item.description || "";
     content.append(title, description);
+    if (item.source_url) {
+      try {
+        const url = new URL(item.source_url);
+        if (url.protocol === "https:" || url.protocol === "http:") {
+          const source = document.createElement("a");
+          source.className = "exam-source";
+          source.href = url.href;
+          source.target = "_blank";
+          source.rel = "noopener noreferrer";
+          source.textContent = "查看来源 ↗";
+          content.append(source);
+        }
+      } catch {
+        // Ignore invalid source links while keeping the event readable.
+      }
+    }
     const status = document.createElement("span");
     status.className = "exam-status";
     status.textContent = item.date_status === "confirmed" ? "已确认" : "预计日期";
@@ -304,7 +285,7 @@ async function loadToday() {
     await loadOverview(today.date.slice(0, 7));
   } catch (error) {
     setText(nodes.status, "今日记录读取失败");
-    retryState(nodes.taskList, error.message, loadToday);
+    retryState(nodes.todaySubjects, error.message, loadToday);
   }
 }
 
@@ -312,6 +293,8 @@ async function loadOverview(month) {
   try {
     renderOverview(await fetchJson(`/api/study/months/${month}`));
   } catch (error) {
+    setText(nodes.allTimeTotal, "累计学习时长读取失败");
+    setText(nodes.monthTotal, "月度学习时长读取失败");
     retryState(nodes.focusTrend, error.message, () => loadOverview(month));
     nodes.subjectBreakdown.replaceChildren();
   }

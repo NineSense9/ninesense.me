@@ -45,7 +45,7 @@
   </div>
 
   <nav class="study-nav" aria-label="备考记录视图">
-    <a href="#study-today">今日计划</a>
+    <a href="#study-today">今日学习</a>
     <a href="#study-overview">专注总览</a>
     <a href="#study-recent">最近 30 天</a>
     <a href="#study-exams">考研时间表</a>
@@ -58,11 +58,11 @@
       <div class="section-inner today-layout">
         <header class="section-heading">
           <p class="eyebrow">TODAY / 今日</p>
-          <h2 id="today-section-title">今天学什么</h2>
-          <p id="today-summary" class="section-summary">当天计划正在读取</p>
+          <h2 id="today-section-title">今天学了多久</h2>
+          <p id="today-summary" class="section-summary">今日学习时长正在读取</p>
           <blockquote id="today-reflection">今天还没有留下复盘。</blockquote>
         </header>
-        <div id="today-task-list" class="today-task-list" aria-live="polite"></div>
+        <div id="today-subjects" class="today-subjects subject-breakdown" aria-label="今日各科专注时长" aria-live="polite"></div>
       </div>
     </section>
 
@@ -71,7 +71,10 @@
         <header class="section-heading overview-heading">
           <p class="eyebrow">MONTHLY FOCUS / 月度</p>
           <h2 id="overview-title">这个月真正学了多久</h2>
-          <p id="month-total" class="section-summary">月度数据正在读取</p>
+          <div class="overview-summary">
+            <p id="all-time-total" class="section-summary all-time-total" aria-live="polite">累计学习时长正在读取</p>
+            <p id="month-total" class="section-summary">月度数据正在读取</p>
+          </div>
         </header>
         <div class="overview-layout">
           <div>

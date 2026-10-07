@@ -140,6 +140,9 @@ def month_summary(db: Session, month_text: str) -> dict[str, object]:
     return {
         "month": month_text,
         "total_seconds": sum(subjects.values()),
+        "all_time_seconds": int(
+            db.scalar(select(func.sum(FocusSession.effective_seconds))) or 0
+        ),
         "subjects": subjects,
         "daily": [
             {"date": key, "seconds": daily[key]}

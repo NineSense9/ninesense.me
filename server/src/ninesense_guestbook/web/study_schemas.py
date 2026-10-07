@@ -76,6 +76,7 @@ class PublicRecent(BaseModel):
 class PublicMonth(BaseModel):
     month: str
     total_seconds: int
+    all_time_seconds: int
     subjects: dict[str, int]
     daily: list[dict[str, int | str]]
     completion: PublicCompletion
