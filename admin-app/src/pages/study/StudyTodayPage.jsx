@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import StudyTaskEditor from "./StudyTaskEditor.jsx";
 import StudyTimerPanel from "./StudyTimerPanel.jsx";
@@ -80,6 +81,7 @@ export default function StudyTodayPage() {
       {loading ? <p className="empty-copy">正在读取今日计划…</p> : (
         <>
           <StudyTimerPanel timer={timer} onChange={reload} />
+          <Link className="plan-entry-link" to="/study/plan">十月强化计划 · 查看今日任务并打勾 →</Link>
           <div className="study-today-grid">
             <StudyTaskEditor day={day} date={date} onChange={reload} />
             <ReflectionEditor date={date} value={day?.reflection || ""} onSaved={reload} />

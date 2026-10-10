@@ -37,6 +37,8 @@ npm run test:e2e
 
 ## 备考记录
 
+十月强化计划位于管理端 `/admin/study/plan`：按附件计划展开 2026-10-09 至 2026-10-31 共 23 天、185 个勾选项，支持自动保存、撤销与补打卡。仅显示任务，不安排每日时长；勾选不改变手动专注计时。公开页 `/records/study/` 只展示完成数量与进度。计划内容版本化存放在包内 `data/study_plan_202610.json`，完成状态由 `0004_study_plan` 迁移新增的表保存。
+
 - 公开接口：`/api/study/today`、`/api/study/recent`、`/api/study/months/{YYYY-MM}`、`/api/study/exams`
 - 管理接口：`/api/admin/study/` 下的周计划、每日任务、计时、历史、专注修正、时间表和导出端点
 - 公开详细记录最多返回最近 30 天，旧月份只返回专注与完成率汇总

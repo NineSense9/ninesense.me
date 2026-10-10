@@ -408,3 +408,49 @@
   .focus-record-summary time,
   .focus-record-summary small { grid-column: 1 / -1; }
 }
+/* Strengthening checklist: kept separate from the focus timer. */
+.strengthening-page { --line: rgba(240, 237, 228, .14); }
+.plan-entry-link { display: block; padding: 18px 20px; margin: 18px 0; border: 1px solid rgba(240, 237, 228, .14); color: #dba975; }
+.plan-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 24px; border: 1px solid var(--line); margin-bottom: 24px; }
+.plan-overview > div { display: grid; gap: 8px; }
+.plan-overview > div > span { font-size: .8rem; opacity: .7; }
+.plan-overview strong { font-size: 1.7rem; font-weight: 500; }
+.plan-overview small { font-size: .8rem; opacity: .7; }
+.plan-overview p { grid-column: 1 / -1; margin: 0; font-size: .85rem; line-height: 1.7; }
+.plan-overview progress { grid-column: 1 / -1; width: 100%; height: 7px; accent-color: #b5874d; }
+.plan-day-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.plan-day-nav button { display: grid; gap: 5px; min-width: 70px; padding: 10px 12px; border: 1px solid var(--line); background: transparent; color: inherit; cursor: pointer; }
+.plan-day-nav button small { opacity: .65; }
+.plan-day-nav .is-selected { background: #25221e; border-color: #d27631; color: #f3eee6; }
+.plan-day-nav .is-complete { border-color: #798366; }
+.plan-date-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 24px; }
+.plan-date-heading > div { text-align: center; }
+.plan-date-heading h2 { margin: 0 0 7px; font-size: 1.3rem; }
+.plan-date-heading span { font-size: .8rem; opacity: .7; }
+.plan-date-heading button { padding: 10px 12px; cursor: pointer; border: 1px solid var(--line); background: transparent; color: inherit; }
+.plan-date-heading button:disabled { opacity: .4; cursor: default; }
+.plan-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.plan-group { min-width: 0; border: 1px solid var(--line); }
+.plan-group:last-child { grid-column: 1 / -1; }
+.plan-group header { display: grid; grid-template-columns: 1fr auto; padding: 22px; gap: 12px; border-bottom: 1px solid var(--line); }
+.plan-group header h2 { font-size: 1.15rem; margin: 0; }
+.plan-group header > span { font-size: .75rem; opacity: .65; }
+.plan-group header p { grid-column: 1 / -1; margin: 0; font-size: .85rem; line-height: 1.7; }
+.plan-checklist { list-style: none; padding: 0; margin: 0; }
+.plan-checklist li { padding: 20px 22px; border-bottom: 1px solid var(--line); }
+.plan-checklist li:last-child { border-bottom: 0; }
+.plan-checklist label { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; }
+.plan-checklist input { flex: 0 0 20px; width: 20px; height: 20px; margin: 1px 0; accent-color: #927344; }
+.plan-checklist label > span { min-width: 0; }
+.plan-checklist strong { display: block; font-size: .93rem; line-height: 1.5; font-weight: 600; }
+.plan-item-description { display: block; margin-top: 8px; font-size: .84rem; line-height: 1.8; opacity: .75; }
+.plan-checklist .is-checked strong { text-decoration: line-through; opacity: .6; }
+.plan-checklist output { display: block; margin-left: 34px; margin-top: 5px; font-size: .75rem; line-height: 1.5; }
+.plan-checklist output:empty { display: none; }
+@media (max-width: 760px) {
+  .plan-groups { grid-template-columns: 1fr; }
+  .plan-group:last-child { grid-column: auto; }
+  .plan-overview { padding: 18px; }
+  .plan-group header, .plan-checklist li { padding: 18px; }
+  .plan-date-heading button { padding: 8px; }
+}

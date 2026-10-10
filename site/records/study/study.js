@@ -21,6 +21,10 @@ const nodes = {
   subjectBreakdown: document.getElementById("subject-breakdown"),
   recentHeatmap: document.getElementById("recent-heatmap"),
   examTimeline: document.getElementById("exam-timeline"),
+  planSummary: document.getElementById("plan-summary"),
+  planProgress: document.getElementById("plan-progress"),
+  planGroups: document.getElementById("plan-groups"),
+  planToday: document.getElementById("plan-today"),
 };
 
 function setText(node, value, fallback = "—") {
@@ -307,7 +311,31 @@ async function loadExams() {
 
 async function loadStudyPage() {
   await loadToday();
-  await Promise.all([loadRecent(), loadExams()]);
+  await Promise.all([loadRecent(), loadExams(), loadPlan()]);
+}
+
+async function loadPlan() {
+  try {
+    const plan = await fetchJson("/api/study/plan");
+    const percent = plan.total ? Math.round(plan.completed / plan.total * 100) : 0;
+    setText(nodes.planSummary, `${plan.completed}/${plan.total} 项已完成 · ${percent}%`);
+    nodes.planProgress.max = plan.total || 1;
+    nodes.planProgress.value = plan.completed;
+    nodes.planGroups.replaceChildren();
+    Object.values(plan.groups).forEach(group => {
+      const row = document.createElement("div");
+      const label = document.createElement("span");
+      const count = document.createElement("strong");
+      label.textContent = group.label;
+      count.textContent = `${group.completed}/${group.total} 项`;
+      row.append(label, count);
+      nodes.planGroups.append(row);
+    });
+    setText(nodes.planToday, plan.today.total ? `今日任务 · ${plan.today.completed}/${plan.today.total} 项已完成` : `计划周期 · ${formatDate(plan.start_date)} — ${formatDate(plan.end_date)}`);
+  } catch (error) {
+    setText(nodes.planSummary, "计划进度读取失败");
+    retryState(nodes.planGroups, error.message, loadPlan);
+  }
 }
 
 loadStudyPage();

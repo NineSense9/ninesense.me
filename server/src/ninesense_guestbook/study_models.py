@@ -256,6 +256,17 @@ class FocusSession(Base):
     )
 
 
+class StudyPlanCheck(Base):
+    __tablename__ = "study_plan_checks"
+
+    admin_id: Mapped[int] = mapped_column(
+        ForeignKey("admins.id", ondelete="CASCADE"), primary_key=True
+    )
+    task_id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    completed: Mapped[bool] = mapped_column(Boolean, default=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class ExamEvent(Base):
     __tablename__ = "exam_events"
     __table_args__ = (

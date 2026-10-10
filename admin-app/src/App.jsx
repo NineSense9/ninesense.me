@@ -14,6 +14,7 @@ import StudyFocusPage from "./pages/study/StudyFocusPage.jsx";
 import StudyHistoryPage from "./pages/study/StudyHistoryPage.jsx";
 import StudySchedulePage from "./pages/study/StudySchedulePage.jsx";
 import StudyTodayPage from "./pages/study/StudyTodayPage.jsx";
+import StudyPlanPage from "./pages/study/StudyPlanPage.jsx";
 
 
 function AppContent() {
@@ -30,6 +31,7 @@ function AppContent() {
         <Route path="security" element={<SecurityPage />} />
         <Route path="study" element={<StudyLayout />}>
           <Route index element={<StudyTodayPage />} />
+          <Route path="plan" element={<StudyPlanPage />} />
           <Route path="schedule" element={<StudySchedulePage />} />
           <Route path="history" element={<StudyHistoryPage />} />
           <Route path="focus" element={<StudyFocusPage />} />

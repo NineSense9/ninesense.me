@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const tabs = [
   ["今天", "/study"],
+  ["强化计划", "/study/plan"],
   ["周计划", "/study/schedule"],
   ["历史记录", "/study/history"],
   ["专注记录", "/study/focus"],

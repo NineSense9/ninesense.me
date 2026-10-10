@@ -353,6 +353,17 @@ footer {
 .heat-cell[data-level="3"] { background: rgba(201, 145, 77, .72); }
 .heat-cell[data-level="4"] { background: var(--amber); }
 
+.public-plan { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }
+.public-plan-heading { display: flex; justify-content: space-between; gap: 18px; align-items: baseline; }
+.public-plan-heading h3 { margin: 0; font-size: 1rem; font-weight: 600; }
+.public-plan-heading p, .public-plan-today { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.8; }
+.public-plan progress { width: 100%; height: 7px; accent-color: var(--amber); margin: 20px 0; }
+.public-plan-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-bottom: 18px; }
+.public-plan-groups > div { display: grid; gap: 8px; }
+.public-plan-groups span { color: var(--muted); font-size: .78rem; }
+.public-plan-groups strong { font-size: 1rem; font-weight: 500; }
+@media (max-width: 560px) { .public-plan-heading { display: grid; gap: 8px; } }
+
 .exam-band { background: var(--paper); }
 .exam-layout {
   display: grid;
