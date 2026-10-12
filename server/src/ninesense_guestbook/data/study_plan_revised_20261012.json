@@ -1,0 +1,3973 @@
+{
+  "id": "revised-20261012",
+  "title": "数学优先 · 考前复习计划",
+  "start_date": "2026-10-12",
+  "end_date": "2026-12-18",
+  "note": "每天一科主任务；可选项不计必做进度。日期是推进顺序，未完成任务替换后续任务，不叠加。计时继续由你自行控制。",
+  "guidelines": [
+    "数学课、例题、880 与章节真题合并计量；通常推进约 10—20 页、3—6 道代表题，概念或证明日可少一些。真题替换练习，不额外加题。",
+    "争取 11 月 8—10 日完成主要基础覆盖并接完整数学真题；10/18、10/25、10/31 检查实际进度。基础未稳时用下一数学日补缺，目标窗口可能顺延。",
+    "旧十月计划与原勾选可在“查看计划”中找到。新任务没有自动继承旧勾选；勾选不改变学习时长。",
+    "完整套卷与当天初次订正为一个主任务。独立作答不看 AI 或解析；当天处理错题、猜对与未完成题，合上解析重写关键步骤。",
+    "需要重新学整节的题列独立补缺；初次订正也未完成时，次日先完成它并替换新卷。后续复查仍要检查是否独立会做。",
+    "套卷先试行每周数学 3 套、408 两套、两天补缺复查。订正稳定后，可将一个补缺位替换为数学卷，增加至四套；不强制自动加量。",
+    "11 月下旬起留三个可选模拟卷位；合工大或超越选数学二版本，替换当日真题，不额外叠加，先做两套，再决定是否第三套。",
+    "英语背词和政治小组选择题持续维持，阅读每周两篇起步；后期作文与分析题准备留有位置。计划完成百分比不代表考试掌握程度或录取概率。"
+  ],
+  "days": [
+    {
+      "date": "2026-10-12",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "函数极限练习",
+          "items": [
+            {
+              "id": "revised-2026-10-12-math-1",
+              "title": "选做函数极限 4—6 题",
+              "description": "覆盖已学的两三种方法；其中可用 1—2 道对应数学二真题替换 880，不额外加题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-12-math-2",
+              "title": "订正并独立复算",
+              "description": "对错题写出定型、方法与关键变形；合上解析重做至少一题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-12-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-12-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-12-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "连续与间断点",
+          "items": [
+            {
+              "id": "revised-2026-10-13-math-1",
+              "title": "连接点与间断点判断",
+              "description": "复习左右极限、函数值与连续性，做两道分段函数连接点题，检查间断点类型。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-13-math-2",
+              "title": "连续函数定理直接应用",
+              "description": "复习介值、最值和零点定理条件，做 1—2 道直接应用题，订正后写明用到的条件。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-13-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-13-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-13-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数列极限补缺",
+          "items": [
+            {
+              "id": "revised-2026-10-14-math-1",
+              "title": "化简或夹逼代表题",
+              "description": "做一道代表题，说明关键变形或上下界；不要求清空全部数列练习。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-14-math-2",
+              "title": "单调有界递推代表题",
+              "description": "做一道代表题，先说明单调、有界等收敛依据，再求并筛选候选极限；合上解析复现。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-14-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-14-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-14-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "串与 KMP",
+          "items": [
+            {
+              "id": "revised-2026-10-15-408-1",
+              "title": "短模式串求 next",
+              "description": "按所用教材的下标与 next 定义，列前后缀，求一个短模式串的 next；用例子检查。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-15-408-2",
+              "title": "完整模拟匹配与回退",
+              "description": "跟踪一次匹配和失配回退，做两道相关代表题并订正；next 稳定后才接 nextval。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-15-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-15-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-15-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "导数与微分",
+          "items": [
+            {
+              "id": "revised-2026-10-16-math-1",
+              "title": "导数定义与可导关系",
+              "description": "复习差商、几何意义及可导与连续的关系，选 1—2 道定义或连接点题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-16-math-2",
+              "title": "基本公式与链式法则",
+              "description": "恢复四则与复合函数求导，选 2—4 道代表计算题；当天总量约 4—6 道，订正漏乘与符号。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-16-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-16-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-16-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：行列式",
+          "items": [
+            {
+              "id": "revised-2026-10-17-math-1",
+              "title": "恢复行列式性质",
+              "description": "说明交换、倍乘、倍加怎样影响行列式，复习展开公式。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-17-math-2",
+              "title": "行列式代表计算 3—4 题",
+              "description": "包含展开与性质化简；检查代数余子式符号。对应真题可替换重复练习。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-17-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-17-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-17-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "求导检查与导数应用",
+          "items": [
+            {
+              "id": "revised-2026-10-18-math-1",
+              "title": "检查普通求导",
+              "description": "独立复算一题；若基本计算仍卡，本日继续补求导，后面的应用顺延。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-18-math-2",
+              "title": "单调、极值、凹凸与拐点",
+              "description": "求导已稳时进入应用，列导数符号表、检查端点和两侧符号；本日合计 4—6 道代表题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-18-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-18-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-18-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "中值定理与证明入门",
+          "items": [
+            {
+              "id": "revised-2026-10-19-math-1",
+              "title": "复习罗尔与拉格朗日定理",
+              "description": "明确区间、连续、可导等条件，解释什么时候可以使用。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-19-math-2",
+              "title": "完成 2—3 道证明代表题",
+              "description": "写辅助函数、核对条件、应用结论；较难构造先标记，求导遗留问题优先替换其中任务。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-19-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-19-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-19-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "不定积分：公式与换元",
+          "items": [
+            {
+              "id": "revised-2026-10-20-math-1",
+              "title": "基本公式与凑微分",
+              "description": "恢复积分公式，观察内外层关系，选两道第一换元代表题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-20-math-2",
+              "title": "换元与结果验证",
+              "description": "接 1—2 道第二换元或同节代表题，注意换回；对积分结果求导验证，不再叠加整组 880。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-20-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-20-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-20-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "数据结构大题",
+          "items": [
+            {
+              "id": "revised-2026-10-21-408-1",
+              "title": "线性表或树的算法真题",
+              "description": "选一题先画结构，再写思路、关键伪代码、边界与复杂度；必要时查解析，最后独立复现。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-21-408-2",
+              "title": "遍历、WPL 或图算法追踪",
+              "description": "再选一道代表题，完整记录状态变化并订正；第一题订正量大时，用本项继续订正，第二题后移。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-21-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-21-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-21-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：矩阵与初等变换",
+          "items": [
+            {
+              "id": "revised-2026-10-22-math-1",
+              "title": "矩阵运算与逆矩阵",
+              "description": "恢复乘法、转置、可逆条件，区分矩阵运算与普通数的运算性质。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-22-math-2",
+              "title": "初等行变换练习",
+              "description": "用行变换求逆或化阶梯形，完成 3—4 道代表题并保留步骤，检查行操作。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-22-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-22-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-22-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-23",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "不定积分：分部与有理函数",
+          "items": [
+            {
+              "id": "revised-2026-10-23-math-1",
+              "title": "分部积分代表题两道",
+              "description": "理解公式与选择，检查符号；积分结果求导校验。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-23-math-2",
+              "title": "简单有理函数积分 1—2 题",
+              "description": "先判断除法或分解，再计算；复杂分解和长计算先标记，不作本日必做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-23-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-23-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-23-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-24",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "OS 大题",
+          "items": [
+            {
+              "id": "revised-2026-10-24-408-1",
+              "title": "调度或页面置换真题",
+              "description": "选一题列状态表与计算过程，对照解析订正后复现。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-24-408-2",
+              "title": "基础 PV 真题",
+              "description": "选一题写同步、互斥约束与信号量初值，再写操作顺序；复杂变体不要求一次全部吃透。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-24-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-24-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-24-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-25",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "定积分与变限积分",
+          "items": [
+            {
+              "id": "revised-2026-10-25-math-1",
+              "title": "定积分基础计算两题",
+              "description": "恢复牛顿—莱布尼茨公式，选换元或分部计算题，核对上下限。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-25-math-2",
+              "title": "变限积分求导 1—2 题",
+              "description": "检查上下限、链式法则与符号；若不定积分未稳，替换本日任务为积分补缺，不叠加。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-25-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-25-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-25-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "反常积分与定积分应用",
+          "items": [
+            {
+              "id": "revised-2026-10-26-math-1",
+              "title": "反常积分基础两题",
+              "description": "将反常积分写成极限，学习基本敛散判断，订正代表题；定积分仍卡时先补计算。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-26-math-2",
+              "title": "面积或体积基础应用",
+              "description": "选 1—2 道基础题，画区域、列积分与边界；不同时追加整组积分不等式。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-26-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-26-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-26-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：秩与方程组",
+          "items": [
+            {
+              "id": "revised-2026-10-27-math-1",
+              "title": "行变换求秩与判断解",
+              "description": "联系秩、未知量个数与解的情况，写出消元过程。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-27-math-2",
+              "title": "齐次与非齐次各一题",
+              "description": "写自由变量与解；行变换仍卡先补消元，不强制同时学后续特征值。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-27-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-27-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-27-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "常微分方程",
+          "items": [
+            {
+              "id": "revised-2026-10-28-math-1",
+              "title": "识别变量可分离与一阶线性",
+              "description": "各做一道代表例题，写求解步骤、通解与初值处理。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-28-math-2",
+              "title": "二阶常系数方程代表例题",
+              "description": "复习特征方程与基本解法，完成一例；首次学习不同时追加多道变式。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-28-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-28-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-28-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "计组、计网大题摸底",
+          "items": [
+            {
+              "id": "revised-2026-10-29-408-1",
+              "title": "计组存储或 Cache 真题",
+              "description": "选一题列地址字段与访问过程，完成计算并订正；最后独立写关键步骤。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-29-408-2",
+              "title": "计网 TCP 或子网真题",
+              "description": "选一题画时序或列地址表，完整作答并订正；这一天不要求重学两个新章节。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-29-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-29-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-29-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "多元微分入门",
+          "items": [
+            {
+              "id": "revised-2026-10-30-math-1",
+              "title": "偏导与全微分概念",
+              "description": "复习多元函数、偏导与全微分关系，区分概念成立条件。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-30-math-2",
+              "title": "多元求导代表题",
+              "description": "接复合或隐函数求导，本日合计 3—4 道代表题；理论或计算密集时仅推进对应小节。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-30-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-30-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-30-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-31",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "月底检查与补缺",
+          "items": [
+            {
+              "id": "revised-2026-10-31-math-1",
+              "title": "独立完成八道已学模块新题",
+              "description": "极限连续、导数、积分、线代各两题；不看 AI 或解析，未学内容单独标记。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-31-math-2",
+              "title": "分类错因并选一个主要缺口",
+              "description": "区分独立正确、算错、需提示、未学；用结果调整十一月，不把八道小测换算成整卷分数。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-10-31-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-10-31-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-10-31-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "多元微分与极值",
+          "items": [
+            {
+              "id": "revised-2026-11-01-math-1",
+              "title": "补多元求导遗留问题",
+              "description": "回查复合或隐函数求导，选 1—2 道代表题，核对链式法则。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-01-math-2",
+              "title": "多元极值代表题",
+              "description": "复习驻点与判别条件，做 1—2 道极值题；求导尚不稳时替换为补缺。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-01-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-01-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-01-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "二重积分：区域与直角坐标",
+          "items": [
+            {
+              "id": "revised-2026-11-02-math-1",
+              "title": "画区域并确定积分次序",
+              "description": "选两个区域，说明上下限和是否需要分区，先画图再列式。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-02-math-2",
+              "title": "直角坐标代表计算",
+              "description": "完成 2—3 道代表题，检查次序、边界和结果，真题替换同类练习。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-02-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-02-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-02-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "二重积分：极坐标与换序",
+          "items": [
+            {
+              "id": "revised-2026-11-03-math-1",
+              "title": "极坐标代表题",
+              "description": "从区域特征判断是否适合极坐标，写角度、半径范围与面积因子。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-03-math-2",
+              "title": "换序与计算检查",
+              "description": "选 2—3 道极坐标或换序代表题并订正；直角坐标仍卡时优先补缺。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-03-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-03-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-03-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：向量组",
+          "items": [
+            {
+              "id": "revised-2026-11-04-math-1",
+              "title": "线性相关与秩的联系",
+              "description": "联系向量组、矩阵秩、线性表示与基础解系，解释条件。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-04-math-2",
+              "title": "代表题 3—4 道",
+              "description": "包含相关性判断和线性表示，保留行变换过程；不额外叠加一章题库。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-04-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-04-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-04-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：特征值与特征向量",
+          "items": [
+            {
+              "id": "revised-2026-11-05-math-1",
+              "title": "恢复特征值求法",
+              "description": "写特征方程，选两道常规矩阵求特征值。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-05-math-2",
+              "title": "求特征向量并验证",
+              "description": "对相应特征值解方程组，代回验证；行变换遗留问题优先补。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-05-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-05-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-05-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "note": "主任务完成即可；页面日期是推进顺序。遇到未完成内容，用下一推进位替换，不把两天任务叠加。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：对角化",
+          "items": [
+            {
+              "id": "revised-2026-11-06-math-1",
+              "title": "复习相似与可对角化条件",
+              "description": "说明独立特征向量与对角化的关系。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-06-math-2",
+              "title": "完成两道代表题",
+              "description": "求变换矩阵与对角矩阵，核验关系；特征向量仍卡则继续昨日模块。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-06-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-06-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-06-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408 第一套完整真题",
+          "items": [
+            {
+              "id": "revised-2026-11-07-408-1",
+              "title": "独立完成一套 408 真题",
+              "description": "先选完整卷，不看解析，标记猜题和未完成题；若四科代表大题尚未覆盖，先分模块诊断。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-07-408-2",
+              "title": "当天订正错题与猜对题",
+              "description": "写错因、重写关键步骤；需补整节的缺口另列任务，初次订正未完成就替换次日任务继续。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-07-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-07-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-07-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "线代主任务",
+          "source": "线代：二次型与主要缺口",
+          "items": [
+            {
+              "id": "revised-2026-11-08-math-1",
+              "title": "二次型基础代表题",
+              "description": "恢复矩阵表示、标准形及正定判断，选 2—3 道基础例题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-08-math-2",
+              "title": "检查进入套卷前的主要缺口",
+              "description": "从积分、多元、线代各选一个代表步骤回查；未学部分标记，不以日期强赶。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-08-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-08-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-08-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-09",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二第一套完整真题",
+          "items": [
+            {
+              "id": "revised-2026-11-09-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "从较近年份选一套，标记熟题、猜题和未学部分，不看 AI 或解析。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-09-math-2",
+              "title": "当天初次订正",
+              "description": "处理全部错题、猜对题和未完成题，合上解析重写关键步骤；未学模块进入独立补缺。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-09-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-09-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-09-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "第一套数学卷复查",
+          "items": [
+            {
+              "id": "revised-2026-11-10-math-1",
+              "title": "完成订正与独立复算",
+              "description": "优先完成前一天尚未完成的订正，再独立复算 2—3 道错题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-10-math-2",
+              "title": "按诊断安排下一套",
+              "description": "分辨未学、方法不会、计算错；选一个主要缺口，后续卷位可以替换为补缺，不累积欠账。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-10-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-10-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-10-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-11-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-11-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-11-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-11-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-11-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-12-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-12-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-12-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-12-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-12-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-13-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-13-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-13-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-13-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-13-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-11-14-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-14-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-14-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-14-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-14-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-14-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-15-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-15-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-15-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-15-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-15-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-16",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-16-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-16-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-16-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-16-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-16-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-11-17-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-17-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-17-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-17-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-17-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-17-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-18-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-18-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-18-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-18-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-18-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-19-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-19-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-19-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-19-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-19-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-20-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-20-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-20-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-20-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-20-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-11-21-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-21-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-21-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-21-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-21-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-21-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-22-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-22-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-22-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-22-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-22-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-23-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-23-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-23-maintenance-1",
+              "title": "英语：作文表达与短练习",
+              "description": "准备一类作文结构或表达，并写一个段落；每隔一次改为一篇完整作文检查，替换常规词汇任务。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-23-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-23-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-11-24-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-24-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-24-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-24-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-24-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-24-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-25-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-25-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-25-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-25-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-25-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-26-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-26-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-26-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-26-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-26-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-27-math-1",
+              "title": "完成本日选定数学卷",
+              "description": "默认做待做年份的数学二真题；真题订正和复查已完成时，可选合工大或超越数学二模拟卷替换。本日只完成所选一套，独立作答后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-27-math-2",
+              "title": "当天订正所选数学卷",
+              "description": "对所选真题或模拟卷，处理错题、猜对与未完成题，合上解析重写关键步骤；无需同时做另一套。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-27-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-27-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-27-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-27-review-2",
+              "title": "记录：本日选择模拟卷路线",
+              "description": "选合工大或超越数学二卷替换本日真题时，可勾选记录选择；实际完成卷与订正后，勾选上面的两项主任务。先两套，再决定第三套。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-11-28-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-28-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-28-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-28-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-28-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-11-28-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-29",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-29-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-29-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-29-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-29-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-29-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-30",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-11-30-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-30-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-11-30-maintenance-1",
+              "title": "英语：作文表达与短练习",
+              "description": "准备一类作文结构或表达，并写一个段落；每隔一次改为一篇完整作文检查，替换常规词汇任务。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-11-30-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-11-30-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-01",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-12-01-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-01-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-01-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-01-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-01-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-01-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-02-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-02-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-02-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-02-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-02-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-03",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-03-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-03-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-03-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-03-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-03-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-04",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-04-math-1",
+              "title": "完成本日选定数学卷",
+              "description": "默认做待做年份的数学二真题；真题订正和复查已完成时，可选合工大或超越数学二模拟卷替换。本日只完成所选一套，独立作答后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-04-math-2",
+              "title": "当天订正所选数学卷",
+              "description": "对所选真题或模拟卷，处理错题、猜对与未完成题，合上解析重写关键步骤；无需同时做另一套。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-04-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-04-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-04-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-04-review-2",
+              "title": "记录：本日选择模拟卷路线",
+              "description": "选合工大或超越数学二卷替换本日真题时，可勾选记录选择；实际完成卷与订正后，勾选上面的两项主任务。先两套，再决定第三套。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-05",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-12-05-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-05-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-05-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-05-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-05-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-05-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-06",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-06-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-06-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-06-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-06-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-06-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-07",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-07-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-07-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-07-maintenance-1",
+              "title": "英语：作文表达与短练习",
+              "description": "准备一类作文结构或表达，并写一个段落；每隔一次改为一篇完整作文检查，替换常规词汇任务。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-07-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-07-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-08",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-12-08-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-08-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-08-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-08-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-08-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-08-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-09",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-09-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-09-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-09-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-09-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-09-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-10",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-10-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-10-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-10-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-10-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-10-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-11",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-11-math-1",
+              "title": "完成本日选定数学卷",
+              "description": "默认做待做年份的数学二真题；真题订正和复查已完成时，可选合工大或超越数学二模拟卷替换。本日只完成所选一套，独立作答后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-11-math-2",
+              "title": "当天订正所选数学卷",
+              "description": "对所选真题或模拟卷，处理错题、猜对与未完成题，合上解析重写关键步骤；无需同时做另一套。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-11-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-11-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-11-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-11-review-2",
+              "title": "记录：本日选择模拟卷路线",
+              "description": "选合工大或超越数学二卷替换本日真题时，可勾选记录选择；实际完成卷与订正后，勾选上面的两项主任务。先两套，再决定第三套。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-12",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-12-12-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-12-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-12-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-12-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-12-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-12-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-13",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "408",
+          "label": "408 主任务",
+          "source": "408真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-13-408-1",
+              "title": "独立完成一套408真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-13-408-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-13-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-13-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-13-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-14",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "数学二真题与当天订正",
+          "items": [
+            {
+              "id": "revised-2026-12-14-math-1",
+              "title": "独立完成一套数学二真题",
+              "description": "选择待做年份或需要复做的卷，标记熟题、猜题和未完成题，不看解析；记录年份与独立作答结果。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-14-math-2",
+              "title": "当天订正并复现关键步骤",
+              "description": "处理所有错题、猜对与未完成题，归类错因并合上解析重写步骤；需整节重学另列补缺，订正未完成时替换下一卷位。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-14-maintenance-1",
+              "title": "英语：作文表达与短练习",
+              "description": "准备一类作文结构或表达，并写一个段落；每隔一次改为一篇完整作文检查，替换常规词汇任务。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-14-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-14-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-15",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "补缺与旧错题复查",
+          "items": [
+            {
+              "id": "revised-2026-12-15-math-1",
+              "title": "完成本日选定补缺或加卷路线",
+              "description": "默认从最近数学或 408 卷中选一个主要缺口，恢复方法并做代表题。本周订正与缺口已处理时，可每周至多一次用一套数学卷替换补缺；完成选定路线后勾选本项。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-15-math-2",
+              "title": "完成对应订正或旧错题复查",
+              "description": "补缺路线：独立复查数学与 408 各 1—2 道旧错题。加卷路线：当天订正错题、猜对与未完成题，并重写关键步骤。选定路线完成后勾选本项，不要求两条同时做。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-15-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-15-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-15-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            },
+            {
+              "id": "revised-2026-12-15-review-2",
+              "title": "记录：本日选择加卷路线",
+              "description": "本周订正与主要缺口已处理，可每周至多一次把补缺位替换为数学真题；选加卷时可勾选记录，完成卷和订正后勾选上面的共同主任务，不叠加补缺路线。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-16",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "考前回查与准备",
+          "items": [
+            {
+              "id": "revised-2026-12-16-math-1",
+              "title": "复算少量基础错题",
+              "description": "从数学或 408 选 2—3 道需要回查的基础题，写关键步骤；不追加新难题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-16-math-2",
+              "title": "检查考试准备",
+              "description": "核对准考证、证件、所需文具与考场路线，按报考点要求准备；回查易错公式与作答习惯。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-16-maintenance-1",
+              "title": "英语：一篇真题阅读",
+              "description": "独立做一篇英语二真题阅读，标记词句与选项依据，再订正；替换部分背词任务，主任务超量时移到补缺日。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-16-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-16-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-17",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "考前回查与准备",
+          "items": [
+            {
+              "id": "revised-2026-12-17-math-1",
+              "title": "复算少量基础错题",
+              "description": "从数学或 408 选 2—3 道需要回查的基础题，写关键步骤；不追加新难题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-17-math-2",
+              "title": "检查考试准备",
+              "description": "核对准考证、证件、所需文具与考场路线，按报考点要求准备；回查易错公式与作答习惯。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-17-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-17-maintenance-2",
+              "title": "政治：分析题要点回忆",
+              "description": "用已经拿到的分析题资料，学习一小组核心要点并合上复述，再回查漏点；替换今天的新选择题，不额外堆量。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-17-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-12-18",
+      "note": "做卷与初次订正放同一天；订正未完成就先补完，替换下一套。数学和 408 不在同一天都设为整套主任务。",
+      "groups": [
+        {
+          "key": "math",
+          "label": "数学 / 补缺主任务",
+          "source": "考前回查与准备",
+          "items": [
+            {
+              "id": "revised-2026-12-18-math-1",
+              "title": "复算少量基础错题",
+              "description": "从数学或 408 选 2—3 道需要回查的基础题，写关键步骤；不追加新难题。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-18-math-2",
+              "title": "检查考试准备",
+              "description": "核对准考证、证件、所需文具与考场路线，按报考点要求准备；回查易错公式与作答习惯。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "maintenance",
+          "label": "英语 / 政治维持",
+          "source": "轻量维持任务，主任务超量时替换或后移，不累积欠账。",
+          "items": [
+            {
+              "id": "revised-2026-12-18-maintenance-1",
+              "title": "英语：复习单词",
+              "description": "复习现有词表中的错词和真题词，不强制精记 500 个；以能回忆和辨认用法为准。",
+              "optional": false
+            },
+            {
+              "id": "revised-2026-12-18-maintenance-2",
+              "title": "政治：选择题与错因回查",
+              "description": "先做约十道小程序选择题，回查错因与不懂概念；已有错题积压时用复查替换新题。",
+              "optional": false
+            }
+          ]
+        },
+        {
+          "key": "review",
+          "label": "可选回顾 / 替换",
+          "source": "以下项目不计入必做进度。替换任务时当天只执行选定的一条路线。",
+          "items": [
+            {
+              "id": "revised-2026-12-18-review-1",
+              "title": "另一科旧题回顾",
+              "description": "状态允许时，从另一科选一道已订正题复算或写步骤；不推进新章节，未做不算欠账。",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

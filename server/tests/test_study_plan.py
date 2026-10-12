@@ -21,7 +21,7 @@ def test_plan_requires_login_and_csrf(client, app, db_session):
 
 
 def test_plan_retains_23_days_and_expanded_groups(owner):
-    plan = owner.get("/api/admin/study/plan").json()
+    plan = owner.get("/api/admin/study/plan?plan_id=strengthening-202610").json()
     assert len(plan["days"]) == 23
     assert plan["days"][0]["date"] == "2026-10-09"
     assert plan["days"][-1]["date"] == "2026-10-31"
@@ -36,7 +36,7 @@ def test_plan_retains_23_days_and_expanded_groups(owner):
 
 
 def test_check_persists_is_idempotent_and_can_be_undone(owner):
-    task = "2026-10-10-math-1"
+    task = "revised-2026-10-12-math-1"
     url = f"/api/admin/study/plan/items/{task}"
     for _ in range(2):
         assert owner.patch(url, json={"completed": True}).status_code == 200

@@ -410,6 +410,14 @@
 }
 /* Strengthening checklist: kept separate from the focus timer. */
 .strengthening-page { --line: rgba(240, 237, 228, .14); }
+.plan-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+.plan-switch label { font-size: .85rem; }
+.plan-switch select { max-width: 100%; min-width: 160px; padding: 10px; color: inherit; background: #25221e; border: 1px solid var(--line); }
+.plan-guidance { border: 1px solid var(--line); padding: 16px 20px; margin-bottom: 22px; font-size: .85rem; line-height: 1.8; }
+.plan-guidance summary { cursor: pointer; }
+.plan-guidance li { margin-bottom: 8px; }
+.plan-day-note { font-size: .85rem; line-height: 1.8; margin-bottom: 24px; opacity: .8; }
+.plan-optional { display: inline-block; margin-right: 8px; font-size: .7rem; color: #dba975; font-weight: 400; }
 .plan-entry-link { display: block; padding: 18px 20px; margin: 18px 0; border: 1px solid rgba(240, 237, 228, .14); color: #dba975; }
 .plan-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 24px; border: 1px solid var(--line); margin-bottom: 24px; }
 .plan-overview > div { display: grid; gap: 8px; }

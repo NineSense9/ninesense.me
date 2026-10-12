@@ -1,6 +1,6 @@
 import { api } from "../../api/client.js";
 
-export const getPlan = () => api("/api/admin/study/plan");
+export const getPlan = (planId) => api(`/api/admin/study/plan${planId ? `?plan_id=${encodeURIComponent(planId)}` : ""}`);
 export const updatePlanItem = (id, completed) => api(`/api/admin/study/plan/items/${encodeURIComponent(id)}`, {
   method: "PATCH", body: JSON.stringify({ completed })
 });

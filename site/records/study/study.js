@@ -22,6 +22,7 @@ const nodes = {
   recentHeatmap: document.getElementById("recent-heatmap"),
   examTimeline: document.getElementById("exam-timeline"),
   planSummary: document.getElementById("plan-summary"),
+  planTitle: document.getElementById("public-plan-title"),
   planProgress: document.getElementById("plan-progress"),
   planGroups: document.getElementById("plan-groups"),
   planToday: document.getElementById("plan-today"),
@@ -317,8 +318,9 @@ async function loadStudyPage() {
 async function loadPlan() {
   try {
     const plan = await fetchJson("/api/study/plan");
+    setText(nodes.planTitle, plan.title);
     const percent = plan.total ? Math.round(plan.completed / plan.total * 100) : 0;
-    setText(nodes.planSummary, `${plan.completed}/${plan.total} 项已完成 · ${percent}%`);
+    setText(nodes.planSummary, `${plan.completed}/${plan.total} 项必做任务已完成 · ${percent}%`);
     nodes.planProgress.max = plan.total || 1;
     nodes.planProgress.value = plan.completed;
     nodes.planGroups.replaceChildren();

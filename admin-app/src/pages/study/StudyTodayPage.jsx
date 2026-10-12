@@ -81,7 +81,7 @@ export default function StudyTodayPage() {
       {loading ? <p className="empty-copy">正在读取今日计划…</p> : (
         <>
           <StudyTimerPanel timer={timer} onChange={reload} />
-          <Link className="plan-entry-link" to="/study/plan">十月强化计划 · 查看今日任务并打勾 →</Link>
+          <Link className="plan-entry-link" to="/study/plan">复习计划 · 查看今日任务并打勾 →</Link>
           <div className="study-today-grid">
             <StudyTaskEditor day={day} date={date} onChange={reload} />
             <ReflectionEditor date={date} value={day?.reflection || ""} onSaved={reload} />

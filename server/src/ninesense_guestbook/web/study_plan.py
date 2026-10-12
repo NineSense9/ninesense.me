@@ -7,7 +7,7 @@ from sqlalchemy.dialects.sqlite import insert
 
 from ..services.audit import record_audit
 from ..services.sessions import require_csrf, require_session
-from ..services.study_plan import private_plan, progress_summary, task_ids
+from ..services.study_plan import DEFAULT_PLAN, PLAN_FILES, private_plan, progress_summary, task_ids
 from ..study_models import StudyPlanCheck
 from .study_public import active_admin_id
 
@@ -22,11 +22,13 @@ class CheckUpdate(BaseModel):
 
 
 @admin_router.get("")
-def get_plan(request: Request, response: Response):
+def get_plan(request: Request, response: Response, plan_id: str = DEFAULT_PLAN):
     response.headers["Cache-Control"] = "no-store"
     with request.app.state.session_factory() as db:
         current = require_session(request, db)
-        return private_plan(db, current.admin.id)
+        if plan_id not in PLAN_FILES:
+            raise HTTPException(status_code=404, detail="计划不存在。")
+        return private_plan(db, current.admin.id, plan_id)
 
 
 @admin_router.patch("/items/{task_id}")
