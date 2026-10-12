@@ -35,6 +35,19 @@ npm run test:e2e
 
 浏览器测试会在 `127.0.0.1:8123` 启动一次性服务，使用独立测试数据库和测试管理员，不读取生产凭据。
 
+## 项目案例
+
+首页展示 VeriFlow、GhostQA 两个外包开发交付案例，详情位于 `/projects/veriflow/` 与 `/projects/ghostqa/`。页面明确区分本人提供思路与方向和各 Agent 的开发分工；每项配三张本地内置案例的真实截图，支持点击放大与移动端滑动查看。
+
+客户源码、交付包与运行数据留在网站仓库外。仓库仅收录整理后的介绍与 WebP 截图；公开页面没有客户项目仓库、在线演示、视频或下载入口。竞赛经历与已有奖项合并在独立板块。
+
+项目页面验收：
+
+```powershell
+node --test tests/project-pages.test.cjs
+npx playwright test --config tests/project-pages.playwright.config.cjs
+```
+
 ## 备考记录
 
 复习计划位于管理端 `/admin/study/plan`：当前采用确认后的数学优先安排，2026-10-12 至 2026-12-18 共 68 天，272 个必做项、81 个可选项。套卷与当天订正作为主任务，可选回顾不计入必做进度。支持自动保存、撤销与补打卡；不安排每日时长，勾选不改变手动专注计时。公开页 `/records/study/` 只展示当前计划必做项的统计。

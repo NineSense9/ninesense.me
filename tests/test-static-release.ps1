@@ -45,14 +45,17 @@ foreach ($contract in @(
 }
 foreach ($contract in @(
   'STUDY RECORD / 2026', 'id="today-title"', 'id="countdown-value"',
-  'id="current-study-status"', 'id="today-task-list"',
+  'id="current-study-status"', 'id="today-subjects"', 'id="all-time-total"',
   'id="focus-trend"', 'id="subject-breakdown"',
-  'id="recent-heatmap"', 'id="recent-day-list"',
+  'id="recent-heatmap"', 'id="plan-progress"', 'id="plan-groups"',
   'id="exam-timeline"', 'id="study-updated-at"'
 )) {
   if ($study -notmatch [regex]::Escape($contract)) {
     throw "Study visual contract missing: $contract"
   }
+}
+if ($study -match 'id="today-task-list"|id="recent-day-list"') {
+  throw 'Removed public task and daily review lists must not return'
 }
 if ($studyCss -notmatch 'max-width:\s*900px') { throw 'Study tablet breakpoint missing' }
 if ($studyCss -notmatch 'max-width:\s*560px') { throw 'Study mobile breakpoint missing' }

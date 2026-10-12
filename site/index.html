@@ -223,6 +223,9 @@
     .mobile-menu-shell.is-open .mobile-menu-prelayer { transform: translateX(0); }
     .mobile-menu-panel {
       z-index: 3;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
       display: flex;
       flex-direction: column;
       padding: 96px 23px 27px;
@@ -726,6 +729,7 @@
       * { transition: none !important; }
     }
   </style>
+  <link rel="stylesheet" href="./projects/portfolio.css?v=20261013">
 </head>
 <body>
   <canvas class="click-spark-canvas" aria-hidden="true"></canvas>
@@ -734,6 +738,7 @@
       <nav aria-label="主导航"><ul>
         <li class="active"><a href="#top" aria-current="page">首页</a></li>
         <li><a href="#work">项目</a></li>
+        <li><a href="#competitions">竞赛</a></li>
         <li><a href="#build">工作方式</a></li>
         <li><a href="#evidence">能力</a></li>
         <li><a href="#about">关于</a></li>
@@ -756,6 +761,7 @@
         <ul class="mobile-menu-list">
           <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#top" aria-current="page" style="--item-delay: 0ms"><span class="mobile-menu-item-label">首页</span></a></li>
           <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#work" style="--item-delay: 55ms"><span class="mobile-menu-item-label">项目</span></a></li>
+          <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#competitions" style="--item-delay: 85ms"><span class="mobile-menu-item-label">竞赛</span></a></li>
           <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#build" style="--item-delay: 110ms"><span class="mobile-menu-item-label">工作方式</span></a></li>
           <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#evidence" style="--item-delay: 165ms"><span class="mobile-menu-item-label">能力</span></a></li>
           <li class="mobile-menu-item-wrap"><a class="mobile-menu-item" href="#about" style="--item-delay: 220ms"><span class="mobile-menu-item-label">关于</span></a></li>
@@ -790,15 +796,34 @@
     <section class="section" id="work">
       <div class="shell">
         <div class="section-label mono">SELECTED WORK</div>
-        <div class="section-head"><h2 class="section-title">SELECTED<em>WORK</em></h2><p>先放三个最能说明问题的项目。客户信息和业务数据不会出现在公开页面里。</p></div>
-        <div class="project-grid">
-          <article class="case feature">
-            <div class="case-top mono"><span>FEATURED / REAL PROJECT</span><span>REAL CAPTURE</span></div>
-            <figure class="project-shot"><img src="./assets/project-kyse.jpg" alt="已脱敏的国产化安全运维 Agent 真实项目界面" width="1600" height="849" loading="lazy" decoding="async"></figure>
-            <div class="case-copy"><h3>安全智能运维 Agent</h3><p>麒麟 V11 · B/S 架构 · 审批与审计 · 完整独立交付</p></div>
+        <div class="section-head"><h2 class="section-title">SELECTED<em>WORK</em></h2><p>近期交付的两个项目，以及此前的运维实践。展示项目思路、关键取舍和整理后的真实界面。</p></div>
+        <div class="portfolio-grid">
+          <a class="project-card" href="./projects/veriflow/" aria-label="查看 VeriFlow 外包开发交付案例">
+            <div class="case-top mono"><span>01 / CONTRACT DEVELOPMENT</span><span>LOCAL CAPTURE</span></div>
+            <figure><img src="./assets/projects/veriflow-overview.webp" alt="VeriFlow 本地演示工作台截图" width="1600" height="629" loading="lazy" decoding="async"></figure>
+            <div class="project-copy"><div><h3>VeriFlow</h3><p>AI 出题流程验证工作台<br>从问题定位到受约束修复，让流程有据可查。</p></div><span class="project-arrow" aria-hidden="true">↗</span></div>
+            <div class="project-tags"><span>外包开发交付案例</span><span>Next.js / FastAPI</span><span>AGENT COLLABORATION</span></div>
+          </a>
+          <a class="project-card" href="./projects/ghostqa/" aria-label="查看 GhostQA 外包开发交付案例">
+            <div class="case-top mono"><span>02 / CONTRACT DEVELOPMENT</span><span>LOCAL CAPTURE</span></div>
+            <figure><img src="./assets/projects/ghostqa-overview.webp" alt="GhostQA 本地探索与缺陷确认工作台截图" width="1600" height="1100" loading="lazy" decoding="async"></figure>
+            <div class="project-copy"><div><h3>GhostQA</h3><p>自主探索式 Web 测试系统<br>记录探索、独立重放，交付可复查的缺陷报告。</p></div><span class="project-arrow" aria-hidden="true">↗</span></div>
+            <div class="project-tags"><span>外包开发交付案例</span><span>Python / Playwright</span><span>AGENT COLLABORATION</span></div>
+          </a>
+          <article class="ops-case">
+            <figure><img src="./assets/project-kyse.jpg" alt="已脱敏的国产化安全运维 Agent 真实项目界面" width="1600" height="849" loading="lazy" decoding="async"></figure>
+            <div><div class="case-top mono"><span>03 / OPERATIONS AGENT</span><span>REAL CAPTURE</span></div><h3>安全智能运维 Agent</h3><p>围绕审批、执行与审计组织运维流程，在国产化环境中完成适配与交付。</p><div class="project-tags"><span>麒麟 V11</span><span>B/S 架构</span><span>审批与审计</span></div></div>
           </article>
+        </div>
+      </div>
+    </section>
 
-          <article class="case small-case">
+    <section class="section" id="competitions">
+      <div class="shell">
+        <div class="section-label mono">COMPETITIVE PROGRAMMING / 竞赛经历</div>
+        <div class="section-head"><h2 class="section-title">CONTEST<em>RECORDS</em></h2><p>算法训练、比赛和留下来的奖牌。从想清楚一道题，到把思路写成能运行的代码。</p></div>
+        <div class="competition-grid">
+          <article class="competition-card">
             <div class="case-top mono"><span>ALGORITHM / EXPERIENCE</span><span>2024—2026</span></div>
             <div class="case-visual ccpc-identity">
               <div class="ccpc-lockup"><div class="ccpc-rings" role="img" aria-label="CCPC 四环标识"><i></i><i></i><i></i><i></i></div><strong>CCPC</strong></div>
@@ -807,7 +832,7 @@
             <div class="case-copy"><h3>算法竞赛经历</h3><p>CCPC · 辽宁省赛 · 训练与赛后复盘</p></div>
           </article>
 
-          <article class="case small-case">
+          <article class="competition-card">
             <div class="case-top mono"><span>EVIDENCE / AWARDS</span><span>REAL OBJECTS</span></div>
             <div class="case-visual award-archive">
               <figure class="award-photo"><img src="./assets/award-ccpc-invitational-2026.jpg" alt="2026 中国大学生程序设计竞赛全国邀请赛福州站铜奖" width="420" height="560" loading="lazy" decoding="async"><figcaption>邀请赛 · 2026</figcaption></figure>
@@ -824,7 +849,14 @@
     <section class="section build-section" id="build">
       <div class="shell">
         <div class="section-label mono">HOW I BUILD</div>
-        <div class="section-head"><h2 class="section-title">HOW I<em>BUILD</em></h2><p>不同工具做不同的事，最后由我把方向、部署、测试和交付串起来。</p></div>
+        <div class="section-head"><h2 class="section-title">HOW I<em>BUILD</em></h2><p>近期的 VeriFlow 与 GhostQA 由我提供思路与方向，再让不同 Agent 分别完成信息收集、整体结构和详细开发。</p></div>
+        <div class="collab-strip">
+          <article><small class="mono">01 / DIRECTION</small><h3>NineSense</h3><p>提供思路与方向，确定项目重点和关键取舍。</p></article>
+          <article><small class="mono">02 / RESEARCH</small><h3>KIMI K3</h3><p>收集项目信息，为方案组织提供材料。</p></article>
+          <article><small class="mono">03 / STRUCTURE</small><h3>ChatGPT</h3><p>设计整体结构，组织功能与系统关系。</p></article>
+          <article><small class="mono">04 / DEVELOPMENT</small><h3>grok4.6 / grok4.7</h3><p>完成详细开发，把整体方案落实到具体功能。</p></article>
+        </div>
+        <p class="other-workflows mono">OTHER WORKFLOWS / 个人网站与其他开发记录</p>
         <div class="build-grid">
           <article class="human-card">
             <img src="./assets/avatar-wechat.webp" alt="长期使用的微信头像" width="940" height="940" loading="lazy" decoding="async">
@@ -838,7 +870,7 @@
             </div>
           </article>
           <div class="tool-stack">
-            <article class="tool-card"><div class="tool-media"><img src="./assets/build-codex-real.jpg" alt="已裁去历史任务与账号信息的 Codex 真实对话截图" width="720" height="480" loading="lazy" decoding="async"></div><div class="tool-copy"><small class="mono">PRIMARY DEVELOPMENT</small><h3>Codex</h3><p>现在大部分开发、调试和测试都交给它，长任务也主要在这里跑。</p></div></article>
+            <article class="tool-card"><div class="tool-media"><img src="./assets/build-codex-real.jpg" alt="已裁去历史任务与账号信息的 Codex 真实对话截图" width="720" height="480" loading="lazy" decoding="async"></div><div class="tool-copy"><small class="mono">WEBSITE / DEVELOPMENT</small><h3>Codex</h3><p>个人网站的开发、调试和维护在这里推进，也用它整理项目展示。</p></div></article>
             <article class="tool-card"><div class="tool-media"><img src="./assets/build-claude-real.jpg" alt="裁去底部空白的 Claude Code 真实终端截图" width="720" height="429" loading="lazy" decoding="async"></div><div class="tool-copy"><small class="mono">TERMINAL WORKFLOW</small><h3>Claude Code / OpenCode</h3><p>搭配不同模型处理小任务，成本更好控制，也方便交叉检查结果。</p></div></article>
           </div>
         </div>
@@ -1155,6 +1187,7 @@
         mobileMenuPanel.toggleAttribute('inert', !nextOpen);
         if (nextOpen) {
           scrollInstantly(0);
+          mobileMenuPanel.scrollTop = 0;
           requestAnimationFrame(() => mobileMenuLinks[0]?.focus({ preventScroll: true }));
         } else {
           scrollInstantly(lockedScrollY);
@@ -1186,7 +1219,7 @@
           ? (currentIndex <= 0 ? focusable.length - 1 : currentIndex - 1)
           : (currentIndex >= focusable.length - 1 ? 0 : currentIndex + 1);
         event.preventDefault();
-        focusable[nextIndex].focus({ preventScroll: true });
+        focusable[nextIndex].focus();
       });
 
       const closeAtDesktop = event => {
