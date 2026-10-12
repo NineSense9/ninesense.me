@@ -54,4 +54,6 @@ Viewer contract:
 - [x] Run project contracts and existing static/deployment contracts.
 - [x] Inspect pages at desktop and 390px width, exercise both routes, screenshot dialog, Escape, restored focus and absence of horizontal overflow.
 - [x] Review the staged file list and public content for private source/runtime files, customer references, repository/demo links and video resources.
-- [ ] Commit, integrate into main, push, publish static files to a new server release and switch the current symlink. Check public page/image HTTP status and deployed content. Keep prior release for rollback.
+- [x] Commit, integrate into main, push, publish static files to a new server release and switch the current symlink. Check public page/image HTTP status and deployed content. Keep prior release for rollback.
+
+Implementation commit: `d501338`. Static release: `20261013-project-cases-d501338`. All 13 changed public files match the release manifest over HTTPS. Live browser checks at 1440px and 390px passed for both routes, image previews and navigation. Prior static release retained; API health passed. Local preview processes were stopped.
