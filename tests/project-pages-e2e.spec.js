@@ -6,6 +6,16 @@ for (const width of [1440, 768, 390, 320]) {
     await page.goto('/');
     const cards = page.locator('.project-card');
     await expect(cards).toHaveCount(2);
+    for (let i = 0; i < 2; i++) {
+      const frame = cards.nth(i).locator('figure');
+      const image = frame.locator('img');
+      await frame.scrollIntoViewIfNeeded();
+      await expect(image).toHaveJSProperty('complete', true);
+      expect(await image.evaluate(n => getComputedStyle(n).objectFit)).toBe('cover');
+      expect(await image.evaluate(n => getComputedStyle(n).objectPosition)).toBe('50% 0%');
+      const bounds = await frame.boundingBox();
+      expect(bounds.width / bounds.height).toBeCloseTo(2, 1);
+    }
     const first = await cards.nth(0).boundingBox();
     const second = await cards.nth(1).boundingBox();
     if (width > 700) expect(Math.abs(first.y - second.y)).toBeLessThan(2);
